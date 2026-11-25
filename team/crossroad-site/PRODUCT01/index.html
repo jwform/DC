@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>2030 MYEONGDONG — FUTURE EMERGENCY PATH</title>
+  <meta name="description" content="2030 명동, 긴급한 순간 도시가 먼저 길을 여는 바닥 설치형 긴급 통행 확보 장치.">
+  <meta name="theme-color" content="#050407">
+  <meta property="og:title" content="2030 MYEONGDONG — FUTURE EMERGENCY PATH">
+  <meta property="og:description" content="A CITY THAT RESPONDS. 도시의 흐름을 바꾸는 긴급 통행 시스템">
+  <meta property="og:image" content="./assets/images/product-render-open.png">
+  <link rel="preload" href="./assets/fonts/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <style>
+    /* [V16] official logo replaces the text brand (the old text keeps its slot invisibly so the top bar layout does not move) */
+    .brand-slot{visibility:hidden}
+    .md-logo{position:fixed;left:max(28px,env(safe-area-inset-left,0px));top:max(28px,env(safe-area-inset-top,0px));z-index:9999;display:block;width:166px;line-height:0;cursor:pointer;
+      -webkit-tap-highlight-color:transparent;transition:filter .3s ease,transform .3s ease;filter:brightness(.94) drop-shadow(0 0 0 rgba(140,90,255,0))}
+    .md-logo img{display:block;width:100%;height:auto;pointer-events:none;user-select:none;-webkit-user-drag:none}
+    .md-logo:hover,.md-logo:focus-visible{filter:brightness(1.12) drop-shadow(0 0 10px rgba(150,100,255,.75)) drop-shadow(0 0 22px rgba(118,40,245,.45));transform:translateY(-1px)}
+    .md-logo:focus-visible{outline:1px solid rgba(197,255,53,.6);outline-offset:6px;border-radius:4px}
+    @media (max-width:760px){.md-logo{width:124px;left:max(16px,env(safe-area-inset-left,0px));top:max(16px,env(safe-area-inset-top,0px))}}
+  </style>
+</head>
+<body>
+
+  <!-- [V16] official logo — fixed top-left; returns to the main site's 3D map with the crossroad selected (no intro) -->
+  <a class="md-logo" id="mdLogo" href="../../index.html?return=crossroad#explore" target="_top" aria-label="2030 MYEONGDONG — 메인 3D 지도로 돌아가기" title="3D 지도로 돌아가기">
+    <img src="./assets/images/logo-official.webp" alt="2030 MYEONGDONG" width="420" height="103" draggable="false">
+  </a>
+
+  <!-- ============ LOADER ============ -->
+  <div id="loader" aria-live="polite">
+    <div class="ld-mark">2030 MYEONGDONG</div>
+    <div class="ld-bar"><i id="ldBar"></i></div>
+    <div class="ld-text"><span id="ldText">LOADING</span><span id="ldPct">0%</span></div>
+  </div>
+
+  <!-- ============ STAGE (pinned by ScrollTrigger) ============ -->
+  <main id="stage">
+    <canvas id="gl" aria-label="3D 인터랙티브 장면"></canvas>
+    <div class="scrim"></div>
+
+    <header class="hud-top">
+      <span class="brand brand-slot" aria-hidden="true">2030 MYEONGDONG<span>FUTURE EMERGENCY PATH</span></span>
+      <div class="hud-scene"><span id="sceneNo">01</span><i></i><span id="sceneName">INTRO</span></div>
+      <nav class="hud-nav" aria-label="프로젝트 이동">
+        <a href="../index.html">TEAM</a>
+        <a href="../../index.html">PROJECT</a>
+      </nav>
+    </header>
+
+    <nav class="chapters" aria-label="장면 이동">
+      <button data-jump="intro"><b>01</b><span>INTRO</span></button>
+      <button data-jump="problem"><b>02</b><span>PROBLEM</span></button>
+      <button data-jump="concept"><b>03</b><span>CONCEPT</span></button>
+      <button data-jump="solution"><b>04</b><span>SOLUTION</span></button>
+      <button data-jump="reveal"><b>05</b><span>PRODUCT REVEAL</span></button>
+      <button data-jump="install"><b>06</b><span>INSTALLATION</span></button>
+      <button data-jump="viewer"><b>07</b><span>VIEWER</span></button>
+      <button data-jump="outro"><b>08</b><span>OUTRO</span></button>
+    </nav>
+    <div class="progress"><i id="prog"></i></div>
+
+    <!-- 01 INTRO : file B (10th-week build) hero — light vortex + "THE CITY RESPONDS BEFORE YOU DO." -->
+    <section class="layer bintro" id="bIntro">
+      <div class="hero__title" id="heroTitle">
+        <h1><span class="lightword hero__name" data-sweep>2030 <b>MYEONGDONG</b></span></h1>
+        <p class="lightword hero__slogan" data-sweep>A CITY THAT <b>RESPONDS.</b></p>
+      </div>
+      <p class="phase phase--l" data-p="0.08,0.3"><span>01</span>THE FUTURE OF URBAN MOBILITY</p>
+      <p class="phase phase--r" data-p="0.32,0.54"><span>02</span>EVERY SECOND ACCELERATES</p>
+      <div class="hero__meta" id="heroMeta">
+        <span>AI-POWERED EMERGENCY PASSAGE CONTROL SYSTEM</span>
+        <span>INDUSTRIAL DESIGN PROJECT · 2030</span>
+      </div>
+      <div class="scrollhint" id="scrollHint">
+        <span class="scrollhint__line"><i></i></span>
+        <span>SCROLL TO EXPLORE</span>
+      </div>
+      <div class="block block--center" id="bPhrase" data-range="0.09,0.88">
+        <p class="eyebrow">01 — CONCEPT</p>
+        <h2 class="display display--center">THE CITY RESPONDS<br><b>BEFORE YOU DO.</b></h2>
+        <p class="lead">도시가 먼저 반응합니다.</p>
+      </div>
+    </section>
+
+    <!-- 02 PROBLEM : explained first, then the street -->
+    <section class="layer problem">
+      <div class="msg" id="pm1"><p class="eyebrow">02 — PROBLEM · 01</p><h2 class="h-xl"><span class="ln">MORE <em>PEOPLE.</em></span></h2><p class="kr-md">2030년, 더 많은 사람이 모이는 명동.</p></div>
+      <div class="msg" id="pm2"><p class="eyebrow">02 — PROBLEM · 02</p><h2 class="h-xl"><span class="ln">LESS <em>SPACE.</em></span></h2><p class="kr-md">밀집된 인파와 좁은 골목, 복잡한 교차로.</p></div>
+      <div class="msg" id="pm3"><p class="eyebrow">02 — PROBLEM · 03</p><h2 class="h-xl"><span class="ln">WHEN EVERY</span><span class="ln"><em>SECOND</em> MATTERS.</span></h2><p class="kr-md">긴급 차량이 진입해야 하는 순간, 사람들로 인해 통행이 지연됩니다.</p></div>
+      <div class="street-cap" id="streetCap">
+        <p class="eyebrow">MYEONGDONG · 2030 · 21:40</p>
+        <p class="kr-lg" id="capA">평소에는 자유롭게 흐르던 거리.</p>
+        <p class="kr-lg" id="capB">긴급 상황, 동선이 겹치며 멈춰 섭니다.</p>
+      </div>
+      <div class="density" id="density"><span class="d-lbl">PEDESTRIAN DENSITY</span><div class="d-bar"><i id="densBar"></i></div><span class="d-val"><b id="densVal">FLOW</b></span></div>
+    </section>
+
+    <!-- 03 CONCEPT : rises from below -->
+    <section class="layer concept">
+      <p class="eyebrow center" id="cEyebrow">03 — CONCEPT</p>
+      <h2 class="h-xl center rise" id="cTitle"><span class="ln"><span class="w">THE</span> <span class="w">CITY</span></span><span class="ln"><span class="w">RESPONDS</span> <span class="w"><em>FIRST.</em></span></span></h2>
+      <p class="kr-md center" id="cKr">긴급 상황을 인식하고, 통행 공간을 스스로 확보하다.</p>
+    </section>
+
+    <!-- 04 SOLUTION : product as the hero -->
+    <section class="layer solution">
+      <div class="blk-left-top">
+        <p class="eyebrow" id="sEyebrow">04 — SOLUTION</p>
+        <h2 class="h-xl mask" id="sTitle">A PATH WHEN<br>IT MATTERS.</h2>
+        <p class="kr-md" id="sKr">평소에는 바닥에 숨겨지고, 긴급 상황에는 통행을 유도합니다.</p>
+      </div>
+    </section>
+
+    <!-- 05 PRODUCT REVEAL : closed state, structure, principle -->
+    <section class="layer reveal">
+      <div class="stmt" id="st_a"><p class="eyebrow">05 — PRODUCT REVEAL · CLOSED</p><h2 class="h-lg">INVISIBLE IN<br>DAILY LIFE.</h2><p class="kr-md">평상시에는 바닥과 일체화되어 보행 흐름을 방해하지 않습니다.</p></div>
+      <div class="stmt" id="st_b"><p class="eyebrow">05 — PRODUCT REVEAL · READY</p><h2 class="h-lg">READY WHEN<br>NEEDED.</h2><p class="kr-md">긴급 차량 접근이 감지되면 통행 공간을 확보하기 위해 전개됩니다.</p></div>
+      <div class="stmt" id="st_c"><p class="eyebrow">05 — PRODUCT REVEAL · RESPONSE</p><h2 class="h-lg">A PATH THAT<br><em>RESPONDS.</em></h2><p class="kr-md">도시의 상황에 반응하여 긴급 이동 경로를 형성합니다.</p></div>
+      <div class="principle" id="principle">
+        <p class="eyebrow">HOW IT WORKS</p>
+        <ol>
+          <li id="pr1"><b>01 — DETECT</b><span>AI와 센서 시스템이 긴급 차량의 접근을 감지합니다.</span></li>
+          <li id="pr2"><b>02 — DEPLOY</b><span>바닥의 장치가 단계적으로 상승하며 통행 경계를 형성합니다.</span></li>
+          <li id="pr3"><b>03 — GUIDE</b><span>보라색 LED가 보행자의 이동 방향을 유도하고 통로를 확보합니다.</span></li>
+          <li id="pr4"><b>04 — RESTORE</b><span>긴급 차량 통과 후 원래의 닫힌 상태로 복귀합니다.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 06 INSTALLATION + operation in the street -->
+    <section class="layer install">
+      <div class="blk-left-mid">
+        <p class="eyebrow" id="iEyebrow">06 — INSTALLATION</p>
+        <h2 class="h-lg split" id="iTitle">NOT ONE.<br>A CONNECTED SYSTEM.</h2>
+        <p class="kr-lg" id="iKr">하나가 아닌, 연결된 통행 시스템</p>
+      </div>
+      <div class="kr-stack">
+        <p class="kr-md" id="iKr1">골목의 진행 방향을 따라, 통행로 양쪽에 한 줄씩.</p>
+        <p class="kr-md" id="iKr2">두 줄 사이, 구급차가 지나갈 충분한 폭을 남깁니다.</p>
+      </div>
+      <div class="lane-tag" id="laneTag"><i></i><span>EMERGENCY LANE</span><i></i></div>
+    </section>
+    <section class="layer operation">
+      <ol class="rail" id="rail">
+        <li><b>01</b>STANDBY</li><li><b>02</b>DETECTION</li><li><b>03</b>EARLY WARNING</li>
+        <li><b>04</b>SIDE PANEL</li><li><b>05</b>BARRIER</li><li><b>06</b>PASSAGE</li><li><b>07</b>RESTORATION</li>
+      </ol>
+      <div class="step" id="st1"><p class="eyebrow">STEP 01 — STANDBY</p><h3>평상시, 도시의 일부가 되다.</h3><p class="kr-sm">완전히 접힌 상태로 바닥에 낮게 놓여 보행을 방해하지 않습니다.</p></div>
+      <div class="step" id="st2"><p class="eyebrow">STEP 02 — DETECTION</p><h3>AI가 긴급 차량의 접근을 인식합니다.</h3><p class="kr-sm">연결된 모든 장치가 동시에 활성화됩니다.</p></div>
+      <div class="step" id="st3"><p class="eyebrow">STEP 03 — EARLY WARNING</p><h3>양끝의 경고 모듈이 먼저 상승합니다.</h3><p class="kr-sm">퍼플 LED가 밝아지며 주변 보행자에게 알립니다.</p></div>
+      <div class="step" id="st4"><p class="eyebrow">STEP 04 — SIDE PANEL</p><h3>양쪽 패널이 힌지를 따라 상승합니다.</h3><p class="kr-sm">무게감 있는 기계적 움직임으로 수직 기둥이 됩니다.</p><div class="angle" id="angle"><span id="angleVal">0</span><sup>°</sup><em>HINGE ANGLE</em></div></div>
+      <div class="step" id="st5"><p class="eyebrow">STEP 05 — TRANSPARENT BARRIER</p><h3>얇은 투명 패널이 위로 전개됩니다.</h3><p class="kr-sm">두 기둥 사이에 투명판이 연결되고 하단 LED가 점등됩니다.</p></div>
+      <div class="step" id="st6"><p class="eyebrow">STEP 06 — EMERGENCY PASSAGE</p><h3>두 줄의 경계 사이로 구급차가 통과합니다.</h3><p class="kr-sm">보행자는 경계 밖으로 이동하고 통로가 확보됩니다.</p></div>
+      <div class="step" id="st7"><p class="eyebrow">STEP 07 — RESTORATION</p><h3>다시 도시 속으로.</h3><p class="kr-sm">투명판 → 패널 → LED → 경고 모듈 순으로 복귀합니다.</p></div>
+    </section>
+
+    <!-- 07 INTERACTIVE VIEWER -->
+    <section class="layer viewer" id="viewerLayer">
+      <div class="viewer-pad" id="viewerPad" aria-label="제품 회전 영역"></div>
+      <div class="v-head" id="vHead">
+        <p class="eyebrow">07 — INTERACTIVE VIEWER</p>
+        <h2 class="h-lg">TAKE A<br>CLOSER LOOK.</h2>
+      </div>
+      <div class="v-hint" id="vHint"><span><i class="ic-drag"></i>DRAG TO ROTATE</span><span><i class="ic-click"></i>CLICK TO DEPLOY</span></div>
+      <div class="v-ctrl" id="vCtrl">
+        <p class="v-state"><i id="vDot"></i><span id="vState">CLOSED STATE</span></p>
+        <div class="v-btns">
+          <button class="v-btn" id="btnOpen" type="button">OPEN</button>
+          <button class="v-btn" id="btnClose" type="button" disabled>CLOSE</button>
+        </div>
+        <div class="v-prog"><i id="vProg"></i></div>
+      </div>
+    </section>
+
+    <!-- 08 OUTRO -->
+    <section class="layer outro">
+      <svg class="horizon" id="horizon" viewBox="0 0 1600 520" preserveAspectRatio="xMidYMin slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="hzFade" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
+          <mask id="hzMask" maskUnits="userSpaceOnUse" x="-400" y="-200" width="2400" height="900"><rect class="hz-mask" x="-400" y="-200" width="2400" height="900" fill="url(#hzFade)"/></mask>
+          <filter id="hzBlurL" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="34"/></filter>
+          <filter id="hzBlurS" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+        </defs>
+        <ellipse class="hz-body" cx="800" cy="1560" rx="1500" ry="1440"/>
+        <g mask="url(#hzMask)">
+          <ellipse class="hz-haze" cx="800" cy="1560" rx="1500" ry="1440" filter="url(#hzBlurL)"/>
+          <ellipse class="hz-glow" cx="800" cy="1560" rx="1500" ry="1440" filter="url(#hzBlurS)"/>
+          <ellipse class="hz-core" cx="800" cy="1560" rx="1500" ry="1440"/>
+          <ellipse class="hz-hot" cx="800" cy="120.5" rx="170" ry="2.5" filter="url(#hzBlurS)"/>
+        </g>
+      </svg>
+      <h2 class="h-xl center" id="oClear"><span class="ln">CLEAR THE WAY.</span></h2>
+      <h2 class="h-xl center dim" id="oSave"><span class="ln">SAVE THE MOMENT.</span></h2>
+      <p class="kr-md center" id="oKr">도시가 먼저 길을 열다.</p>
+      <div class="final" id="final">
+        <div>
+          <p class="eyebrow">2030 MYEONGDONG</p>
+          <p class="final-title">FUTURE EMERGENCY PATH</p>
+        </div>
+        <div class="final-meta">
+          <button class="btn-top" data-jump="intro">BACK TO START ↑</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="fallback" id="fallback" hidden>
+      <img src="./assets/images/product-render-open.png" alt="긴급 통행 확보 장치 전개 상태 렌더링">
+      <p>이 브라우저에서는 3D(WebGL)를 표시할 수 없습니다.</p>
+    </div>
+  </main>
+
+  <script src="./assets/js/vendor/gsap/gsap.min.js"></script>
+  <script src="./assets/js/vendor/gsap/ScrollTrigger.min.js"></script>
+  <!-- 더블클릭(file://)으로 열었을 때만 모델·폰트 내장 파일을 함께 불러옵니다 -->
+  <script>if (location.protocol === 'file:') document.write('<script src="./assets/js/offline-data.js"><\/script>');</script>
+  <!-- 사이트 전체 코드 (assets/js/*.js 를 하나로 묶은 파일, 수정 시 README의 빌드 방법 참고) -->
+  <script src="./assets/js/app.bundle.js"></script>
+</body>
+</html>
