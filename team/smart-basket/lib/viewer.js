@@ -213,8 +213,8 @@ window.ProductViewer=function(box,opt){
     glowM.rotation.x=-Math.PI/2;glowM.position.set(c.x,bb.min.y-0.0008,c.z);scene.add(glowM);
     sun.target.position.copy(c);scene.add(sun.target);
     S.ready=true;renderer.shadowMap.needsUpdate=true;S.idle=performance.now();fit();S.r=S.gr;
-    wake();
-    opt.onLoad&&opt.onLoad(api);
+    var go=function(){wake();opt.onLoad&&opt.onLoad(api)};
+    if(renderer.compileAsync){renderer.compileAsync(scene,cam).then(go,go)}else go();
   }).catch(function(err){console.error(err);opt.onError&&opt.onError(err)});
   return api;
 };

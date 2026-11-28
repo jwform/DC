@@ -438,7 +438,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .tmapc{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}.tmapc svg{flex:1 1 auto;min-height:0;width:100%;height:100%}
 .tcard{padding:12px 14px!important}.tc-h{margin-bottom:6px!important}.tc-h b{font-size:17px!important}.tph{padding:12px 14px!important}.tph b{font-size:18px!important}.tph small{font-size:14px!important}
 .trr{position:absolute;left:14px;bottom:14px;z-index:6;border:1.5px solid rgba(255,255,255,.3);background:rgba(10,8,20,.75);color:#fff;border-radius:99px;padding:9px 16px;font:700 14px var(--f-body);cursor:pointer}
-.try-tip{bottom:16px!important}
+.try-tip{display:none!important}
 @media(max-width:980px){.try{min-height:0;display:block}.try-3d{height:46vh!important}.try-side{height:auto;max-height:none}.tmapc svg{height:auto}}
 
 .dp .ic{width:1.5em;height:1.5em;max-height:none;stroke:currentColor}.dp .dst svg{flex:none}
@@ -456,12 +456,13 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .fin-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,28px)}
 .fin-cards>div{border-radius:24px;border:1px solid rgba(157,92,255,.3);background:rgba(14,10,26,.8);padding:26px 26px 28px}
 .fin-cards k{display:block;font:700 12px var(--f-mono);letter-spacing:.2em;color:var(--lime)}
-.fin-cards b{display:block;font-size:clamp(24px,2.2vw,34px);letter-spacing:-.04em;margin:10px 0 10px}
-.fin-cards p{margin:0;font-size:clamp(16px,1.25vw,19px);line-height:1.65;color:rgba(245,245,246,.8);word-break:keep-all}
+.fin-cards b{display:block;font-size:clamp(28px,2.6vw,40px);letter-spacing:-.04em;margin:0 0 8px}
+.fin-cards p{margin:0;font-size:clamp(18px,1.6vw,24px);line-height:1.65;color:rgba(245,245,246,.8);word-break:keep-all}
 .fin-spec{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
 .fin-spec span{display:flex;flex-direction:column;gap:4px;padding:14px 20px;border-radius:16px;background:rgba(255,255,255,.05);font:700 18px var(--f-body)}
 .fin-spec k{font:700 11px var(--f-mono);letter-spacing:.2em;color:var(--lime)}
 @media(max-width:980px){.fin-cards{grid-template-columns:1fr}}
+.tsel{position:absolute;left:14px;top:14px;z-index:6;display:flex;align-items:center;gap:10px;padding:8px 16px 8px 10px;border-radius:99px;background:rgba(10,8,20,.8);border:1.5px solid var(--lime);font:800 17px var(--f-body)}.tsel[hidden]{display:none}.tsel img{width:30px;height:30px;object-fit:contain}.tsel span{color:var(--lime);font-size:15px}
 </style>
 </head>
 <body>
@@ -514,7 +515,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 <div class="try-top"><div class="try-hd"><span class="ce">03 · 체험</span><h3>이제, 직접 써 보세요</h3></div>
 <ol class="try-steps" id="trSteps"><li data-s="1"><b>1</b>코너 고르기</li><li data-s="2"><b>2</b>직원 호출</li><li data-s="3"><b>3</b>제품 담기</li><li data-s="4"><b>4</b>금액 확인</li></ol></div>
 <p class="try-hint" id="trHint"></p>
-<div class="try-grid"><div class="try-3d" id="try3d"><div class="try-load" id="trLoad">3D 제품을 불러오는 중…</div><div class="try-tip" id="trTip">다이얼을 <b>돌려</b> 보세요</div><div class="tdrop" id="tdrop"><span>여기에 놓기</span></div><div class="tdrag" id="tdrag"></div><div class="try-ptr" id="trPtr"><i></i><span id="trPtrT">드래그해서 돌리기</span></div><button type="button" class="trr" id="trReset">↺ 다시 해보기</button></div>
+<div class="try-grid"><div class="try-3d" id="try3d"><div class="try-load" id="trLoad">3D 제품을 불러오는 중…</div><div class="try-tip" id="trTip">다이얼을 <b>돌려</b> 보세요</div><div class="tdrop" id="tdrop"><span>여기에 놓기</span></div><div class="tdrag" id="tdrag"></div><div class="try-ptr" id="trPtr"><i></i><span id="trPtrT">드래그해서 돌리기</span></div><div class="tsel" id="tsel" hidden><img id="tselI" alt=""><b id="tselN"></b><span id="tselP"></span></div><button type="button" class="trr" id="trReset">↺ 다시 해보기</button></div>
 <div class="try-side">
 <div class="tcard tmapc"><div class="tc-h"><b>매장 지도</b><span id="mapT">손님이 입구에 있어요</span></div><svg id="tmap" viewBox="0 0 360 250" preserveAspectRatio="xMidYMid meet"></svg><div class="tleg"><i class="c"></i>손님<i class="s"></i>직원</div></div>
 <div class="tcard"><div class="tc-h"><b>직원 휴대폰</b></div><div class="tph" id="tph" data-st="idle"><i></i><div><b id="tphT">호출 대기 중</b><small id="tphS">손님이 호출하면 알림이 와요</small></div></div></div>
@@ -541,15 +542,11 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
     
     
     <section class="fin" id="finish" aria-label="정리"><div class="fin-in">
-<span class="ce">06 · 정리</span><h3>글자가 아닌 아이콘으로,<br>기다림이 아닌 호출로</h3>
-<ol class="fin-flow"><li>코너 선택</li><li>길 안내</li><li>직원 호출</li><li>제품 전달</li><li>바구니에 담기</li><li>금액 표시</li></ol>
-<div class="fin-cards">
-<div><k>FOR CUSTOMER</k><b>한국어를 몰라도</b><p>다이얼로 코너를 고르면 아이콘과 화살표가 길을 보여줘요. 안내판을 읽지 않아도 원하는 코너에 도착해요.</p></div>
-<div><k>FOR STAFF</k><b>어디로 갈지 바로</b><p>호출 버튼을 누르면 직원 휴대폰에 코너 위치가 떠요. 손님을 찾아 헤매지 않고 필요한 곳으로 바로 가요.</p></div>
-<div><k>FOR STORE</k><b>바구니는 그대로</b><p>상단 걸이 두 개로 기존 바구니 테두리에 걸어요. 카메라가 담긴 제품을 인식한 뒤에 금액을 보여줘요.</p></div>
-</div>
-<div class="fin-spec"><span><k>SIZE</k>280 × 98 × 65 mm</span><span><k>MOUNT</k>상단 걸이 2개</span><span><k>INPUT</k>다이얼 · 호출 버튼</span><span><k>SENSOR</k>뒷면 카메라</span><span><k>COLOR</k>Black · Violet · Amber</span></div>
+<span class="ce">06 · 정리</span><h3>아이콘으로 고르고,<br>버튼으로 부릅니다</h3>
+<ol class="fin-flow"><li>고르기</li><li>길 안내</li><li>호출</li><li>전달</li><li>담기</li><li>금액</li></ol>
+<div class="fin-cards"><div><b>손님</b><p>한국어 몰라도 길을 찾아요</p></div><div><b>직원</b><p>부른 곳으로 바로 가요</p></div><div><b>매장</b><p>바구니에 걸기만 하면 끝</p></div></div>
 </div></section>
+
 <div class="pm-act">
       <a class="btn" id="teamLink2" href="https://jwform.github.io/DC/team/"><span>← 다시 지도로 돌아가기</span><span>MAP</span></a>
       <a class="btn ghost" href="models/3D-01_product.glb" download><span>GLB 모델 ↓</span></a><a class="btn ghost" href="models/3D-02_with-basket.glb" download><span>바구니 장착 모델 ↓</span></a>
@@ -575,7 +572,7 @@ function mk(key,silent){
   const o={box:pvB,url:'models/3D-02_with-basket.glb',fallbackScript:'models/3D-02_with-basket.glb.js',fallbackVar:'__GLB_B64_BASKET',fitToModel:true};
   API[key]=ProductViewer(o.box,{url:o.url,fallbackScript:o.fallbackScript,fallbackVar:o.fallbackVar,fitToModel:o.fitToModel,autoDelay:key==='basket'?8000:3500,onLoad:()=>{load.style.display='none';fb.style.display='none';setTimeout(()=>window.__applyMode&&window.__applyMode(),50)},onError:()=>{load.textContent='3D를 불러오지 못했어요 · 사진으로 대신 보여드려요'}});
 }
-window.__thrP=ld('lib/three.bundle.js');let ready=window.__thrP.then(()=>ld('lib/viewer.js')).then(()=>mk('basket')).catch(e=>{load.textContent='3D 뷰어를 불러오지 못했어요';console.error(e)});
+window.__thrP=ld('lib/three.bundle.js');let ready=window.__thrP.then(()=>ld('lib/viewer.js')).then(()=>new Promise(r=>{let done=false;const go=()=>{if(done)return;done=true;clearInterval(t);r()};const t=setInterval(()=>{if(window.__storyReady)setTimeout(go,900)},250);setTimeout(go,14000);const pe=document.getElementById('product');new IntersectionObserver(es=>{if(es[0].isIntersecting)go()},{rootMargin:'1600px 0px'}).observe(pe)})).then(()=>mk('basket')).catch(e=>{load.textContent='3D 뷰어를 불러오지 못했어요';console.error(e)});
 document.querySelectorAll('.pm-mode button').forEach(b=>b.addEventListener('click',()=>{
   cur=b.dataset.m;view.dataset.tab=cur;document.querySelectorAll('.pm-mode button').forEach(x=>x.classList.toggle('on',x===b));
   window.__applyMode();
@@ -608,7 +605,7 @@ function upd(){tick=false;var r=P.getBoundingClientRect(),tot=P.offsetHeight-inn
  P.querySelectorAll('.sw-bar b').forEach(function(b,j){b.style.width=(j<i?100:j===i?f*100:0).toFixed(1)+'%'});if(S)S.setBeat(i,f)}
 var on=function(){if(!tick){tick=true;requestAnimationFrame(upd)}};addEventListener('scroll',on,{passive:true});addEventListener('resize',function(){if(S)S.resize();upd()});
 function boot(){if(!window.Story||!window.__buildGLB){return setTimeout(boot,200)}
- try{S=window.Story(cv,hud,{glbScript:'models/3D-02_with-basket.glb.js',glbUrl:'models/3D-02_with-basket.glb'});S.ready.then(function(){ld.classList.add('off');upd()});S.resize();
+ try{S=window.Story(cv,hud,{glbScript:'models/3D-02_with-basket.glb.js',glbUrl:'models/3D-02_with-basket.glb'});S.ready.then(function(){ld.classList.add('off');upd();window.__storyReady=true});S.resize();
   new IntersectionObserver(function(es){S.setVisible(es[es.length-1].isIntersecting)},{rootMargin:'200px'}).observe(P);upd()}
  catch(e){fail(e)}}
 function fail(e){console.warn('CTXfail',e&&(e.message||e.type||e));P.classList.add('nogl');ld.classList.add('off');cur=-1;upd()}
@@ -698,8 +695,8 @@ const DEV=[0,.122,.128];
 let S,A=null,M=null,P=null,moving=null,cust={...ENT},stf={...STAFF0},pathTo=null;
 function stand(c){return{x:c.x<180?148:212,y:c.y}}function sstand(c){return{x:c.x<180?214:146,y:c.y}}
 function bottle(c){return '<svg viewBox="0 0 46 70"><rect x="15" y="2" width="16" height="12" rx="3" fill="#ddd"/><rect x="5" y="14" width="36" height="54" rx="9" fill="'+COL[c.k]+'"/><rect x="12" y="30" width="22" height="16" rx="3" fill="rgba(255,255,255,.7)"/></svg>'}
-function reset(){S={touched:false,sel:-1,th:0,tth:0,step:1,called:false,items:[],busy:false,hd:90,hcur:90,carry:false};moving&&cancelAnimationFrame(moving);cust={...ENT};stf={...STAFF0};pathTo=null;drawMap();ui();disp();$('mapT').textContent='손님이 입구에 있어요';ph('idle','호출 대기 중','손님이 호출하면 알림이 와요');$('tOffer').hidden=true;$('tdrag').classList.remove('on');$('tdrop').classList.remove('on');if(A)cam(1)}
-function cam(n){if(!A)return;if(n===3)A.focus([0,.17,-.01],28,56,1.0);else A.focus(DEV,0,84,n===4?.66:.56)}
+function reset(){clearItem();S={touched:false,sel:-1,th:0,tth:0,step:1,called:false,items:[],busy:false,hd:90,hcur:90,carry:false};moving&&cancelAnimationFrame(moving);cust={...ENT};stf={...STAFF0};pathTo=null;drawMap();ui();disp();$('mapT').textContent='손님이 입구에 있어요';ph('idle','호출 대기 중','손님이 호출하면 알림이 와요');$('tOffer').hidden=true;$('tdrag').classList.remove('on');$('tdrop').classList.remove('on');if(A)cam(1)}
+function cam(n){if(!A)return;if(n===3)A.focus([0,.17,-.01],28,56,1.0);else if(n===4)A.focus([0,.15,.03],14,64,.78);else A.focus(DEV,0,84,.56)}
 function drawMap(){let s='<rect x="6" y="4" width="348" height="242" rx="14" fill="none" stroke="#2a2640" stroke-width="2"/><rect x="152" y="22" width="56" height="214" fill="rgba(255,255,255,.03)"/>';
  CORN.forEach((c,i)=>{const on=i===S.sel;s+=`<g><rect x="${c.x-42}" y="${c.y-26}" width="84" height="52" rx="12" fill="${on?'rgba(197,255,53,.18)':'#15112a'}" stroke="${on?'#c5ff35':'#2e2a48'}" stroke-width="${on?3:1.5}"/><image href="images/icons/${c.k}.png" x="${c.x-13}" y="${c.y-22}" width="26" height="26" opacity=".9"/><text x="${c.x}" y="${c.y+21}" fill="#cfcdd8" font-size="12" font-family="sans-serif" font-weight="700" text-anchor="middle">${c.n}</text></g>`});
  if(pathTo){const q=stand(pathTo);s+=`<path d="M${ENT.x} ${ENT.y} L${ENT.x} ${q.y} L${q.x} ${q.y}" fill="none" stroke="#c5ff35" stroke-width="3" stroke-dasharray="7 7"/>`}
@@ -724,7 +721,10 @@ function setup(a){A=a;M=a.model;M.updateMatrixWorld(true);const meshes=[];M.trav
 function ang(e){const r=A.canvas.getBoundingClientRect();const v=new THREE.Vector3();P.dial.parent.localToWorld(v.copy(P.dial.position));v.project(A.cam);const cx=r.left+(v.x*.5+.5)*r.width,cy=r.top+(-v.y*.5+.5)*r.height;return Math.atan2(e.clientX-cx,-(e.clientY-cy))*180/Math.PI}
 function nearest(th){let b=0,bd=1e9;P.ring.forEach((r,i)=>{let d=Math.abs(((th-r.ang+540)%360)-180);if(d<bd){bd=d;b=i}});return b}
 function priceTex(txt){const im=P.pi,w=(im&&im.width)||512,h=(im&&im.height)||128,c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#fff';x.font='300 '+Math.floor(h*.82)+'px Inter,Arial,sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(txt,w/2,h/2+h*.03);const t=new THREE.CanvasTexture(c);t.flipY=false;t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=4;return t}
-function disp(){if(!P)return;const has=S.sel>=0,paid=S.items.length>0;P.line.visible=has;P.arrow.visible=has;P.disp.forEach((m,i)=>m.visible=has&&i===S.sel);P.price.visible=paid;
+function addItem(c){if(P.item){M.remove(P.item)}const g=new THREE.Group(),col=new THREE.Color(COL[c.k]);const body=new THREE.Mesh(new THREE.CylinderGeometry(.021,.021,.07,24),new THREE.MeshStandardMaterial({color:col,roughness:.4,metalness:.05,emissive:col,emissiveIntensity:.18}));const cap=new THREE.Mesh(new THREE.CylinderGeometry(.011,.011,.018,16),new THREE.MeshStandardMaterial({color:0xe6e6ea,roughness:.3}));cap.position.y=.044;const lab=new THREE.Mesh(new THREE.CylinderGeometry(.0215,.0215,.026,24,1,true),new THREE.MeshStandardMaterial({color:0xffffff,roughness:.6}));lab.position.y=-.002;g.add(body,cap,lab);g.position.set(.0,.3,-.04);g.userData={y:.3,ry:.098,vy:0};g.rotation.z=.12;M.add(g);P.item=g}
+function clearItem(){if(P&&P.item){M.remove(P.item);P.item=null}}
+function disp(){const ts=$('tsel');if(ts){if(S.sel>=0){ts.hidden=false;$('tselI').src='images/icons/'+CORN[S.sel].k+'.png';$('tselN').textContent=CORN[S.sel].n;$('tselP').textContent=S.items.length?CORN[S.sel].pr.toLocaleString()+'원':''}else ts.hidden=true}
+ if(!P)return;const has=S.sel>=0,paid=S.items.length>0;P.line.visible=has;P.arrow.visible=has;P.disp.forEach((m,i)=>m.visible=has&&i===S.sel);P.price.visible=paid;
  if(paid){const tot=S.items.reduce((a,i)=>a+CORN[i].pr,0);P.price.material.map=priceTex(tot.toLocaleString('en-US'));P.price.material.needsUpdate=true}
  P.ring.forEach((r,i)=>{r.m.scale.setScalar(i===S.sel?1.4:1)})}
 function sp(m){const r=A.canvas.getBoundingClientRect(),v=new THREE.Vector3();m.geometry.computeBoundingBox();m.geometry.boundingBox.getCenter(v);m.localToWorld(v);v.project(A.cam);return[(v.x*.5+.5)*r.width,(-v.y*.5+.5)*r.height]}
@@ -757,7 +757,7 @@ function offer(){const c=CORN[S.sel];$('tprod').innerHTML=bottle(c);$('tofN').te
  function move(e){const r=st.r;g.style.transform='translate('+(e.clientX-r.left)+'px,'+(e.clientY-r.top)+'px)';const d=Math.hypot(e.clientX-r.left-S.dz[0],e.clientY-r.top-S.dz[1]);$('tdrop').classList.toggle('hot',d<95)}
  g.addEventListener('pointermove',e=>{if(st)move(e)});
  const end=e=>{if(!st)return;const r=st.r,d=Math.hypot(e.clientX-r.left-S.dz[0],e.clientY-r.top-S.dz[1]);st=null;g.classList.remove('drag');S.dg=false;$('tdrop').classList.remove('hot');
-  if(d<95){S.carry=false;g.style.transition='transform .35s ease-in,opacity .35s';g.style.transform='translate('+S.dz[0]+'px,'+(S.dz[1]+10)+'px) scale(.5)';g.style.opacity=0;setTimeout(()=>{g.classList.remove('on');g.style.transition='';g.style.opacity='';$('tdrop').classList.remove('on');S.items.push(S.sel);S.step=4;$('tOffer').hidden=true;ph('done','응대 완료','단말기로 완료를 확인했어요');ui();disp();S.hd=90;cam(4)},380)}};
+  if(d<95){S.carry=false;g.style.transition='transform .35s ease-in,opacity .35s';g.style.transform='translate('+S.dz[0]+'px,'+(S.dz[1]+10)+'px) scale(.5)';g.style.opacity=0;setTimeout(()=>{g.classList.remove('on');g.style.transition='';g.style.opacity='';$('tdrop').classList.remove('on');addItem(CORN[S.sel]);S.items.push(S.sel);S.step=4;$('tOffer').hidden=true;ph('done','응대 완료','단말기로 완료를 확인했어요');ui();disp();S.hd=90;cam(4)},380)}};
  g.addEventListener('pointerup',end);g.addEventListener('pointercancel',end)})();
 $('trReset').addEventListener('click',()=>{reset();disp()});
 reset();
