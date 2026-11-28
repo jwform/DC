@@ -463,6 +463,8 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .fin-spec k{font:700 11px var(--f-mono);letter-spacing:.2em;color:var(--lime)}
 @media(max-width:980px){.fin-cards{grid-template-columns:1fr}}
 .tsel{position:absolute;left:14px;top:14px;z-index:6;display:flex;align-items:center;gap:10px;padding:8px 16px 8px 10px;border-radius:99px;background:rgba(10,8,20,.8);border:1.5px solid var(--lime);font:800 17px var(--f-body)}.tsel[hidden]{display:none}.tsel img{width:30px;height:30px;object-fit:contain}.tsel span{color:var(--lime);font-size:15px}
+.pm-view .shot{position:absolute;inset:4% 3%;width:94%;height:92%;object-fit:contain;opacity:0;transform:scale(.96);transition:opacity .6s ease,transform .9s cubic-bezier(.2,.8,.2,1);pointer-events:none;z-index:2}.pm-view .shot.on{opacity:1;transform:none}
+.pr-demo .sw-card:not(.on) *{animation:none!important}
 </style>
 </head>
 <body>
@@ -500,14 +502,12 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 </div><a class="pm-cta" id="prCta" href="#try">직접 체험해보기 <span aria-hidden="true">↓</span></a>
       </div>
       <div class="pm-view" id="pmView" data-tab="basket">
-        <div class="pm-fb" id="pmFb"><img src="images/IMG-01_hero.webp" alt="바구니에 걸린 스마트 바구니 디스플레이"></div>
-        <div class="pv" id="pvBasket"></div>
-        <div class="pm-mode" role="group" aria-label="보기 선택"><button type="button" class="on" data-m="basket">바구니에 건 모습</button><button type="button" data-m="dev">제품만 보기</button></div>
+        <img class="shot on" data-k="0" src="images/shot_s0_basket.webp" alt="바구니에 걸린 스마트 바구니 디스플레이" decoding="async">
+        <img class="shot" data-k="1" src="images/shot_s1_dial.webp" alt="다이얼" decoding="async">
+        <img class="shot" data-k="2" src="images/shot_s2_display.webp" alt="디스플레이" decoding="async">
+        <img class="shot" data-k="3" src="images/shot_s3_call.webp" alt="호출 버튼" decoding="async">
+        <img class="shot" data-k="4" src="images/shot_s4_basket_side.webp" alt="바구니에 걸린 모습" decoding="async">
         <i class="pm-c tl"></i><i class="pm-c tr"></i><i class="pm-c bl"></i><i class="pm-c br"></i>
-        <span class="pm-dim a">280 mm</span><span class="pm-dim b">98 mm</span>
-        <div class="pm-load" id="pmLoad">3D 모델 불러오는 중…</div>
-        <div class="pm-chips" id="pmChips" role="group" aria-label="보기 전환"><button class="on" data-v="quarter" type="button">Quarter</button><button data-v="top" type="button">Top</button><button data-v="front" type="button">Front</button><button data-v="side" type="button">Side</button><button data-v="rear" type="button">Rear</button></div>
-        <div class="pm-hint" style="display:none"><b>드래그</b>로 돌려보고 · <b>휠</b>로 확대 · 제품만 보기에서는 <b>빛나는 점</b>에 올리면 설명</div>
       </div>
     <div class="pr-prog" id="prProg"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div></div></section>
 
@@ -559,31 +559,19 @@ const TEAM_URL='https://jwform.github.io/DC/team/', COURSE_URL='https://jwform.g
 ['teamLink','teamLink2'].forEach(i=>document.getElementById(i).href=TEAM_URL);
 ['homeLink'].forEach(i=>document.getElementById(i).href=COURSE_URL);
 (function(){
-let API={},cur='basket';window.__prAPI=()=>API;
-const OFF=[0,.122,.1142];
-const DEVC=[-.0,.122,.128];
-API.dev={get _S(){return API.basket&&API.basket._S},get model(){return API.basket&&API.basket.model},focus(p,t,ph,r){API.basket&&API.basket.focus([p[0]+OFF[0],p[1]+OFF[1],p[2]+OFF[2]],t,ph,r)},setView(n){const a=API.basket;if(!a)return;const v=a.views[n];if(!v)return;a.focus(DEVC,v[0],v[1],.5)},setActive(){}};
+let API={};window.__prAPI=()=>API;
 window.__showAll=function(){const a=API.basket;if(!a||!a.model)return;a.model.traverse(o=>{if(o.isMesh&&/^basket_/.test(o.name))o.visible=true})};
-window.__applyMode=function(){const a=API.basket;if(!a||!a.model)return;a.model.traverse(o=>{if(o.isMesh&&/^basket_/.test(o.name))o.visible=(view.dataset.tab!=='dev')})};
-const view=document.getElementById('pmView'),pvB=document.getElementById('pvBasket'),load=document.getElementById('pmLoad'),fb=document.getElementById('pmFb');
+window.__applyMode=window.__showAll;
+const t3=document.getElementById('try3d'),pvB=document.createElement('div');pvB.className='pv';pvB.id='pvBasket';t3.insertBefore(pvB,t3.firstChild);
 function ld(src){return new Promise((r,j)=>{const s=document.createElement('script');s.src=src;s.onload=r;s.onerror=()=>j(new Error(src));document.head.appendChild(s)})}
-function mk(key,silent){
-  if(API[key]||API['_'+key])return;API['_'+key]=1;if(!silent)load.style.display='';
-  const o={box:pvB,url:'models/3D-02_with-basket.glb',fallbackScript:'models/3D-02_with-basket.glb.js',fallbackVar:'__GLB_B64_BASKET',fitToModel:true};
-  API[key]=ProductViewer(o.box,{url:o.url,fallbackScript:o.fallbackScript,fallbackVar:o.fallbackVar,fitToModel:o.fitToModel,autoDelay:key==='basket'?8000:3500,onFirstFrame:()=>{fb.style.opacity='0';setTimeout(()=>{fb.style.display='none'},500)},onContextLost:()=>{fb.style.display='';fb.style.opacity='1';load.style.display=''},onContextRestored:()=>{load.style.display='none'},onLoad:()=>{load.style.display='none';setTimeout(()=>window.__applyMode&&window.__applyMode(),50)},onError:()=>{load.textContent='3D를 불러오지 못했어요 · 사진으로 대신 보여드려요'}});
+function mk(){
+  if(API.basket)return;
+  API.basket=ProductViewer(pvB,{url:'models/3D-02_with-basket.glb',fallbackScript:'models/3D-02_with-basket.glb.js',fallbackVar:'__GLB_B64_BASKET',fitToModel:true,autoDelay:8000,onLoad:()=>setTimeout(window.__showAll,50),onError:()=>console.warn('3D load failed')});
 }
-window.__thrP=ld('lib/three.bundle.js');let ready=window.__thrP.then(()=>ld('lib/viewer.js')).then(()=>new Promise(r=>{let done=false;const go=()=>{if(done)return;done=true;clearInterval(t);r()};const t=setInterval(()=>{if(window.__storyReady)setTimeout(go,900)},250);setTimeout(go,14000);const pe=document.getElementById('product');new IntersectionObserver(es=>{if(es[0].isIntersecting)go()},{rootMargin:'1600px 0px'}).observe(pe)})).then(()=>mk('basket')).catch(e=>{load.textContent='3D 뷰어를 불러오지 못했어요';console.error(e)});
-document.querySelectorAll('.pm-mode button').forEach(b=>b.addEventListener('click',()=>{
-  cur=b.dataset.m;view.dataset.tab=cur;document.querySelectorAll('.pm-mode button').forEach(x=>x.classList.toggle('on',x===b));
-  window.__applyMode();
-  /* [OPT-1] 가려진 쪽 3D 뷰어는 렌더링 중지 */
-  
-  fb.style.display=(cur==='basket'&&!(API.basket&&API.basket._S&&API.basket._S.ready))?'':'none';
-  document.querySelectorAll('#pmChips button').forEach(x=>x.classList.toggle('on',x.dataset.v==='quarter'));
-  ready.then(()=>{const a=API[cur];a&&a.setView&&a.setView('quarter')});
-}));
-document.getElementById('pmChips').addEventListener('click',e=>{const b=e.target.closest('button[data-v]');if(!b)return;const a=API[cur];if(!a)return;document.querySelectorAll('#pmChips button').forEach(x=>x.classList.toggle('on',x===b));a.setView(b.dataset.v)});
+/* 제품 소개는 미리 만든 이미지로 보여주고, 3D는 직접 체험 구역 근처에서만 늦게 불러옵니다 */
+window.__thrP=ld('lib/three.bundle.js');window.__thrP.then(()=>ld('lib/viewer.js')).then(()=>new Promise(r=>{let done=false;const go=()=>{if(done)return;done=true;r()};const te=document.getElementById('try');new IntersectionObserver(es=>{if(es[0].isIntersecting)go()},{rootMargin:'1400px 0px'}).observe(te)})).then(mk).catch(e=>console.error(e));
 })();
+
 const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 </script>
@@ -629,16 +617,15 @@ var ST=[null,
  ['02','디스플레이','아이콘과 화살표로 길을 보여줍니다. 한국어를 몰라도 됩니다','dev',[-0.02,0,0.0138],0,86,.52,2],
  ['03','호출 버튼','누르면 직원 휴대폰으로 바로 호출이 갑니다','dev',[-0.12,0.0,0.018],-18,80,.3,3],
  ['04','바구니에 걸기만 하면 끝','손잡이에 걸면 바로 사용할 수 있어요','basket',null,34,54,1,0]];
-function api(k){return window.__prAPI&&window.__prAPI()[k]}
+var shots=document.querySelectorAll('#pmView .shot');function api(k){return window.__prAPI&&window.__prAPI()[k]}
 function ready(k,fn,n){n=n||0;var a=api(k);if(a&&a._S&&a._S.ready)return fn(a);if(n<80)setTimeout(function(){ready(k,fn,n+1)},150)}
 function mode(m){var b=document.querySelector('.pm-mode button[data-m="'+m+'"]');if(b&&!b.classList.contains('on'))b.click()}
 function go(i){var s=ST[i];stage.classList.toggle('cap',i>0);stage.classList.toggle('end',i===4);cap.classList.toggle('on',!!s);
  demo.querySelectorAll('.sw-card').forEach(function(c){c.classList.toggle('on',!!s&&+c.dataset.i===s[8])});clearInterval(tm);
  if(s&&s[8]===1){dial();tm=setInterval(dial,1500)}if(s&&s[8]===3){ph.style.opacity=0;setTimeout(function(){ph.style.opacity=1},900)}
- if(!s){mode('basket');ready('basket',function(a){a.setView('quarter')});return}
- N.textContent=s[0];T.textContent=s[1];D.textContent=s[2];mode(s[3]);
- setTimeout(function(){ready(s[3],function(a){if(s[4])a.focus(s[4],s[5],s[6],s[7]);else a.setView('quarter')})},s[3]==='dev'?250:0)}
-function upd(){tk=false;var r=sec.getBoundingClientRect(),tot=sec.offsetHeight-innerHeight;if(tot<=0)return;var p=Math.max(0,Math.min(.9999,-r.top/tot)),n=5,i=Math.floor(p*n),f=p*n-i;
+ shots.forEach(function(im,k){im.classList.toggle('on',k===i)});if(!s)return;
+ N.textContent=s[0];T.textContent=s[1];D.textContent=s[2]}
+function upd(){tk=false;var r=sec.getBoundingClientRect(),tot=sec.offsetHeight-innerHeight;if(tot<=0)return;if(r.bottom<0||r.top>innerHeight){if(cur!==-2){clearInterval(tm);cur=-2}return}var p=Math.max(0,Math.min(.9999,-r.top/tot)),n=5,i=Math.floor(p*n),f=p*n-i;
  if(i!==cur){cur=i;go(i)}bars.forEach(function(b,k){b.style.width=(k<i?100:k===i?f*100:0).toFixed(1)+'%'})}
 addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(upd)}},{passive:true});addEventListener('resize',upd);upd();
 })();
