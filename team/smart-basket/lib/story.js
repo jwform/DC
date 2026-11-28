@@ -13,7 +13,7 @@ function angDiff(a,b){return ((a-b+Math.PI*3)%(Math.PI*2))-Math.PI}
 window.Story=function(canvas,hud,opt){
 opt=opt||{};
 var R=new T.WebGLRenderer({canvas:canvas,antialias:false,powerPreference:'high-performance'});
-R.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));
+R.setPixelRatio(Math.min(window.devicePixelRatio||1,1.25));
 R.toneMapping=T.ACESFilmicToneMapping;R.toneMappingExposure=.78;R.outputColorSpace=T.SRGBColorSpace;
 var S=new T.Scene();S.background=new T.Color('#06040c');S.fog=new T.FogExp2('#08050f',.028);
 var pm=new T.PMREMGenerator(R);S.environment=pm.fromScene(new window.RoomEnvironment(),0.04).texture;S.environmentIntensity=.18;
@@ -109,7 +109,7 @@ function human(o){
  if(o.bag){var bg=new T.Mesh(new T.BoxGeometry(.24,.28,.1),mat(o.bag,em*.5));bg.position.set(.21,.96*hs,.03);g.add(bg)}
  g.userData={legs:legs,arms:arms,ph:Math.random()*6};S.add(g);return g}
 var DT=.016;
-function walk(h,sp,t){var u=h.userData;if(u.char){h.updateMatrixWorld(true);u.char.update(sp,DT);return}var k=Math.sin(t*sp*6.2+u.ph)*Math.min(.42,sp*.5);u.legs[0].rotation.x=k;u.legs[1].rotation.x=-k;u.arms[0].rotation.x=-k*.8;u.arms[1].rotation.x=k*.8}
+var FC=0;function walk(h,sp,t){var u=h.userData;if(u.char){if(u.skip&&(FC&1))return;h.updateMatrixWorld(true);u.char.update(sp,DT*(u.skip?2:1));return}var k=Math.sin(t*sp*6.2+u.ph)*Math.min(.42,sp*.5);u.legs[0].rotation.x=k;u.legs[1].rotation.x=-k;u.arms[0].rotation.x=-k*.8;u.arms[1].rotation.x=k*.8}
 
 /* 주인공 & 직원 */
 var TX=-3,TZ=3.4;
@@ -140,18 +140,17 @@ function loadScript(src){return new Promise(function(res,rej){var el=document.cr
 var CHD=[],CRC=['#7a6bb8','#5a5290','#8f86c4','#4a4472','#6572a8','#9a8fd0','#6d6694','#8b78c8'];
 function charBuf(url){return fetch(url).then(function(r){if(!r.ok)throw 0;return r.arrayBuffer()})}
 function applyChars(){var C=window.Chars;if(!C)return Promise.resolve();
- return Promise.all([charBuf(base+'models/char_tourist.glb'),charBuf(base+'models/char_staff.glb')]).then(function(bs){
- var dT=C.parse(bs[0]),dS=C.parse(bs[1]);
- return Promise.all([C.loadTex(dT),C.loadTex(dS)]).then(function(){
-  function put(g,inst){g.children.slice().forEach(function(c){c.visible=false});g.add(inst.root);g.userData.char=inst}
-  put(tourist,C.make(dT,{glow:0x5a5440}));put(staff,C.make(dS,{glow:0x3c4f86}));
-  crowd.forEach(function(c,i){var d=i%2?dT:dS,col=CRC[i%CRC.length];put(c.h,C.make(d,{tint:col,emis:.16,scale:rnd(.94,1.06),sx:rnd(.9,1.12)}))})})})}
+ return Promise.all(['char_tourist','char_staff','crowd_a','crowd_b'].map(function(n){return charBuf(base+'models/'+n+'.glb')})).then(function(bs){
+ var d=bs.map(function(b){return C.parse(b)});
+ function put(g,inst){g.children.slice().forEach(function(c){c.visible=false});g.add(inst.root);g.userData.char=inst}
+ put(tourist,C.make(d[0],{tint:'#ffd23f',emis:.55}));put(staff,C.make(d[1],{tint:'#2fe6c0',emis:.5}));
+ crowd.forEach(function(c,i){var col=CRC[i%CRC.length];c.h.userData.skip=1;put(c.h,C.make(d[2+i%2],{tint:col,emis:.16,scale:rnd(.94,1.06),sx:rnd(.9,1.12)}))})})}
 var ready=loadModel().catch(function(e){console.warn('model',e)});
 loadScript(base+'lib/chars.js').then(function(){return applyChars()}).catch(function(e){console.warn('chars',e)});
 
 
 /* ---------- 손님들 ---------- */
-var crowd=[],N=26;
+var crowd=[],N=(window.innerWidth<800?12:18);
 function inIsl(x,z,m){for(var k=0;k<ISL.length;k++){if(Math.abs(x-ISL[k][0])<1.9+m&&Math.abs(z-ISL[k][1])<1+m)return true}return false}
 var jam=false,open=false;
 function outIsl(o){for(var k=0;k<ISL.length;k++){var dx=o.x-ISL[k][0],dz=o.z-ISL[k][1],px=1.9+.25-Math.abs(dx),pz=1+.25-Math.abs(dz);if(px>0&&pz>0){if(px<pz)o.x+=(dx<0?-1:1)*px;else o.z+=(dz<0?-1:1)*pz}}}
@@ -175,7 +174,7 @@ var ringT=new T.Mesh(new T.RingGeometry(.7,.78,48),new T.MeshBasicMaterial({colo
 var ringS=ringT.clone();ringS.material=ringT.material.clone();ringS.material.color.set(0x8fe05a);S.add(ringS);
 
 /* ---------- HUD (화면 위 표시) ---------- */
-hud.innerHTML='<div class="h-dens" data-h="dens"><span>매장 안 손님</span><b>26</b><span>직원</span><b class="g">1</b></div>'+
+hud.innerHTML='<div class="h-dens" data-h="dens"><span>매장 안 손님</span><b>'+(N+1)+'</b><span>직원</span><b class="g">1</b></div>'+
  '<div class="h-tag" data-h="tour">외국인 관광객</div><div class="h-tag g" data-h="staff">매장 직원</div>'+
  '<div class="h-q" data-h="q0">?</div><div class="h-q" data-h="q1">?</div><div class="h-q" data-h="q2">?</div>'+
  '<svg class="h-line" data-h="line"><line x1="0" y1="0" x2="0" y2="0"/></svg><div class="h-x" data-h="x">✕</div><div class="h-tag r" data-h="cut">사이에 사람 12명</div>'+
@@ -212,7 +211,7 @@ function setBeat(i,f){if(i!==beat){beat=i;bt=0;jam=i===3;open=i>=7;crowd.forEach
 var sw={tx:-1,tz:-6.4,yaw:0,wait:0,st:0};
 function sPick(){sw.st=0;for(var n=0;n<30;n++){var x=rnd(-11,11),z=rnd(-7,8.5);if(inIsl(x,z,.6))continue;if(beat<=3&&Math.hypot(x-TX,z-TZ)<6.5)continue;sw.tx=x;sw.tz=z;return}sw.tx=7;sw.tz=-6}
 function frame(){raf=requestAnimationFrame(frame);if(!vis)return;
- var dt=Math.min(clk.getDelta(),.05),t=clk.elapsedTime;bt+=dt;DT=dt;
+ FC++;var dt=Math.min(clk.getDelta(),.05),t=clk.elapsedTime;bt+=dt;DT=dt;
  /* 손님 */
  for(var k=0;k<crowd.length;k++){var c=crowd[k],h=c.h;
   if(c.wait>0){c.wait-=dt;c.v*=.9;walk(h,0,t);if(c.wait<=0)pickT(c);continue}
@@ -282,7 +281,7 @@ function frame(){raf=requestAnimationFrame(frame);if(!vis)return;
  place(H.say,proj(sx,2.3,sz),beat===7&&callT>=0&&Math.hypot(sx+1.6,sz-2.5)<.6,0,-24);
  comp.render()}
 function resize(){var w=canvas.clientWidth||canvas.parentNode.clientWidth,h=canvas.clientHeight||canvas.parentNode.clientHeight;if(!w||!h)return;W=w;Hh=h;
- var pr=Math.min(window.devicePixelRatio||1,w<800?1.15:1.5);R.setPixelRatio(pr);R.setSize(w,h,false);comp.setPixelRatio(pr);comp.setSize(w,h);cam.aspect=w/h;
+ var pr=Math.min(window.devicePixelRatio||1,w<800?1:1.25);R.setPixelRatio(pr);R.setSize(w,h,false);comp.setPixelRatio(pr);comp.setSize(w,h);cam.aspect=w/h;
  var asp=w/h;bl.setSize(w*.5,h*.5);cam.updateProjectionMatrix()}
 resize();frame();
 return{_crowd:crowd,setBeat:setBeat,resize:resize,setVisible:function(v){vis=v;if(v)clk.getDelta()},ready:ready}
