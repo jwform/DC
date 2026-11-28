@@ -97,7 +97,7 @@ window.ProductViewer=function(box,opt){
   var pm=new T.PMREMGenerator(renderer);
   scene.environment=pm.fromScene(new window.RoomEnvironment(),0.04).texture;scene.environmentIntensity=0.7;
   var sun=new T.DirectionalLight(0xffffff,2.6);sun.position.set(-0.25,0.32,-0.2);sun.castShadow=true;
-  sun.shadow.mapSize.set(2048,2048);sun.shadow.radius=5;sun.shadow.bias=-0.0004;
+  sun.shadow.mapSize.set(1024,1024);sun.shadow.radius=5;sun.shadow.bias=-0.0004;
   Object.assign(sun.shadow.camera,{left:-0.3,right:0.3,top:0.3,bottom:-0.3,near:0.05,far:1.5});
   var rim=new T.DirectionalLight(0x7628F5,1.6);rim.position.set(0.2,0.05,-0.3);
   var fill=new T.DirectionalLight(0xdfe6ff,0.35);fill.position.set(0.3,0.12,-0.15);
@@ -114,7 +114,7 @@ window.ProductViewer=function(box,opt){
 
   function fit(){
     var w=box.clientWidth||600,h=box.clientHeight||400;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));renderer.setSize(w,h,false);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));renderer.setSize(w,h,false);
     cam.aspect=w/h;
     // 가로 280mm가 화면 폭의 약 78%가 되도록 거리 계산 (세로가 좁으면 세로 기준)
     var tv=Math.tan(cam.fov*RAD/2),th=tv*cam.aspect;
@@ -143,9 +143,12 @@ window.ProductViewer=function(box,opt){
     hot.forEach(function(o){o.el.classList.toggle('on',o===best)});
   }
   var last=performance.now();
+  /* [OPT-1] 화면 밖/숨김 상태에서는 렌더 루프를 멈추고, 다시 보일 때 재개 (렌더 결과는 동일) */
+  var running=false;
+  function wake(){if(running||!S.visible||!S.ready)return;running=true;last=performance.now();requestAnimationFrame(frame)}
   function frame(now){
+    if(!S.visible||!S.ready){running=false;return}
     requestAnimationFrame(frame);
-    if(!S.visible||!S.ready) return;
     var dt=Math.min((now-last)/1000,0.1);last=now;
     if(S.auto&&now-S.idle>(opt.autoDelay||1200)){S.gth+=16*RAD*dt;S.th=S.gth}
     else{var k=1-Math.exp(-dt*9);S.th+=(S.gth-S.th)*k;S.ph+=(S.gph-S.ph)*k;S.r+=(S.gr-S.r)*k}
@@ -155,8 +158,8 @@ window.ProductViewer=function(box,opt){
     camFill.position.set(cam.position.x-0.2,cam.position.y-0.02,cam.position.z+0.1);camFill.target.position.copy(S.target);
     updateHot();renderer.render(scene,cam);
   }
-  requestAnimationFrame(frame);
-  if('IntersectionObserver' in window)new IntersectionObserver(function(e){S.visible=e[0].isIntersecting}).observe(box);
+  S.io=true;S.active=true;
+  if('IntersectionObserver' in window)new IntersectionObserver(function(e){S.io=e[0].isIntersecting;S.visible=S.io&&S.active;wake()}).observe(box);
 
   function stopAuto(){S.auto=false}
   function clampPh(){S.gph=Math.max(3*RAD,Math.min(177*RAD,S.gph))}
@@ -187,6 +190,8 @@ window.ProductViewer=function(box,opt){
       S.gth=th;S.gph=v[1]*RAD;S.gr=S.r0;S.userZoomed=false;
     },
     resume:function(){S.auto=true;S.idle=performance.now()},
+    /* [OPT-1] 보기 전환으로 가려진 뷰어는 false로 두면 렌더링을 멈춘다 */
+    setActive:function(on){S.active=!!on;S.visible=S.io&&S.active;wake()},
     views:VIEWS,_S:S
   };
 
@@ -204,9 +209,11 @@ window.ProductViewer=function(box,opt){
     glowM.rotation.x=-Math.PI/2;glowM.position.set(c.x,bb.min.y-0.0008,c.z);scene.add(glowM);
     sun.target.position.copy(c);scene.add(sun.target);
     S.ready=true;S.idle=performance.now();fit();S.r=S.gr;
+    wake();
     opt.onLoad&&opt.onLoad(api);
   }).catch(function(err){console.error(err);opt.onError&&opt.onError(err)});
   return api;
 };
 window.ProductViewer.b64ToBuf=b64ToBuf;window.ProductViewer.parseGLB=parseGLB;window.ProductViewer.buildModel=buildModel;
+window.__buildGLB={b64ToBuf:b64ToBuf,parseGLB:parseGLB,buildModel:buildModel};
 })();
