@@ -386,6 +386,28 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .pr{fill:var(--lime);stroke:none;font:300 38px var(--f-body);text-anchor:middle;animation:pp 4s infinite}@keyframes pp{0%,35%{opacity:0}50%,100%{opacity:1}}
 .spc{padding:clamp(60px,8vw,120px) 0;background:#07050d}.spc-in{max-width:1500px;margin:0 auto;padding:0 clamp(18px,5vw,90px)}.spc h4{font-size:clamp(28px,3vw,44px);letter-spacing:-.04em;margin:0 0 24px}
 @media(max-width:980px){.dtl-stage{grid-template-columns:1fr;align-content:start;padding-top:80px;gap:14px}.dtl-vis{height:40vh}.dtl-t h3{font-size:30px}.dtl-t p{font-size:16px}}
+
+.try{position:relative;padding:clamp(70px,7vw,100px) 0 clamp(60px,8vw,110px);background:radial-gradient(70% 45% at 30% 0%,rgba(118,40,245,.2),transparent 70%),#07050d;border-top:1px solid rgba(157,92,255,.18)}
+.try-in{max-width:1500px;margin:0 auto;padding:0 clamp(18px,5vw,90px)}
+.try-hd .ce{font:700 13px var(--f-mono);letter-spacing:.2em;color:var(--lime)}.try-hd h3{font-weight:700;font-size:clamp(34px,4.4vw,64px);line-height:1.08;letter-spacing:-.045em;margin:10px 0 18px;word-break:keep-all}
+.try-steps{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:0 0 14px;padding:0}
+.try-steps li{display:inline-flex;align-items:center;gap:10px;padding:9px 20px 9px 9px;border-radius:99px;border:1.5px solid rgba(255,255,255,.22);color:#cfcdd8;font:700 17px var(--f-body);transition:.3s}
+.try-steps b{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:15px}
+.try-steps li.on{background:var(--lime);color:#10101a;border-color:var(--lime)}.try-steps li.on b{background:#10101a;color:var(--lime)}.try-steps li.done{border-color:rgba(197,255,53,.6);color:var(--lime)}.try-steps li.done b{background:var(--lime);color:#10101a}
+.try-hint{font-size:clamp(20px,2.1vw,30px);font-weight:600;letter-spacing:-.03em;line-height:1.4;margin:0 0 22px;min-height:1.4em;word-break:keep-all}.try-hint b{color:var(--lime)}.try-hint.shake{animation:shk .4s}
+.try-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:clamp(16px,2.4vw,36px);align-items:start}
+.try-3d{position:relative;height:min(68vh,620px);border-radius:28px;border:1px solid rgba(157,92,255,.3);background:radial-gradient(60% 60% at 50% 55%,rgba(118,40,245,.35),transparent 75%),#0b0816;overflow:hidden;box-shadow:0 50px 140px -50px rgba(118,40,245,.8)}
+.try-3d .pv{position:absolute;inset:0}.try-3d .hs{display:none!important}
+.try-load{position:absolute;inset:0;display:grid;place-items:center;color:var(--mute);font:600 14px var(--f-mono);z-index:2;background:#0b0816;transition:opacity .6s}.try-load.off{opacity:0;pointer-events:none}
+.try-tip{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:3;background:var(--lime);color:#10101a;font:700 17px var(--f-body);padding:11px 22px;border-radius:99px;pointer-events:none;animation:tipb 1.6s infinite;white-space:nowrap}.try-tip b{font-weight:900}@keyframes tipb{50%{transform:translate(-50%,-6px)}}
+.try-side{display:grid;gap:16px}
+.tcard{border-radius:22px;border:1px solid rgba(157,92,255,.28);background:rgba(14,10,26,.85);padding:16px 16px 14px}.tc-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px}.tc-h b{font-size:20px;letter-spacing:-.03em}.tc-h span{font-size:15px;color:var(--lime);font-weight:700}
+#tmap{display:block;width:100%;height:auto;border-radius:14px;background:#0a0814}.tleg{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;color:#cfcdd8}.tleg i{width:11px;height:11px;border-radius:50%;display:inline-block}.tleg i.c{background:#fff}.tleg i.s{background:var(--lime);margin-left:12px}
+.tph{display:flex;gap:14px;align-items:center;background:#f4f2ee;color:#17121f;border-radius:18px;padding:16px}.tph i{width:14px;height:14px;border-radius:50%;background:#bbb;flex:none}.tph b{display:block;font-size:20px;letter-spacing:-.03em}.tph small{font-size:15px;color:#554;font-weight:600}
+.tph[data-st=call]{background:#fff3e6}.tph[data-st=call] i{background:#ff4d5e;animation:pk 1s infinite}.tph[data-st=go] i{background:#ff8a1f}.tph[data-st=done] i{background:#3ab54a}
+.tof{display:flex;gap:14px;align-items:center}.tof img{width:64px;height:64px;object-fit:contain;background:#17132a;border-radius:16px;padding:10px}.tof b{display:block;font-size:22px;letter-spacing:-.03em}.tof small{font-size:16px;color:var(--lime);font-weight:700}
+.tbtn{margin-top:14px;width:100%;border:0;border-radius:99px;background:var(--lime);color:#10101a;font:800 18px var(--f-body);padding:14px;cursor:pointer;animation:tipb2 1.6s infinite}@keyframes tipb2{50%{box-shadow:0 0 0 8px rgba(197,255,53,.25)}}
+@media(max-width:980px){.try-grid{grid-template-columns:1fr}.try-3d{height:46vh}.try-steps li{font-size:15px;padding:7px 14px 7px 7px}}
 </style>
 </head>
 <body>
@@ -434,58 +456,17 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
       </div>
     <div class="pr-prog" id="prProg"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div></div></section>
 
-    <section class="pm-sec sim" id="try" data-n="03">
-  <div class="ch"><span class="ce">03 · 체험</span><h3>이제,<br>직접 써 보세요</h3><p>방금 본 제품을 직접 써 보세요. 다이얼을 돌려 코너를 고르고, 호출 버튼을 눌러 보세요.</p></div>
-  <div class="sim-guide" id="simGuide" aria-live="polite">
-    <ol class="sim-steps"><li data-s="1"><b>1</b>코너 고르기</li><li data-s="2"><b>2</b>호출하기</li><li data-s="3"><b>3</b>제품 담기</li><li data-s="4"><b>4</b>금액 확인</li></ol>
-    <p class="sim-hint" id="simHint"></p>
-  </div>
-  <div class="sim-grid">
-    <div class="sim-left">
-      <svg id="sim" viewBox="0 0 640 410" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="체험용 스마트 바구니 디스플레이">
-        <rect width="640" height="410" rx="24" fill="#0e0e16"/><circle cx="320" cy="230" r="300" fill="url(#gGV)" opacity=".7"/>
-        <path d="M110 112Q320 -30 530 112" fill="none" stroke="#aeb2ba" stroke-width="5" stroke-linecap="round"/>
-        <g id="basketBody"><path d="M44 118H596L556 402H84Z" fill="rgba(180,190,205,.06)" stroke="url(#gSil)" stroke-width="5" stroke-linejoin="round"/><path d="M66 128H574L544 394H96Z" fill="rgba(4,4,12,.55)"/></g>
-        <rect id="zone" x="120" y="282" width="400" height="108" rx="16" fill="rgba(197,255,53,.06)" stroke="#c5ff35" stroke-width="2.5" stroke-dasharray="8 8" opacity="0"/>
-        <g id="inBasket"></g>
-        <g stroke="#aeb2ba" stroke-opacity=".28" stroke-width="2"><path d="M130 118L116 402M200 118L190 402M270 118L264 402M340 118L338 402M410 118L412 402M480 118L486 402M550 118L560 402"/><path d="M60 214H580M72 310H568"/></g>
-        <g id="dev" transform="translate(100 98) scale(1.571)">
-          <rect x="24" y="0" width="38" height="18" rx="5" fill="url(#gVio)" stroke="#3a0f8f"/><rect x="218" y="0" width="38" height="18" rx="5" fill="url(#gVio)" stroke="#3a0f8f"/>
-          <rect x="0" y="10" width="280" height="88" rx="16" fill="url(#gBody)" stroke="#52535e" stroke-width="1.5" filter="url(#fSs)"/>
-          <path d="M16 10H264a16 16 0 0 1 16 16H0A16 16 0 0 1 16 10z" fill="url(#gVio)" opacity=".95"/>
-          <rect x="40" y="34" width="162" height="52" rx="8" fill="url(#gScr)" stroke="#000" stroke-width="2"/>
-          <g id="scr"></g>
-          <g id="dialRing"></g>
-          <g id="dial" tabindex="0" role="slider" aria-label="코너 선택 다이얼" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" style="cursor:grab;outline:none">
-            <circle cx="240" cy="60" r="34" fill="transparent"/>
-            <circle cx="240" cy="60" r="21" fill="#101015" stroke="url(#gVio)" stroke-width="4.5"/>
-            <g id="dialKnob"><circle cx="240" cy="60" r="14.5" fill="#23232b" stroke="#3a3a46"/><path d="M240 48V55" stroke="#c5ff35" stroke-width="3.5" stroke-linecap="round"/></g>
-          </g>
-          <circle id="dialHot" cx="240" cy="60" r="33" fill="none" stroke="#c5ff35" stroke-width="2.5" class="ringP" style="display:none"/>
-          <g id="bell" tabindex="0" role="button" aria-label="직원 호출 버튼" style="cursor:pointer;outline:none">
-            <circle id="bellGlow" cx="18" cy="60" r="30" fill="url(#gGA)" opacity="0"/>
-            <circle cx="18" cy="60" r="12.5" fill="#1a1410" stroke="url(#gAmb)" stroke-width="3"/>
-            <g transform="translate(11 53) scale(.58)" fill="none" stroke="#ff8a1f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21a2 2 0 0 0 4 0"/></g>
-            <circle id="bellRip" cx="18" cy="60" r="14" fill="none" stroke="#ff8a1f" stroke-width="2" opacity="0"/>
-          </g>
-          <circle id="bellHot" cx="18" cy="60" r="19" fill="none" stroke="#c5ff35" stroke-width="2.5" class="ringP" style="display:none"/>
-        </g>
-        <g id="selBadge" style="display:none"></g>
-        <g id="offer" tabindex="0" role="button" aria-label="전달받은 제품, 눌러서 바구니에 담기" style="cursor:grab;display:none;outline:none"></g>
-      </svg>
-      <div class="sim-bar"><button type="button" id="simReset" class="ghostbtn">↺ 다시 해보기</button><span class="sim-sum" id="simSum"></span></div>
-    </div>
-    <div class="sim-right">
-      <div class="sim-card" id="mapCard"><div class="sim-ct"><span>MYEONGDONG STORE</span><b>매장 지도</b></div><div class="map-st" id="mapSt"><i></i><span id="mapStT"></span></div>
-        <svg id="smap" viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg" aria-label="매장 지도"></svg>
-        <div class="sim-leg"><i style="background:#fff"></i>손님<i style="background:#c5ff35;margin-left:14px"></i>직원</div>
-      </div>
-      <div class="sim-card"><div class="sim-ct"><span>STAFF PHONE</span><b>직원 휴대폰</b></div>
-        <div class="phone"><div class="pn" id="pn" data-st="idle"><i class="pdot"></i><div><b id="pnT">호출 대기 중</b><small id="pnS">손님이 호출하면 알림이 옵니다</small></div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
+    <section class="try" id="try" aria-label="직접 체험"><div class="try-in">
+<div class="try-hd"><span class="ce">03 · 체험</span><h3>이제, 직접 써 보세요</h3></div>
+<ol class="try-steps" id="trSteps"><li data-s="1"><b>1</b>코너 고르기</li><li data-s="2"><b>2</b>직원 호출</li><li data-s="3"><b>3</b>제품 담기</li><li data-s="4"><b>4</b>금액 확인</li></ol>
+<p class="try-hint" id="trHint"></p>
+<div class="try-grid"><div class="try-3d" id="try3d"><div class="try-load" id="trLoad">3D 제품을 불러오는 중…</div><div class="try-tip" id="trTip">다이얼을 <b>돌려</b> 보세요</div></div>
+<div class="try-side">
+<div class="tcard"><div class="tc-h"><b>매장 지도</b><span id="mapT">손님이 입구에 있어요</span></div><svg id="tmap" viewBox="0 0 360 250"></svg><div class="tleg"><i class="c"></i>손님<i class="s"></i>직원</div></div>
+<div class="tcard"><div class="tc-h"><b>직원 휴대폰</b></div><div class="tph" id="tph" data-st="idle"><i></i><div><b id="tphT">호출 대기 중</b><small id="tphS">손님이 호출하면 알림이 와요</small></div></div></div>
+<div class="tcard toffer" id="tOffer" hidden><div class="tc-h"><b>직원이 가져왔어요</b></div><div class="tof"><img id="tofI" alt=""><div><b id="tofN"></b><small id="tofP"></small></div></div><button type="button" id="tofB" class="tbtn">바구니에 담기</button></div>
+<button type="button" class="ghostbtn" id="trReset">↺ 다시 해보기</button>
+</div></div></div></section>
 
     <section class="scn" id="scenario" aria-label="시나리오"><div class="scn-in">
 <div class="scn-hd"><span class="ce">04 · 시나리오</span><h3>버튼 하나,<br>두 사람의 시선</h3></div>
@@ -544,154 +525,6 @@ document.querySelectorAll('.pm-mode button').forEach(b=>b.addEventListener('clic
 }));
 document.getElementById('pmChips').addEventListener('click',e=>{const b=e.target.closest('button[data-v]');if(!b)return;const a=API[cur];if(!a)return;document.querySelectorAll('#pmChips button').forEach(x=>x.classList.toggle('on',x===b));a.setView(b.dataset.v)});
 })();
-(function(){
-const IMG=(n,x,y,s,extra)=>`<image href="images/icons/${n}.png" x="${x}" y="${y}" width="${s}" height="${s}" ${extra||''}/>`;
-const CORN=[{n:'스킨케어',i:'skincare',p:'세럼',pr:48000},{n:'메이크업',i:'makeup',p:'립스틱',pr:32000},{n:'헤어케어',i:'haircare',p:'헤어 에센스',pr:27000},{n:'바디케어',i:'bodycare',p:'바디 로션',pr:19000},{n:'향수',i:'perfume',p:'향수',pr:64000},{n:'식품',i:'food',p:'건강식품',pr:15000}];
-const $=id=>document.getElementById(id);
-const S={dir:0,sel:null,phase:'pick',items:[],ang:0,token:0,pos:null,origin:'E'};
-const hint=$('simHint'),guide=$('simGuide');
-const won=n=>n.toLocaleString('ko-KR');
-const HINT={
- 1:'① 다이얼을 <b>돌리거나 눌러서</b> 가고 싶은 코너를 골라보세요.',
- '1b':'다이얼을 돌려 <b>다른 코너</b> 제품도 담아보세요.',
- walk:'길 안내가 시작됐어요! <b>지도<span class="dirarrow"></span></b>에서 내 위치와 가는 길을 확인하세요. 화살표는 가야 할 방향으로 바뀌어요.',
- 2:'도착했어요! 제품이 필요하면 <b>주황색 호출 버튼</b>을 눌러보세요.',
- coming:'직원 휴대폰으로 호출이 갔어요. 직원이 오고 있어요…',
- 3:'직원이 제품을 가져왔어요. 제품을 <b>바구니로 끌어 놓거나 눌러서</b> 담아보세요.',
- drop:'제품이 바구니에 담기는 중이에요…',
- need:'먼저 <b>다이얼로 코너</b>를 골라주세요.',
- wait:'아직 걷는 중이에요. 도착한 뒤에 눌러주세요.',
- full:'바구니가 가득 찼어요. <b>다시 해보기</b>로 처음부터 해볼 수 있어요.'};
-function step(n,msg){guide.querySelectorAll('.sim-steps li').forEach(li=>{const k=+li.dataset.s;li.classList.toggle('on',k===n);li.classList.toggle('done',k<n||n===4)});hint.innerHTML=msg||HINT[n];hint.classList.remove('shake')}
-function shake(msg){hint.innerHTML=msg;hint.classList.remove('shake');void hint.offsetWidth;hint.classList.add('shake')}
-function total(){return S.items.reduce((a,i)=>a+CORN[i].pr,0)}
-function sum(){const el=$('simSum');el.innerHTML=S.items.length?`담은 제품 <b>${S.items.length}개</b> · ${S.items.map(i=>CORN[i].p).join(', ')}`:'바구니가 비어 있어요'}
-// ---- device screen (실제 제품 아이콘 이미지 사용)
-function navIcon(cx,cy,s){
- if(S.phase==='walking')return `<g transform="rotate(${S.dir} ${cx} ${cy})"><g class="arrowP">${IMG('arrow',cx-s/2,cy-s/2,s)}</g></g>`;
- const k=s/36;return `<path d="M${cx-9*k} ${cy} l${6*k} ${7*k} l${12*k} ${-14*k}" fill="none" stroke="#c5ff35" stroke-width="${4*k}" stroke-linecap="round" stroke-linejoin="round"/>`}
-function scr(){
- const c=CORN[S.sel==null?0:S.sel];let h=IMG('cart',46,45,30);
- const has=S.items.length>0;
- if(has){
-  h+=`<text x="80" y="66" fill="#fff" font-size="17" font-weight="300" font-family="Pretendard,sans-serif" letter-spacing="-.3">${won(total())}</text><path d="M140 40V80" stroke="#444458"/>`;
-  if(S.sel!=null) h+=IMG(c.i,146,46,28)+navIcon(187,60,26);
- } else {
-  h+='<path d="M86 40V80" stroke="#444458"/>';
-  if(S.sel!=null) h+=IMG(c.i,96,40,40)+navIcon(164,61,36);
-  else h+='<g fill="#3a3a4c"><circle cx="118" cy="60" r="3"/><circle cx="134" cy="60" r="3"/><circle cx="150" cy="60" r="3"/></g>';
- }
- $('scr').innerHTML=h;
-}
-(function(){let h='';CORN.forEach((c,k)=>{const a=k*60*Math.PI/180,x=240+31.5*Math.sin(a),y=60-31.5*Math.cos(a);h+=IMG(c.i,x-5,y-5,10,'opacity=".8"')});$('dialRing').innerHTML=h})();
-function setDial(a){S.ang=a;$('dialKnob').setAttribute('transform',`rotate(${a} 240 60)`)}
-function tweenDial(to){const from=S.ang;let d=((to-from+540)%360)-180;const t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/220);setDial(from+d*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f);else setDial(((to%360)+360)%360)})(t0)}
-// ---- map
-const BX=[24,134,244],BY=[22,118],POS=[[0,0],[1,0],[2,0],[2,1],[1,1],[0,1]];
-const front=i=>{const[c,r]=POS[i];return [BX[c]+46,r==0?92:118]};
-function route(from,to){const [cx,edge]=front(to);let p;
- if(from==='E')p=[[180,225],[180,203],[125,203],[125,105],[cx,105],[cx,edge]];
- else{const [ax,ae]=front(from);p=[[ax,ae],[ax,105],[cx,105],[cx,edge]]}
- return p.filter((q,k,a)=>k==0||q[0]!=a[k-1][0]||q[1]!=a[k-1][1])}
-function staffRoute(to){const [cx,edge]=front(to);return [[235,225],[235,105],[cx,105],[cx,edge]].filter((q,k,a)=>k==0||q[0]!=a[k-1][0]||q[1]!=a[k-1][1])}
-let rC=null,rS=null;
-function drawMap(){
- let h='<rect width="360" height="240" rx="14" fill="#10101a"/>';
- CORN.forEach((c,i)=>{const[ci,ri]=POS[i],x=BX[ci],y=BY[ri],hi=S.sel===i;h+=`<rect x="${x}" y="${y}" width="92" height="70" rx="9" fill="${hi?'url(#gJk)':'#1b1b2a'}" stroke="#9d5cff" stroke-opacity="${hi?.95:.3}"/>`+IMG(c.i,x+31,y+8,30,`opacity="${hi?1:.55}"`)+`<text x="${x+46}" y="${y+58}" fill="${hi?'#fff':'#8e8ea6'}" font-size="11" font-weight="700" text-anchor="middle" font-family="sans-serif">${c.n}</text>`});
- h+='<rect x="200" y="212" width="64" height="24" rx="8" fill="#171d12" stroke="#c5ff35" stroke-opacity=".3"/><text x="232" y="228" fill="#c5ff35" fill-opacity=".7" font-size="10" text-anchor="middle" font-family="monospace" letter-spacing="2">ENTRANCE</text>';
- if(rC)h+=`<polyline points="${rC.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" class="flowW"/>`;
- if(rS)h+=`<polyline points="${rS.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#c5ff35" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" class="flowL"/>`;
- const pc=S.pos||[180,225];
- h+=`<g id="dotS" style="display:none"><circle r="11" fill="#c5ff35" opacity=".25"/><circle r="6.5" fill="#c5ff35" stroke="#111" stroke-width="2"/></g>`;
- h+=`<g id="dotC" transform="translate(${pc[0]} ${pc[1]})"><circle r="11" fill="#fff" opacity=".2"/><circle r="6.5" fill="#fff" stroke="#7628f5" stroke-width="2.5"/></g>`;
- $('smap').innerHTML=h;
-}
-function setDot(id,p){const e=$(id);if(e){e.style.display='';e.setAttribute('transform',`translate(${p[0]} ${p[1]})`)}}
-function walk(pts,dur,id,done){
- const tok=S.token;const L=[0];for(let i=1;i<pts.length;i++)L.push(L[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));const tot=L[L.length-1]||1;const t0=performance.now();
- (function f(t){if(tok!==S.token)return;const k=Math.min(1,(t-t0)/dur),d=k*tot;let i=1;while(i<L.length-1&&L[i]<d)i++;const u=(d-L[i-1])/((L[i]-L[i-1])||1);const p=pts.length<2?pts[0]:[pts[i-1][0]+(pts[i][0]-pts[i-1][0])*u,pts[i-1][1]+(pts[i][1]-pts[i-1][1])*u];setDot(id,p);if(id==='dotC'){S.pos=p;if(pts.length>1){const dx=pts[i][0]-pts[i-1][0],dy=pts[i][1]-pts[i-1][1];const a=Math.round(Math.atan2(dy,dx)*180/Math.PI/90)*90;if(a!==S.dir){S.dir=a;scr()}}}if(k<1)requestAnimationFrame(f);else done&&done()})(t0);
-}
-function mapSt(t,on){$('mapStT').innerHTML=t;$('mapSt').classList.toggle('on',!!on)}
-function badge(){const b=$('selBadge');if(S.sel==null){b.style.display='none';return}const c=CORN[S.sel];b.style.display='';b.innerHTML=`<g class="pop"><rect x="16" y="14" width="236" height="46" rx="23" fill="#0b0b10" stroke="#c5ff35" stroke-width="2"/><image href="images/icons/${c.i}.png" x="26" y="20" width="34" height="34"/><text x="70" y="43" fill="#fff" font-size="17" font-weight="800" font-family="Pretendard,sans-serif">${c.n} 코너 선택됨</text></g>`}
-function attn(){const c=$('mapCard');c.classList.remove('attn');void c.offsetWidth;c.classList.add('attn')}
-function phone(st,t,s){$('pn').dataset.st=st;$('pnT').textContent=t;$('pnS').textContent=s}
-function hot(){$('dialHot').style.display=(S.phase==='pick'||S.phase==='arrived')&&S.sel==null?'':'none';$('bellHot').style.display=S.phase==='arrived'?'':'none';$('zone').style.opacity=S.phase==='offer'?1:0;$('offer').classList.toggle('pulse',S.phase==='offer')}
-const busy=()=>S.phase==='coming'||S.phase==='offer'||S.phase==='drop'||S.phase==='full';
-// ---- actions
-function choose(i){
- if(busy())return;
- S.token++;S.sel=i;S.phase='walking';scr();tweenDial(i*60);$('dial').setAttribute('aria-valuenow',i+1);
- const r=route(S.origin,i);rC=r;rS=null;S.pos=r[0];S.dir=0;badge();scr();drawMap();hot();step(1,HINT.walk);mapSt('<b>'+CORN[i].n+'</b> 코너로 길 안내 중',1);attn();
- walk(r,r.length<2?10:2600,'dotC',()=>{S.origin=i;S.phase='arrived';rC=null;scr();step(2);hot();drawMap();mapSt('<b>도착했어요</b> · '+CORN[i].n+' 코너',0)});
-}
-function press(){
- const g=$('bellGlow'),r=$('bellRip');
- if(S.sel==null){shake(HINT.need);return}
- if(S.phase==='walking'){shake(HINT.wait);return}
- if(S.phase!=='arrived')return;
- g.setAttribute('opacity','1');r.setAttribute('opacity','1');r.animate([{r:14,opacity:.9},{r:34,opacity:0}],{duration:900});setTimeout(()=>g.setAttribute('opacity','0'),900);
- S.phase='coming';S.token++;hot();step(3,HINT.coming);phone('call','고객 호출 · '+CORN[S.sel].n+' 코너','지도에서 위치를 확인하고 이동하세요');mapSt('직원이 <b>'+CORN[S.sel].n+'</b> 코너로 이동 중',1);attn();
- rS=staffRoute(S.sel);drawMap();setDot('dotS',rS[0]);
- walk(rS,2800,'dotS',()=>{S.phase='offer';phone('ok','전달할 제품을 꺼냈어요',CORN[S.sel].p+' · 손님에게 전달 중');showOffer();step(3);hot();mapSt('<b>직원이 도착했어요</b>',0)});
-}
-const SLOT=n=>[120+66*n,322];
-function prodSvg(k,sz){const c=CORN[k],s=sz/84;return `<g transform="scale(${s})" filter="url(#fSs)"><rect width="84" height="84" rx="14" fill="url(#gLime)"/><image href="images/icons/${c.i}.png" x="22" y="8" width="40" height="40" style="filter:invert(1) opacity(.8)"/><text x="42" y="68" fill="#26330a" font-size="12" font-weight="800" text-anchor="middle" font-family="sans-serif">${c.p}</text></g>`}
-function showOffer(){
- const o=$('offer');o.style.display='';o.setAttribute('transform','translate(0 0)');
- o.innerHTML=`<g transform="translate(540 298)">${prodSvg(S.sel,84)}<rect x="-4" y="-4" width="92" height="92" rx="17" fill="none" stroke="#c5ff35" stroke-width="2" class="ringP"/></g>`;
-}
-function ease(t){return 1-Math.pow(1-t,3)}
-function bounce(t){const n=7.5625,d=2.75;if(t<1/d)return n*t*t;if(t<2/d)return n*(t-=1.5/d)*t+.75;if(t<2.5/d)return n*(t-=2.25/d)*t+.9375;return n*(t-=2.625/d)*t+.984375}
-function put(){
- if(S.phase!=='offer')return;const k=S.sel,n=S.items.length,[sx,sy]=SLOT(n);S.phase='drop';hot();step(3,HINT.drop);
- const o=$('offer');const m=/translate\(([-\d.]+)[ ,]([-\d.]+)\)/.exec(o.getAttribute('transform')||'')||[0,0,0];
- const x0=540+(+m[1]),y0=298+(+m[2]),sc=64/84;
- o.setAttribute('transform','translate(0 0)');const g=o.firstChild;const ring=g.querySelector('rect.ringP');if(ring)ring.remove();
- const tok=++S.token;const t0=performance.now();
- (function f(t){if(tok!==S.token)return;const q=Math.min(1,(t-t0)/420),e=ease(q);
-  g.setAttribute('transform',`translate(${x0+(sx-x0)*e} ${y0+(30-y0)*e}) scale(${1+(sc-1)*e})`);
-  if(q<1)requestAnimationFrame(f);else fall()})(t0);
- function fall(){
-  o.style.display='none';o.innerHTML='';
-  const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('transform',`translate(${sx} 30)`);g.innerHTML=prodSvg(k,64);$('inBasket').appendChild(g);
-  const t1=performance.now();
-  (function h(t){const q=Math.min(1,(t-t1)/900);g.setAttribute('transform',`translate(${sx} ${30+(sy-30)*bounce(q)})`);if(q<1)requestAnimationFrame(h);else land()})(t1);
- }
- function land(){S.items.push(k);S.phase=S.items.length>=6?'full':'pick';scr();sum();hot();
-  step(4,S.phase==='full'?HINT.full:`담겼어요! 이제 <b>금액이 표시</b>돼요 (합계 <b>${won(total())}원</b>). 다이얼을 돌려 <b>다른 제품도</b> 담아보세요.`);
-  phone('done','응대 완료 ✓',CORN[k].n+' · 제품 전달됨');rS=null;drawMap();mapSt('제품이 담겼어요 · 다른 코너도 골라보세요',0);
-  const s=$('scr');s.classList.remove('flash');void s.getBoundingClientRect();s.classList.add('flash');$('simReset').classList.add('pulse')}
-}
-function reset(){S.token++;S.dir=0;badge();mapSt('다이얼로 코너를 고르면 <b>여기에 길</b>이 표시돼요',0);S.sel=null;S.phase='pick';S.items=[];S.pos=null;S.origin='E';rC=null;rS=null;$('inBasket').innerHTML='';$('offer').style.display='none';$('offer').innerHTML='';scr();sum();drawMap();hot();tweenDial(0);phone('idle','호출 대기 중','손님이 호출하면 알림이 옵니다');step(1);$('simReset').classList.remove('pulse')}
-// ---- dial input
-(function(){const d=$('dial');let down=null,moved=false;
- function ang(e){const r=$('dialKnob').getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;return (Math.atan2(e.clientX-cx,-(e.clientY-cy))*180/Math.PI+360)%360}
- const nextI=()=>S.sel==null?0:(S.sel+1)%6;
- d.addEventListener('pointerdown',e=>{if(busy())return;d.setPointerCapture(e.pointerId);down=[e.clientX,e.clientY];moved=false;d.style.cursor='grabbing'});
- d.addEventListener('pointermove',e=>{if(!down)return;if(Math.hypot(e.clientX-down[0],e.clientY-down[1])>6)moved=true;if(moved){const i=Math.round(ang(e)/60)%6;if(i!==S.sel)choose(i)}});
- d.addEventListener('pointerup',()=>{d.style.cursor='grab';if(down&&!moved)choose(nextI());down=null});
- d.addEventListener('pointercancel',()=>{down=null});
- d.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='Enter'||e.key===' '){e.preventDefault();choose(nextI())}if(e.key==='ArrowLeft'){e.preventDefault();choose(S.sel==null?5:(S.sel+5)%6)}});
-})();
-$('bell').addEventListener('click',press);$('bell').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();press()}});
-// ---- offer drag
-(function(){const o=$('offer'),svg=$('sim');let st=null,moved=false;
- function pt(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
- o.addEventListener('pointerdown',e=>{if(S.phase!=='offer')return;o.setPointerCapture(e.pointerId);st=pt(e);moved=false;o.style.cursor='grabbing'});
- o.addEventListener('pointermove',e=>{if(!st)return;const p=pt(e),dx=p.x-st.x,dy=p.y-st.y;if(Math.hypot(dx,dy)>6)moved=true;o.setAttribute('transform',`translate(${dx} ${dy})`)});
- o.addEventListener('pointerup',e=>{if(!st)return;const p=pt(e);o.style.cursor='grab';const inZone=p.x>60&&p.x<580&&p.y>90&&p.y<405;st=null;if(!moved||inZone)put();else o.setAttribute('transform','translate(0 0)')});
- o.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();put()}});
-})();
-$('simReset').addEventListener('click',reset);
-reset();
-})();
-
-document.querySelectorAll('[data-car]').forEach(root=>{
- const bs=[...root.querySelectorAll('[role=tab]')],ps=[...root.querySelectorAll('.xp-pane')],pv=root.querySelector('[data-prev]'),nx=root.querySelector('[data-next]');let cur=0;
- function go(i){cur=i;bs.forEach((b,j)=>b.setAttribute('aria-selected',String(j===i)));ps.forEach((p,j)=>p.hidden=j!==i);root.querySelectorAll('video').forEach(v=>v.pause());if(pv){pv.disabled=i===0;nx.disabled=i===bs.length-1}}
- bs.forEach((b,i)=>b.addEventListener('click',()=>go(i)));
- if(pv){pv.addEventListener('click',()=>go(Math.max(0,cur-1)));nx.addEventListener('click',()=>go(Math.min(bs.length-1,cur+1)));go(0)}
-});
 const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 </script>
@@ -781,6 +614,68 @@ var k=0,tm;function spin(){k=(k+1)%6;os.forEach(function(g,i){g.classList.toggle
 function go(i){cur=i;box.classList.add('sw');setTimeout(function(){N.textContent=ST[i][0];T.textContent=ST[i][1];D.textContent=ST[i][2];box.classList.remove('sw')},180);dp.forEach(function(p,j){p.classList.toggle('on',j===i)});clearInterval(tm);if(i===0){spin();tm=setInterval(spin,1300)}}
 function upd(){tk=false;var r=sec.getBoundingClientRect(),tot=sec.offsetHeight-innerHeight;if(tot<=0)return;var p=Math.max(0,Math.min(.9999,-r.top/tot)),i=Math.floor(p*6);if(i!==cur)go(i)}
 addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(upd)}},{passive:true});addEventListener('resize',upd);upd();
+})();
+
+(function(){
+const sec=document.getElementById('try'),box=document.getElementById('try3d'),pvD=document.getElementById('pvDev'),view=document.getElementById('pmView');
+const $=id=>document.getElementById(id);
+const CORN=[{k:'skincare',n:'스킨케어',p:'세럼',pr:48000,x:70,y:60},{k:'makeup',n:'메이크업',p:'립스틱',pr:32000,x:180,y:60},{k:'haircare',n:'헤어케어',p:'헤어 에센스',pr:27000,x:290,y:60},{k:'bodycare',n:'바디케어',p:'바디 로션',pr:19000,x:70,y:140},{k:'perfume',n:'향수',p:'향수',pr:64000,x:180,y:140},{k:'food',n:'식품',p:'건강식품',pr:15000,x:290,y:140}];
+const ENT={x:180,y:228},STAFF0={x:330,y:226};
+let S,A=null,M=null,P=null,moving=null;
+function reset(){S={sel:-1,th:0,tth:0,step:1,called:false,items:[],busy:false};moving&&cancelAnimationFrame(moving);cust={...ENT};stf={...STAFF0};drawMap();ui();disp();$('mapT').textContent='손님이 입구에 있어요';ph('idle','호출 대기 중','손님이 호출하면 알림이 와요');$('tOffer').hidden=true;}
+let cust={...ENT},stf={...STAFF0},pathTo=null;
+function stand(c){return{x:c.x,y:c.y<100?100:182}}function gut(c){return c.x<125?125:c.x<235?235:345}
+function drawMap(){let s='<g stroke="#2a2640" stroke-width="2"><rect x="8" y="8" width="344" height="234" rx="14" fill="none"/></g>';
+ CORN.forEach((c,i)=>{const on=i===S.sel;s+=`<g><rect x="${c.x-38}" y="${c.y-30}" width="76" height="60" rx="12" fill="${on?'rgba(197,255,53,.18)':'#15112a'}" stroke="${on?'#c5ff35':'#2e2a48'}" stroke-width="${on?3:1.5}"/><image href="images/icons/${c.k}.png" x="${c.x-14}" y="${c.y-24}" width="28" height="28" opacity=".9"/><text x="${c.x}" y="${c.y+24}" fill="#cfcdd8" font-size="12" font-family="sans-serif" font-weight="700" text-anchor="middle">${c.n}</text></g>`});
+ if(pathTo){const q=stand(pathTo),g=gut(pathTo);s+=`<path d="M${ENT.x} ${ENT.y} L${ENT.x} 192 L${g} 192 L${g} ${q.y} L${q.x} ${q.y}" fill="none" stroke="#c5ff35" stroke-width="3" stroke-dasharray="7 7"/>`}
+ s+=`<text x="${ENT.x}" y="246" fill="#6c6a7c" font-size="11" font-family="monospace" text-anchor="middle">ENTRANCE</text><circle cx="${stf.x}" cy="${stf.y}" r="9" fill="#c5ff35"/><circle cx="${cust.x}" cy="${cust.y}" r="9" fill="#fff" stroke="#7628f5" stroke-width="3"/>`;
+ $('tmap').innerHTML=s}
+function ui(){const L=document.querySelectorAll('#trSteps li');L.forEach(li=>{const n=+li.dataset.s;li.classList.toggle('on',n===S.step);li.classList.toggle('done',n<S.step)});
+ const H={1:'다이얼을 <b>돌려서</b> 가고 싶은 코너를 골라 보세요',2:'도움이 필요하면 <b>호출 버튼</b>을 눌러 보세요',3:'직원이 제품을 가져왔어요. <b>바구니에 담아</b> 보세요',4:'담은 제품의 <b>금액</b>이 화면에 나타났어요'};$('trHint').innerHTML=H[S.step];
+ $('trTip').style.display=S.step===1?'':'none';$('trTip').innerHTML=S.step===1?'다이얼을 <b>돌려</b> 보세요':''}
+function ph(st,t,s){$('tph').dataset.st=st;$('tphT').textContent=t;$('tphS').textContent=s}
+function anim(obj,to,ms,cb){const f={x:obj.x,y:obj.y},t0=performance.now();const tick=n=>{const u=Math.min(1,(n-t0)/ms),e=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;obj.x=f.x+(to.x-f.x)*e;obj.y=f.y+(to.y-f.y)*e;drawMap();if(u<1)moving=requestAnimationFrame(tick);else cb&&cb()};moving=requestAnimationFrame(tick)}
+/* ---- 3D 연결 ---- */
+function setup(a){A=a;M=a.model;const meshes=[];M.traverse(o=>{if(o.isMesh)meshes.push(o)});const find=re=>meshes.find(m=>re.test(m.name));
+ const rec=m=>{const g=m.geometry;g.computeBoundingBox();const c=g.boundingBox.getCenter(new THREE.Vector3()),sz=g.boundingBox.getSize(new THREE.Vector3());g.translate(-c.x,-c.y,-c.z);m.position.copy(c);return{c:c.clone(),s:Math.max(sz.x,sz.y)}};
+ P={meshes,dial:find(/^dial$/),ring:[],call:meshes.filter(m=>/^call_/.test(m.name)),cart:find(/cart/),line:find(/line/),arrow:find(/arrow/),price:find(/price/),dicon:null,disp:[]};
+ P.dialI=rec(P.dial);
+ CORN.forEach((c,i)=>{const m=meshes.find(x=>x.name.indexOf(c.k)>-1&&!/_2$/.test(x.name));const r=rec(m);const dx=r.c.x-P.dialI.c.x,dy=r.c.y-P.dialI.c.y;P.ring[i]={m,r,ang:(Math.atan2(dx,dy)*180/Math.PI+360)%360}});
+ P.dicon=find(/skincare.*_2$/);const di=rec(P.dicon);P.dicon.visible=false;
+ CORN.forEach((c,i)=>{const cl=P.ring[i].m.clone();cl.position.copy(di.c);const k=di.s/P.ring[i].r.s;cl.scale.setScalar(k);cl.visible=false;P.dicon.parent.add(cl);P.disp[i]=cl});
+ const pm=P.price;pm.userData.o=pm.material.map;P.pi=pm.material.map&&pm.material.map.image;
+ a.lock(true);a.focus([0,0,0],8,84,.9);a.onFrame=frame;bind(a.canvas);$('trLoad').classList.add('off');disp()}
+function ang(e){const r=A.canvas.getBoundingClientRect();const v=new THREE.Vector3();P.dial.parent.localToWorld(v.copy(P.dial.position));v.project(A.cam);const cx=r.left+(v.x*.5+.5)*r.width,cy=r.top+(-v.y*.5+.5)*r.height;return Math.atan2(e.clientX-cx,-(e.clientY-cy))*180/Math.PI}
+function nearest(th){let b=0,bd=1e9;P.ring.forEach((r,i)=>{let d=Math.abs(((th-r.ang+540)%360)-180);if(d<bd){bd=d;b=i}});return b}
+function priceTex(txt){const im=P.pi,w=(im&&im.width)||512,h=(im&&im.height)||128,c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#fff';x.font='300 '+Math.floor(h*.82)+'px Inter,Arial,sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(txt,w/2,h/2+h*.03);const t=new THREE.CanvasTexture(c);t.flipY=false;t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=4;return t}
+function disp(){if(!P)return;const has=S.sel>=0,paid=S.items.length>0;P.line.visible=has;P.arrow.visible=has;P.disp.forEach((m,i)=>m.visible=has&&i===S.sel);P.price.visible=paid;
+ if(paid){const tot=S.items.reduce((a,i)=>a+CORN[i].pr,0);const t=priceTex(tot.toLocaleString('en-US'));P.price.material.map=t;P.price.material.needsUpdate=true}
+ P.ring.forEach((r,i)=>{r.m.scale.setScalar(i===S.sel?1.4:1)})}
+let drag=null,press=0;
+function bind(cv){
+ const nearCall=e=>{const r=cv.getBoundingClientRect(),b=P.call.find(m=>/bezel/.test(m.name));const v=new THREE.Vector3();b.geometry.computeBoundingBox();b.geometry.boundingBox.getCenter(v);b.localToWorld(v);v.project(A.cam);const sx=r.left+(v.x*.5+.5)*r.width,sy=r.top+(-v.y*.5+.5)*r.height;return Math.hypot(e.clientX-sx,e.clientY-sy)<r.width*.06};
+ const hit=e=>{if(nearCall(e))return'call_x';const r=cv.getBoundingClientRect(),V=new THREE.Vector2(((e.clientX-r.left)/r.width)*2-1,-((e.clientY-r.top)/r.height)*2+1),RC=new THREE.Raycaster();RC.setFromCamera(V,A.cam);const h=RC.intersectObjects(M.children,true)[0];return h&&h.object.name};
+ cv.addEventListener('pointerdown',e=>{const n=hit(e)||'';if(/^dial/.test(n)){drag={a0:ang(e),t0:S.th,moved:0,x:e.clientX};S.dragging=true;cv.setPointerCapture(e.pointerId);$('trTip').style.display='none'}else if(/^call_/.test(n)){callPress()}});
+ cv.addEventListener('pointermove',e=>{if(drag){let d=ang(e)-drag.a0;d=((d+540)%360)-180;S.th=drag.t0+d;drag.moved=Math.max(drag.moved,Math.abs(d));const sel=nearest(((S.th%360)+360)%360);if(sel!==S.sel){S.sel=sel;disp();drawMap()}}else{const n=hit(e)||'';cv.style.cursor=/^(dial|call_)/.test(n)?'pointer':'default'}});
+ const up=()=>{if(!drag)return;const wasTap=drag.moved<4;S.dragging=false;drag=null;if(wasTap){S.sel=(S.sel+1+CORN.length)%CORN.length;disp()}settle()};
+ cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up)}
+function settle(){if(S.sel<0)return;S.tth=P.ring[S.sel].ang;const cur=((S.th%360)+360)%360;let d=((S.tth-cur+540)%360)-180;S.tth=S.th+d;pathTo=CORN[S.sel];disp();
+ $('mapT').textContent=CORN[S.sel].n+' 코너로 안내 중';ph('idle','호출 대기 중','손님이 호출하면 알림이 와요');
+ if(S.step<=2||S.step===1){S.called=false;const q=stand(pathTo),g=gut(pathTo);anim(cust,{x:ENT.x,y:192},500,()=>anim(cust,{x:g,y:192},700,()=>anim(cust,{x:g,y:q.y},500,()=>anim(cust,q,400,()=>{$('mapT').textContent=CORN[S.sel].n+' 코너에 도착';if(S.step===1){S.step=2;ui()}}))))}drawMap()}
+function frame(dt){if(!P)return;if(!S.dragging){S.th+=(S.tth-S.th)*Math.min(1,dt*10)}P.dial.rotation.z=-S.th*Math.PI/180;
+ press=Math.max(0,press-dt*4);const z=-.0016*Math.sin(Math.min(1,press)*Math.PI);P.call.forEach(m=>{if(/pad|ring|bell/.test(m.name))m.position.z=(m.userData.z0===undefined?(m.userData.z0=m.position.z):m.userData.z0)+z})}
+function callPress(){press=1;if(S.sel<0){const h=$('trHint');h.classList.remove('shake');void h.offsetWidth;h.classList.add('shake');return}
+ if(S.called)return;moving&&cancelAnimationFrame(moving);const q0=stand(CORN[S.sel]);cust={...q0};drawMap();S.called=true;S.step=3;ui();$('mapT').textContent='직원이 호출을 받았어요';ph('call','호출 · '+CORN[S.sel].n+' 코너','손님이 도움을 요청했어요');
+ setTimeout(()=>{ph('go','이동 중','맵을 보고 '+CORN[S.sel].n+' 코너로 가는 중');const q=stand(pathTo),g=gut(pathTo);anim(stf,{x:g,y:STAFF0.y},700,()=>anim(stf,{x:g,y:q.y},900,()=>anim(stf,{x:q.x+26,y:q.y},500,()=>{ph('done','도착했어요','제품을 꺼내 전달해요');offer()})))},900)}
+function offer(){const c=CORN[S.sel];$('tofI').src='images/icons/'+c.k+'.png';$('tofN').textContent=c.p;$('tofP').textContent=c.pr.toLocaleString()+'원';$('tOffer').hidden=false;$('mapT').textContent='직원이 제품을 전달해요'}
+$('tofB').addEventListener('click',()=>{S.items.push(S.sel);S.step=4;$('tOffer').hidden=true;ph('done','응대 완료','단말기로 완료를 확인했어요');ui();disp()});
+$('trReset').addEventListener('click',()=>{S.sel=-1;S.th=0;S.tth=0;pathTo=null;reset();disp()});
+reset();
+/* 뷰어를 체험 칸으로 옮기기 */
+function home(){if(pvD.parentNode!==view){view.insertBefore(pvD,view.firstChild.nextSibling||null);const cur=view.dataset.tab;pvD.classList.toggle('off',cur!=='dev');if(A)A.lock(false)}}
+function away(){if(pvD.parentNode!==box){box.insertBefore(pvD,box.firstChild);pvD.classList.remove('off');if(A)A.lock(true)}}
+let tries=0;function init(){const a=window.__prAPI&&window.__prAPI().dev;if(a&&a._S&&a._S.ready&&a.model){away();a.setActive(true);if(!P)setup(a);else{a.lock(true);a.focus([0,0,0],8,84,.9)}return}if(tries++<200)setTimeout(init,300)}
+new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){tries=0;init()}else{home()}})},{rootMargin:'300px 0px'}).observe(sec);
 })();
 </script>
 </body>

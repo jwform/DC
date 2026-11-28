@@ -157,20 +157,20 @@ window.ProductViewer=function(box,opt){
     /* 카메라를 따라다니는 키/필 조명: 어느 방향에서 봐도 제품이 어둡지 않게 */
     camKey.position.set(cam.position.x+0.12,cam.position.y+0.16,cam.position.z+0.02);camKey.target.position.copy(S.target);
     camFill.position.set(cam.position.x-0.2,cam.position.y-0.02,cam.position.z+0.1);camFill.target.position.copy(S.target);
-    updateHot();renderer.render(scene,cam);
+    updateHot();if(api.onFrame)api.onFrame(dt);renderer.render(scene,cam);
   }
   S.io=true;S.active=true;
   if('IntersectionObserver' in window)new IntersectionObserver(function(e){S.io=e[0].isIntersecting;S.visible=S.io&&S.active;wake()}).observe(box);
 
   function stopAuto(){S.auto=false}
   function clampPh(){S.gph=Math.max(3*RAD,Math.min(177*RAD,S.gph))}
-  var pts={},pd=0;
+  var pts={},pd=0,locked=false;
   cv.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();mouse=[e.clientX-r.left,e.clientY-r.top]});
   cv.addEventListener('pointerleave',function(){mouse=null});
-  cv.addEventListener('pointerdown',function(e){cv.setPointerCapture(e.pointerId);pts[e.pointerId]=[e.clientX,e.clientY];stopAuto();cv.style.cursor='grabbing';
+  cv.addEventListener('pointerdown',function(e){if(locked)return;cv.setPointerCapture(e.pointerId);pts[e.pointerId]=[e.clientX,e.clientY];stopAuto();cv.style.cursor='grabbing';
     if(Object.keys(pts).length===2){var a=Object.values(pts);pd=Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1])}});
   cv.addEventListener('pointermove',function(e){
-    var p=pts[e.pointerId];if(!p)return;
+    if(locked)return;var p=pts[e.pointerId];if(!p)return;
     var n=Object.keys(pts).length;
     if(n===1){var dx=e.clientX-p[0],dy=e.clientY-p[1];S.gth-=dx*0.0075;S.gph-=dy*0.0075;clampPh();S.th=S.gth;S.ph=S.gph}
     pts[e.pointerId]=[e.clientX,e.clientY];
@@ -179,7 +179,7 @@ window.ProductViewer=function(box,opt){
   function up(e){delete pts[e.pointerId];cv.style.cursor='grab';pd=0}
   cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
   function zoom(f){S.userZoomed=true;S.gr=Math.max(S.r0*0.35,Math.min(S.r0*1.8,S.gr*f));S.r=S.gr}
-  cv.addEventListener('wheel',function(e){e.preventDefault();stopAuto();zoom(Math.exp(e.deltaY*0.0012))},{passive:false});
+  cv.addEventListener('wheel',function(e){if(locked)return;e.preventDefault();stopAuto();zoom(Math.exp(e.deltaY*0.0012))},{passive:false});
   cv.addEventListener('keydown',function(e){
     var m={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];
     if(m){e.preventDefault();stopAuto();S.gth+=m[0]*10*RAD;S.gph+=m[1]*10*RAD;clampPh()}});
@@ -191,6 +191,8 @@ window.ProductViewer=function(box,opt){
       S.gth=th;S.gph=v[1]*RAD;S.gr=S.r0;S.userZoomed=false;S.gt.copy(S.c0);
     },
     focus:function(p,thd,phd,rs){stopAuto();var th=thd*RAD;while(th-S.th>Math.PI)th-=2*Math.PI;while(th-S.th<-Math.PI)th+=2*Math.PI;S.gth=th;S.gph=phd*RAD;S.gt.set(p[0],p[1],p[2]);S.gr=S.r0*rs;S.userZoomed=true},
+    lock:function(b){locked=!!b;cv.style.cursor=b?'default':'grab';cv.style.touchAction=b?'none':'pan-y'},
+    cam:cam,scene:scene,canvas:cv,wake:wake,model:null,onFrame:null,
     resume:function(){S.auto=true;S.idle=performance.now()},
     /* [OPT-1] 보기 전환으로 가려진 뷰어는 false로 두면 렌더링을 멈춘다 */
     setActive:function(on){S.active=!!on;S.visible=S.io&&S.active;wake()},
@@ -199,7 +201,7 @@ window.ProductViewer=function(box,opt){
 
   loadBuffer(opt).then(function(buf){
     var model=buildModel(parseGLB(buf),function(){});
-    scene.add(model);
+    scene.add(model);api.model=model;
     var bb=new T.Box3().setFromObject(model),c=bb.getCenter(new T.Vector3());
     S.target.copy(c);S.gt.copy(c);S.c0.copy(c);if(opt.fitToModel){var sz=bb.getSize(new T.Vector3());S.hw=Math.hypot(sz.x,sz.z)/2;S.hh=sz.y/2*1.15;fit();S.r=S.gr=S.r0}
     var ground=new T.Mesh(new T.PlaneGeometry(3,3),new T.ShadowMaterial({opacity:0.55}));
