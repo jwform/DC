@@ -138,7 +138,10 @@ var devOn=false;function setDev(v){devOn=v;devParts.forEach(function(m){m.visibl
 var base=opt.base||'';
 function loadScript(src){return new Promise(function(res,rej){var el=document.createElement('script');el.src=src;el.onload=res;el.onerror=function(){rej(new Error(src))};document.head.appendChild(el)})}
 var CHD=[],CRC=['#7a6bb8','#5a5290','#8f86c4','#4a4472','#6572a8','#9a8fd0','#6d6694','#8b78c8'];
-function charBuf(url){return fetch(url).then(function(r){if(!r.ok)throw 0;return r.arrayBuffer()})}
+function charBuf(url){var n=url.split('/').pop().replace(/\.glb.*$/,'');
+ function viaJs(){return loadScript(base+'models/'+n+'.glb.js?v=4').then(function(){return window.Chars.b64ToBuf(window['__CHM_'+n])})}
+ if(location.protocol==='file:'||!window.fetch)return viaJs();
+ return fetch(url).then(function(r){if(!r.ok)throw 0;return r.arrayBuffer()}).catch(viaJs)}
 function applyChars(){var C=window.Chars;if(!C)return Promise.resolve();
  return Promise.all(['char_tourist','char_staff','crowd_a','crowd_b'].map(function(n){return charBuf(base+'models/'+n+'.glb?v=4')})).then(function(bs){
  var d=bs.map(function(b){return C.parse(b)});
