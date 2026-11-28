@@ -149,6 +149,7 @@ window.ProductViewer=function(box,opt){
   function frame(now){
     if(!S.visible||!S.ready){running=false;return}
     requestAnimationFrame(frame);
+    if(S.lost)return;
     var dt=Math.min((now-last)/1000,0.1);last=now;
     if(S.auto&&now-S.idle>(opt.autoDelay||1200)){S.gth+=16*RAD*dt;S.th=S.gth}
     else{var k=1-Math.exp(-dt*9);S.th+=(S.gth-S.th)*k;S.ph+=(S.gph-S.ph)*k;S.r+=(S.gr-S.r)*k}
@@ -158,7 +159,10 @@ window.ProductViewer=function(box,opt){
     camKey.position.set(cam.position.x+0.12,cam.position.y+0.16,cam.position.z+0.02);camKey.target.position.copy(S.target);
     camFill.position.set(cam.position.x-0.2,cam.position.y-0.02,cam.position.z+0.1);camFill.target.position.copy(S.target);
     updateHot();if(api.onFrame)api.onFrame(dt);renderer.render(scene,cam);
+    if(!S.first){S.first=1;requestAnimationFrame(function(){opt.onFirstFrame&&opt.onFirstFrame()})}
   }
+  cv.addEventListener('webglcontextlost',function(e){e.preventDefault();S.lost=1;S.first=0;opt.onContextLost&&opt.onContextLost()},false);
+  cv.addEventListener('webglcontextrestored',function(){S.lost=0;S.first=0;renderer.shadowMap.needsUpdate=true;wake();opt.onContextRestored&&opt.onContextRestored()},false);
   S.io=true;S.active=true;
   if('IntersectionObserver' in window)new IntersectionObserver(function(e){S.io=e[0].isIntersecting;S.visible=S.io&&S.active;wake()}).observe(box);
 

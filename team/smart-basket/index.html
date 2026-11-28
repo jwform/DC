@@ -176,7 +176,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .pm-mode{position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:5;display:flex;gap:4px;padding:4px;border-radius:99px;background:rgba(10,10,16,.85);border:1px solid var(--line)}
 .pm-mode button{border:0;background:none;color:#cfcdd8;font:600 13px var(--f-body);padding:9px 18px;border-radius:99px;cursor:pointer;transition:.2s;white-space:nowrap}.pm-mode button.on{background:var(--lime);color:#111}
 .pm-view .pv.off{visibility:hidden;pointer-events:none}
-.pm-fb{position:absolute;inset:0;z-index:0;display:grid;place-items:center;padding:60px 20px 80px}.pm-fb img{width:100%;max-width:720px;aspect-ratio:4/3;object-fit:contain;opacity:.9;-webkit-mask-image:radial-gradient(ellipse 62% 62% at 50% 50%,#000 60%,transparent 100%);mask-image:radial-gradient(ellipse 62% 62% at 50% 50%,#000 60%,transparent 100%)}
+.pm-fb{transition:opacity .45s;position:absolute;inset:0;z-index:0;display:grid;place-items:center;padding:60px 20px 80px}.pm-fb img{width:100%;max-width:720px;aspect-ratio:4/3;object-fit:contain;opacity:.9;-webkit-mask-image:radial-gradient(ellipse 62% 62% at 50% 50%,#000 60%,transparent 100%);mask-image:radial-gradient(ellipse 62% 62% at 50% 50%,#000 60%,transparent 100%)}
 .pm-load{position:absolute;left:50%;bottom:86px;transform:translateX(-50%);z-index:4;font:500 12px var(--f-mono);color:var(--lime);letter-spacing:.1em;background:rgba(10,10,16,.8);padding:6px 14px;border-radius:99px}
 .pm-view .pv{z-index:2}.pm-dim.a{top:62px}.pm-dim.b{top:92px}.pm-view[data-tab=basket] .pm-dim{display:none}
 .pm-sec .pm-h{margin-bottom:clamp(24px,3.4vw,44px)}
@@ -275,7 +275,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 
 /* [PRODUCT-PIN] */
 .pm-hero.pr{display:block;height:760vh;padding:0;margin:0;overflow:visible;min-height:0}
-.pr-stage{position:sticky;top:0;height:100vh;display:grid;grid-template-columns:minmax(300px,.8fr) 1.3fr;align-items:center;gap:clamp(10px,2vw,40px);padding:96px clamp(18px,3.4vw,56px) 56px;overflow:hidden}
+.pr-stage{background:#07050d;position:sticky;top:0;height:100vh;display:grid;grid-template-columns:minmax(300px,.8fr) 1.3fr;align-items:center;gap:clamp(10px,2vw,40px);padding:96px clamp(18px,3.4vw,56px) 56px;overflow:hidden}
 .pr-stage .pm-view{height:min(78vh,860px)}
 .pr-cap{margin-top:22px;min-height:96px;padding-left:16px;border-left:2px solid var(--lime);opacity:0;transform:translateY(14px);transition:.5s}.pr-cap.on{opacity:1;transform:none}
 .pr-cap span{font:700 11px var(--f-mono);letter-spacing:.24em;color:var(--lime);display:block}.pr-cap b{display:block;font-size:clamp(20px,2vw,30px);font-weight:700;letter-spacing:-.03em;margin:4px 0}.pr-cap small{font-size:14px;color:var(--mute);word-break:keep-all}
@@ -570,7 +570,7 @@ function ld(src){return new Promise((r,j)=>{const s=document.createElement('scri
 function mk(key,silent){
   if(API[key]||API['_'+key])return;API['_'+key]=1;if(!silent)load.style.display='';
   const o={box:pvB,url:'models/3D-02_with-basket.glb',fallbackScript:'models/3D-02_with-basket.glb.js',fallbackVar:'__GLB_B64_BASKET',fitToModel:true};
-  API[key]=ProductViewer(o.box,{url:o.url,fallbackScript:o.fallbackScript,fallbackVar:o.fallbackVar,fitToModel:o.fitToModel,autoDelay:key==='basket'?8000:3500,onLoad:()=>{load.style.display='none';fb.style.display='none';setTimeout(()=>window.__applyMode&&window.__applyMode(),50)},onError:()=>{load.textContent='3D를 불러오지 못했어요 · 사진으로 대신 보여드려요'}});
+  API[key]=ProductViewer(o.box,{url:o.url,fallbackScript:o.fallbackScript,fallbackVar:o.fallbackVar,fitToModel:o.fitToModel,autoDelay:key==='basket'?8000:3500,onFirstFrame:()=>{fb.style.opacity='0';setTimeout(()=>{fb.style.display='none'},500)},onContextLost:()=>{fb.style.display='';fb.style.opacity='1';load.style.display=''},onContextRestored:()=>{load.style.display='none'},onLoad:()=>{load.style.display='none';setTimeout(()=>window.__applyMode&&window.__applyMode(),50)},onError:()=>{load.textContent='3D를 불러오지 못했어요 · 사진으로 대신 보여드려요'}});
 }
 window.__thrP=ld('lib/three.bundle.js');let ready=window.__thrP.then(()=>ld('lib/viewer.js')).then(()=>new Promise(r=>{let done=false;const go=()=>{if(done)return;done=true;clearInterval(t);r()};const t=setInterval(()=>{if(window.__storyReady)setTimeout(go,900)},250);setTimeout(go,14000);const pe=document.getElementById('product');new IntersectionObserver(es=>{if(es[0].isIntersecting)go()},{rootMargin:'1600px 0px'}).observe(pe)})).then(()=>mk('basket')).catch(e=>{load.textContent='3D 뷰어를 불러오지 못했어요';console.error(e)});
 document.querySelectorAll('.pm-mode button').forEach(b=>b.addEventListener('click',()=>{
@@ -769,5 +769,6 @@ let tries=0;function init(){const a=window.__prAPI&&window.__prAPI().basket;if(a
 new IntersectionObserver(es=>{es.forEach(e=>{if(e.intersectionRatio>=.45){tries=0;init()}else if(e.intersectionRatio<.3){home()}})},{threshold:[0,.3,.45,.6]}).observe(sec);
 })();
 </script>
+<script>/* 제품 뷰어 감시: 보이는 동안 렌더 루프가 멈춰 있으면 깨움 */(function(){var t=0;addEventListener('scroll',function(){if(t)return;t=setTimeout(function(){t=0;try{var a=window.__prAPI&&window.__prAPI().basket;if(a&&a.wake)a.wake()}catch(e){}},120)},{passive:true})})();</script>
 </body>
 </html>
