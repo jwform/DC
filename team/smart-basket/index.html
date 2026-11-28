@@ -465,6 +465,24 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .tsel{position:absolute;left:14px;top:14px;z-index:6;display:flex;align-items:center;gap:10px;padding:8px 16px 8px 10px;border-radius:99px;background:rgba(10,8,20,.8);border:1.5px solid var(--lime);font:800 17px var(--f-body)}.tsel[hidden]{display:none}.tsel img{width:30px;height:30px;object-fit:contain}.tsel span{color:var(--lime);font-size:15px}
 .pm-view .shot{position:absolute;inset:4% 3%;width:94%;height:92%;object-fit:contain;opacity:0;transform:scale(.96);transition:opacity .6s ease,transform .9s cubic-bezier(.2,.8,.2,1);pointer-events:none;z-index:2}.pm-view .shot.on{opacity:1;transform:none}
 .pr-demo .sw-card:not(.on) *{animation:none!important}
+.pf{background:#07050d;padding:clamp(90px,10vw,150px) clamp(18px,5vw,90px) clamp(40px,6vw,90px);max-width:1500px;margin:0 auto}
+.pf-hero,.pf-row{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(18px,4vw,70px);align-items:center}
+.pf-hero{min-height:min(86vh,820px)}
+.pf-copy h2{font-weight:800;font-size:clamp(52px,8.4vw,130px);line-height:.92;letter-spacing:-.05em;margin:18px 0 26px}.pf-copy h2 em{font-style:normal;background:linear-gradient(90deg,#9d5cff,#c5ff35);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pf-copy p{font-size:clamp(18px,1.8vw,26px);line-height:1.55;color:rgba(245,245,246,.88);word-break:keep-all}.pf-copy p b{color:var(--lime)}
+.pf-img{position:relative;aspect-ratio:4/3;border-radius:28px;border:1px solid rgba(157,92,255,.25);background:radial-gradient(70% 55% at 50% 58%,rgba(118,40,245,.3),transparent 70%),linear-gradient(180deg,rgba(20,20,34,.7),rgba(8,8,14,.6));overflow:hidden;box-shadow:0 40px 120px -40px rgba(118,40,245,.5)}
+.pf-img img{position:absolute;inset:3%;width:94%;height:94%;object-fit:contain;-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 62%,transparent 100%)}
+.pf-row{margin-top:clamp(50px,8vw,120px)}.pf-row.rev .pf-img{order:-1}
+.pf-txt span{font:700 14px var(--f-mono);letter-spacing:.2em;color:var(--lime)}.pf-txt h3{font-weight:700;font-size:clamp(32px,4vw,60px);letter-spacing:-.045em;line-height:1.1;margin:12px 0 16px;word-break:keep-all}.pf-txt p{font-size:clamp(18px,1.7vw,24px);line-height:1.6;color:rgba(245,245,246,.82);word-break:keep-all;margin:0}
+.pf-go{display:flex;justify-content:center;margin-top:clamp(50px,7vw,100px)}
+@media(max-width:980px){.pf-hero,.pf-row{grid-template-columns:1fr}.pf-row.rev .pf-img{order:0}.pf-hero{min-height:0}}
+.fin2{background:#07050d;border-top:1px solid rgba(157,92,255,.18);padding:clamp(70px,9vw,130px) clamp(18px,5vw,90px)}
+.fin2-in{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,70px);align-items:center}
+.fin2 .ce{font:700 13px var(--f-mono);letter-spacing:.2em;color:var(--lime)}
+.fin2 h3{font-weight:700;font-size:clamp(34px,4.6vw,68px);line-height:1.1;letter-spacing:-.045em;margin:14px 0 18px;word-break:keep-all}
+.fin2 p{font-size:clamp(18px,1.7vw,24px);line-height:1.6;color:rgba(245,245,246,.82);margin:0;word-break:keep-all}.fin2 p b{color:var(--lime)}
+@media(max-width:980px){.fin2-in{grid-template-columns:1fr}}
+.tnext{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:7;width:auto;margin:0;padding:13px 28px;font-size:17px;white-space:nowrap}.tnext[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -490,32 +508,21 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 
     
 
-    <section class="pm-hero pr" id="product"><div class="pr-stage"><div class="pm-ambient"></div>
-      
-      <div class="pm-copy">
-        <div class="pm-eye">02 · 제품 · 최지원</div>
-        <h2 id="pmTitle">SMART<br>BASKET<br><em>DISPLAY</em></h2>
-        <p class="pm-what" id="prW">바구니에 걸기만 하면<br><b>길을 안내</b>하고 <b>직원을 부르는</b> 작은 디스플레이</p>
-                <div class="pr-cap" id="prCap"><span id="prN">01</span><b id="prT"></b><small id="prD"></small></div><div class="pr-demo" id="prDemo"><div class="sw-card" data-i="1"><div class="dvs"><div class="dvs-top"><svg class="dvs-ic" viewBox="0 0 48 48"></svg><div><b class="dvs-nm">스킨케어</b><span class="dvs-ar">→ 앞으로 12m</span></div></div><div class="dvs-row"><i data-k="0"></i><i data-k="1"></i><i data-k="2"></i><i data-k="3"></i></div></div><svg class="dial" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="30" class="in"/><line x1="50" y1="50" x2="50" y2="14"/></svg></div>
-<div class="sw-card" data-i="2"><div class="sgn bad"><svg viewBox="0 0 48 48"></svg><b>스킨케어</b><em>?</em></div><div class="sgn good"><svg viewBox="0 0 48 48" class="si"></svg><b>→</b><em>✓</em></div></div>
-<div class="sw-card" data-i="3"><div class="ph"><div class="ph-b"><i></i><b>호출 알림</b></div><div class="ph-c"><svg viewBox="0 0 48 48" class="si"></svg><div><b>스킨케어 코너</b><span>손님이 부르고 있어요</span></div></div><div class="ph-m"><u></u><s></s></div></div></div>
-</div><a class="pm-cta" id="prCta" href="#try">직접 체험해보기 <span aria-hidden="true">↓</span></a>
-      </div>
-      <div class="pm-view" id="pmView" data-tab="basket">
-        <img class="shot on" data-k="0" src="images/shot_s0_basket.webp" alt="바구니에 걸린 스마트 바구니 디스플레이" decoding="async">
-        <img class="shot" data-k="1" src="images/shot_s1_dial.webp" alt="다이얼" decoding="async">
-        <img class="shot" data-k="2" src="images/shot_s2_display.webp" alt="디스플레이" decoding="async">
-        <img class="shot" data-k="3" src="images/shot_s3_call.webp" alt="호출 버튼" decoding="async">
-        <img class="shot" data-k="4" src="images/shot_s4_basket_side.webp" alt="바구니에 걸린 모습" decoding="async">
-        <i class="pm-c tl"></i><i class="pm-c tr"></i><i class="pm-c bl"></i><i class="pm-c br"></i>
-      </div>
-    <div class="pr-prog" id="prProg"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div></div></section>
+    <section class="pf" id="product" aria-label="제품">
+  <div class="pf-hero"><div class="pf-copy"><div class="pm-eye">02 · 제품 · 최지원</div><h2>SMART<br>BASKET<br><em>DISPLAY</em></h2><p>바구니에 걸기만 하면<br><b>길을 안내</b>하고 <b>직원을 부르는</b> 작은 디스플레이</p></div>
+  <div class="pf-img"><img src="images/shot_s0_basket.webp" alt="바구니에 걸린 스마트 바구니 디스플레이" decoding="async"></div></div>
+  <div class="pf-row"><div class="pf-txt"><span>01</span><h3>다이얼</h3><p>돌려서 가고 싶은 코너를 고릅니다</p></div><div class="pf-img"><img src="images/shot_s1_dial.webp" alt="다이얼" loading="lazy" decoding="async"></div></div>
+  <div class="pf-row rev"><div class="pf-txt"><span>02</span><h3>디스플레이</h3><p>아이콘과 화살표로 길을 보여줍니다. 한국어를 몰라도 됩니다</p></div><div class="pf-img"><img src="images/shot_s2_display.webp" alt="디스플레이" loading="lazy" decoding="async"></div></div>
+  <div class="pf-row"><div class="pf-txt"><span>03</span><h3>호출 버튼</h3><p>누르면 직원 휴대폰으로 바로 호출이 갑니다</p></div><div class="pf-img"><img src="images/shot_s3_call.webp" alt="호출 버튼" loading="lazy" decoding="async"></div></div>
+  <div class="pf-row rev"><div class="pf-txt"><span>04</span><h3>바구니에 걸기만 하면 끝</h3><p>손잡이에 걸면 바로 사용할 수 있어요</p></div><div class="pf-img"><img src="images/shot_s4_basket_side.webp" alt="바구니에 걸기만 하면 끝" loading="lazy" decoding="async"></div></div>
+  <div class="pf-go"><a class="pm-cta" href="#try">직접 체험해보기 <span aria-hidden="true">↓</span></a></div>
+</section>
 
     <section class="try" id="try" aria-label="직접 체험"><div class="try-in">
 <div class="try-top"><div class="try-hd"><span class="ce">03 · 체험</span><h3>이제, 직접 써 보세요</h3></div>
 <ol class="try-steps" id="trSteps"><li data-s="1"><b>1</b>코너 고르기</li><li data-s="2"><b>2</b>직원 호출</li><li data-s="3"><b>3</b>제품 담기</li><li data-s="4"><b>4</b>금액 확인</li></ol></div>
 <p class="try-hint" id="trHint"></p>
-<div class="try-grid"><div class="try-3d" id="try3d"><div class="try-load" id="trLoad">3D 제품을 불러오는 중…</div><div class="try-tip" id="trTip">다이얼을 <b>돌려</b> 보세요</div><div class="tdrop" id="tdrop"><span>여기에 놓기</span></div><div class="tdrag" id="tdrag"></div><div class="try-ptr" id="trPtr"><i></i><span id="trPtrT">드래그해서 돌리기</span></div><div class="tsel" id="tsel" hidden><img id="tselI" alt=""><b id="tselN"></b><span id="tselP"></span></div><button type="button" class="trr" id="trReset">↺ 다시 해보기</button></div>
+<div class="try-grid"><div class="try-3d" id="try3d"><div class="try-load" id="trLoad">3D 제품을 불러오는 중…</div><div class="try-tip" id="trTip">다이얼을 <b>돌려</b> 보세요</div><div class="tdrop" id="tdrop"><span>여기에 놓기</span></div><div class="tdrag" id="tdrag"></div><div class="try-ptr" id="trPtr"><i></i><span id="trPtrT">드래그해서 돌리기</span></div><div class="tsel" id="tsel" hidden><img id="tselI" alt=""><b id="tselN"></b><span id="tselP"></span></div><button type="button" class="tbtn tnext" id="tNext" hidden>다른 코너도 담아보기</button><button type="button" class="trr" id="trReset">↺ 다시 해보기</button></div>
 <div class="try-side">
 <div class="tcard tmapc"><div class="tc-h"><b>매장 지도</b><span id="mapT">손님이 입구에 있어요</span></div><svg id="tmap" viewBox="0 0 360 250" preserveAspectRatio="xMidYMid meet"></svg><div class="tleg"><i class="c"></i>손님<i class="s"></i>직원</div></div>
 <div class="tcard"><div class="tc-h"><b>직원 휴대폰</b></div><div class="tph" id="tph" data-st="idle"><i></i><div><b id="tphT">호출 대기 중</b><small id="tphS">손님이 호출하면 알림이 와요</small></div></div></div>
@@ -541,11 +548,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 
     
     
-    <section class="fin" id="finish" aria-label="정리"><div class="fin-in">
-<span class="ce">06 · 정리</span><h3>아이콘으로 고르고,<br>버튼으로 부릅니다</h3>
-<ol class="fin-flow"><li>고르기</li><li>길 안내</li><li>호출</li><li>전달</li><li>담기</li><li>금액</li></ol>
-<div class="fin-cards"><div><b>손님</b><p>한국어 몰라도 길을 찾아요</p></div><div><b>직원</b><p>부른 곳으로 바로 가요</p></div><div><b>매장</b><p>바구니에 걸기만 하면 끝</p></div></div>
-</div></section>
+    <section class="fin2" id="finish" aria-label="정리"><div class="fin2-in"><div><span class="ce">06 · 정리</span><h3>아이콘으로 고르고,<br>버튼으로 부릅니다</h3><p>손님은 <b>한국어를 몰라도</b> 길을 찾고,<br>직원은 <b>부른 곳으로 바로</b> 갑니다.</p></div><div class="pf-img"><img src="images/shot_s0_basket.webp" alt="스마트 바구니 디스플레이" loading="lazy" decoding="async"></div></div></section>
 
 <div class="pm-act">
       <a class="btn" id="teamLink2" href="https://jwform.github.io/DC/team/"><span>← 다시 지도로 돌아가기</span><span>MAP</span></a>
@@ -603,33 +606,7 @@ whenThree(function(){var sc=document.createElement('script');sc.src='lib/story.j
 upd();
 })();
 </script>
-<script>
-/* [PRODUCT] 스크롤로 제품 한 부분씩 가까이 */
-(function(){var sec=document.getElementById('product'),stage=sec.querySelector('.pr-stage'),cap=document.getElementById('prCap'),N=document.getElementById('prN'),T=document.getElementById('prT'),D=document.getElementById('prD'),bars=sec.querySelectorAll('#prProg b'),cur=-2,tk=false;
-var ICON=['<circle cx="24" cy="24" r="15"/><path d="M18 22h.01M30 22h.01M19 29q5 5 10 0"/><path d="M38 6v6M35 9h6"/>','<rect x="18" y="24" width="12" height="16" rx="2"/><path d="M20 24v-8l8-5v13"/>','<path d="M6 16h24a9 9 0 0 1 0 15H6z"/><path d="M20 31l-3 12h8l2-12M38 14l5-3M38 20h6M38 26l5 3"/>','<rect x="12" y="24" width="24" height="17" rx="4"/><path d="M19 24v-6h10v6M21 12h6M24 12v6"/>'];
-var NM=['스킨케어','메이크업','헤어케어','향수'],DS=['12m','9m','15m','7m'];
-var demo=document.getElementById('prDemo'),dic=demo.querySelector('.dvs-ic'),dnm=demo.querySelector('.dvs-nm'),dar=demo.querySelector('.dvs-ar'),chips=demo.querySelectorAll('.dvs-row i'),dl=demo.querySelector('.dial line'),ph=demo.querySelector('.ph');
-demo.querySelector('.sgn.bad svg').innerHTML='<path d="M8 14h32v20H8z"/><path d="M14 22h20M14 28h12"/>';demo.querySelector('.sgn.good svg').innerHTML=ICON[0];demo.querySelector('.ph-c svg').innerHTML=ICON[0];
-var sel=-1,tm=0;function dial(){sel=(sel+1)%4;dic.innerHTML=ICON[sel];dnm.textContent=NM[sel];dar.textContent='→ 앞으로 '+DS[sel];chips.forEach(function(c,k){c.classList.toggle('on',k<=sel)});dl.style.transform='rotate('+(sel*52-80)+'deg)'}
-/* 단계: [번호, 제목, 설명, 뷰어, 초점(좌표), 방위각, 고도, 확대, 카드] */
-var ST=[null,
- ['01','다이얼','돌려서 가고 싶은 코너를 고릅니다','dev',[0.10,0.0,0.028],18,80,.3,1],
- ['02','디스플레이','아이콘과 화살표로 길을 보여줍니다. 한국어를 몰라도 됩니다','dev',[-0.02,0,0.0138],0,86,.52,2],
- ['03','호출 버튼','누르면 직원 휴대폰으로 바로 호출이 갑니다','dev',[-0.12,0.0,0.018],-18,80,.3,3],
- ['04','바구니에 걸기만 하면 끝','손잡이에 걸면 바로 사용할 수 있어요','basket',null,34,54,1,0]];
-var shots=document.querySelectorAll('#pmView .shot');function api(k){return window.__prAPI&&window.__prAPI()[k]}
-function ready(k,fn,n){n=n||0;var a=api(k);if(a&&a._S&&a._S.ready)return fn(a);if(n<80)setTimeout(function(){ready(k,fn,n+1)},150)}
-function mode(m){var b=document.querySelector('.pm-mode button[data-m="'+m+'"]');if(b&&!b.classList.contains('on'))b.click()}
-function go(i){var s=ST[i];stage.classList.toggle('cap',i>0);stage.classList.toggle('end',i===4);cap.classList.toggle('on',!!s);
- demo.querySelectorAll('.sw-card').forEach(function(c){c.classList.toggle('on',!!s&&+c.dataset.i===s[8])});clearInterval(tm);
- if(s&&s[8]===1){dial();tm=setInterval(dial,1500)}if(s&&s[8]===3){ph.style.opacity=0;setTimeout(function(){ph.style.opacity=1},900)}
- shots.forEach(function(im,k){im.classList.toggle('on',k===i)});if(!s)return;
- N.textContent=s[0];T.textContent=s[1];D.textContent=s[2]}
-function upd(){tk=false;var r=sec.getBoundingClientRect(),tot=sec.offsetHeight-innerHeight;if(tot<=0)return;if(r.bottom<0||r.top>innerHeight){if(cur!==-2){clearInterval(tm);cur=-2}return}var p=Math.max(0,Math.min(.9999,-r.top/tot)),n=5,i=Math.floor(p*n),f=p*n-i;
- if(i!==cur){cur=i;go(i)}bars.forEach(function(b,k){b.style.width=(k<i?100:k===i?f*100:0).toFixed(1)+'%'})}
-addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(upd)}},{passive:true});addEventListener('resize',upd);upd();
-})();
-</script>
+
 <nav class="rail" id="rail" aria-label="챕터"><a href="#problem" data-s="problem"><b>문제</b><i></i></a><a href="#product" data-s="product"><b>제품</b><i></i></a><a href="#try" data-s="try"><b>체험</b><i></i></a><a href="#scenario" data-s="scenario"><b>시나리오</b><i></i></a><a href="#detail" data-s="detail"><b>디테일</b><i></i></a></nav>
 <script>
 (function(){var ids=['problem','product','try','scenario','detail'],rail=document.getElementById('rail'),as=rail.querySelectorAll('a'),els=ids.map(function(i){return document.getElementById(i)}),root=document.documentElement,tk=false;
@@ -685,13 +662,13 @@ function bottle(c){return '<svg viewBox="0 0 46 70"><rect x="15" y="2" width="16
 function reset(){clearItem();S={touched:false,sel:-1,th:0,tth:0,step:1,called:false,items:[],busy:false,hd:90,hcur:90,carry:false};moving&&cancelAnimationFrame(moving);cust={...ENT};stf={...STAFF0};pathTo=null;drawMap();ui();disp();$('mapT').textContent='손님이 입구에 있어요';ph('idle','호출 대기 중','손님이 호출하면 알림이 와요');$('tOffer').hidden=true;$('tdrag').classList.remove('on');$('tdrop').classList.remove('on');if(A)cam(1)}
 function cam(n){if(!A)return;if(n===3)A.focus([0,.17,-.01],28,56,1.0);else if(n===4)A.focus([0,.15,.03],14,64,.78);else A.focus(DEV,0,84,.56)}
 function drawMap(){let s='<rect x="6" y="4" width="348" height="242" rx="14" fill="none" stroke="#2a2640" stroke-width="2"/><rect x="152" y="22" width="56" height="214" fill="rgba(255,255,255,.03)"/>';
- CORN.forEach((c,i)=>{const on=i===S.sel;s+=`<g><rect x="${c.x-42}" y="${c.y-26}" width="84" height="52" rx="12" fill="${on?'rgba(197,255,53,.18)':'#15112a'}" stroke="${on?'#c5ff35':'#2e2a48'}" stroke-width="${on?3:1.5}"/><image href="images/icons/${c.k}.png" x="${c.x-13}" y="${c.y-22}" width="26" height="26" opacity=".9"/><text x="${c.x}" y="${c.y+21}" fill="#cfcdd8" font-size="12" font-family="sans-serif" font-weight="700" text-anchor="middle">${c.n}</text></g>`});
+ CORN.forEach((c,i)=>{const on=i===S.sel,dn=S.items.includes(i);s+=`<g><rect x="${c.x-42}" y="${c.y-26}" width="84" height="52" rx="12" fill="${on?'rgba(197,255,53,.18)':dn?'rgba(197,255,53,.08)':'#15112a'}" stroke="${on?'#c5ff35':dn?'#6f8a2a':'#2e2a48'}" stroke-width="${on?3:1.5}"/><image href="images/icons/${c.k}.png" x="${c.x-13}" y="${c.y-22}" width="26" height="26" opacity=".9"/><text x="${c.x}" y="${c.y+21}" fill="#cfcdd8" font-size="12" font-family="sans-serif" font-weight="700" text-anchor="middle">${c.n}</text>${dn?`<text x="${c.x+30}" y="${c.y-10}" fill="#c5ff35" font-size="15" font-weight="800" text-anchor="middle">✓</text>`:''}</g>`});
  if(pathTo){const q=stand(pathTo);s+=`<path d="M${ENT.x} ${ENT.y} L${ENT.x} ${q.y} L${q.x} ${q.y}" fill="none" stroke="#c5ff35" stroke-width="3" stroke-dasharray="7 7"/>`}
  s+=`<text x="${ENT.x+34}" y="${ENT.y+3}" fill="#8a88a0" font-size="11" font-family="sans-serif" font-weight="700">입구</text><text x="${STAFF0.x+34}" y="${STAFF0.y+4}" fill="#8a88a0" font-size="11" font-family="sans-serif" font-weight="700">직원 대기</text><circle cx="${stf.x}" cy="${stf.y}" r="9" fill="#c5ff35"/><circle cx="${cust.x}" cy="${cust.y}" r="9" fill="#fff" stroke="#7628f5" stroke-width="3"/>`;
  $('tmap').innerHTML=s}
 function ui(){document.querySelectorAll('#trSteps li').forEach(li=>{const n=+li.dataset.s;li.classList.toggle('on',n===S.step);li.classList.toggle('done',n<S.step)});
- const H={1:'다이얼을 <b>돌려서</b> 가고 싶은 코너를 골라 보세요',2:'도움이 필요하면 <b>호출 버튼</b>을 눌러 보세요',3:'직원이 가져온 제품을 <b>바구니로 끌어다</b> 넣어 보세요',4:'바구니 속 <b>카메라</b>'+CAMI+'가 담긴 제품을 인식해 <b>금액</b>이 나타났어요'};$('trHint').innerHTML=H[S.step];
- $('trTip').style.display=S.step===1&&!(S&&S.touched)?'':'none'}
+ const nI=S.items.length,tot=S.items.reduce((a,i)=>a+CORN[i].pr,0).toLocaleString();const H={1:nI?'다음 코너를 담아 보세요 · 다이얼을 <b>돌려</b> 다른 코너를 골라요 ('+nI+'/6)':'다이얼을 <b>돌려서</b> 가고 싶은 코너를 골라 보세요',2:'도움이 필요하면 <b>호출 버튼</b>을 눌러 보세요',3:'직원이 가져온 제품을 <b>바구니로 끌어다</b> 넣어 보세요',4:'바구니 속 <b>카메라</b>'+CAMI+'가 담긴 제품을 인식해 <b>금액</b>이 나타났어요 · 합계 <b>'+tot+'원</b> ('+nI+'/6)'};$('trHint').innerHTML=H[S.step];
+ $('trTip').style.display=S.step===1&&!(S&&S.touched)?'':'none';const nx=$('tNext');if(nx){nx.hidden=S.step!==4;nx.textContent=nI>=6?'모두 담았어요 · 처음부터 다시 해보기':'다른 코너도 담아보기 ('+nI+'/6)'}}
 function ph(st,t,s){$('tph').dataset.st=st;$('tphT').textContent=t;$('tphS').textContent=s}
 function anim(obj,to,ms,hd,cb){if(hd!==null)S.hd=hd;const f={x:obj.x,y:obj.y},t0=performance.now();const tick=n=>{const u=Math.min(1,(n-t0)/ms),e=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;obj.x=f.x+(to.x-f.x)*e;obj.y=f.y+(to.y-f.y)*e;drawMap();if(u<1)moving=requestAnimationFrame(tick);else cb&&cb()};moving=requestAnimationFrame(tick)}
 function walk(obj,pts,cb){let i=0;const nx=()=>{if(i>=pts.length){cb&&cb();return}const p=pts[i++];const dx=p.x-obj.x,dy=p.y-obj.y;const hd=Math.abs(dy)>=Math.abs(dx)?(dy<0?90:-90):(dx>0?0:180);anim(obj,p,Math.max(250,Math.hypot(dx,dy)*7),hd,nx)};nx()}
@@ -708,9 +685,10 @@ function setup(a){A=a;M=a.model;M.updateMatrixWorld(true);const meshes=[];M.trav
 function ang(e){const r=A.canvas.getBoundingClientRect();const v=new THREE.Vector3();P.dial.parent.localToWorld(v.copy(P.dial.position));v.project(A.cam);const cx=r.left+(v.x*.5+.5)*r.width,cy=r.top+(-v.y*.5+.5)*r.height;return Math.atan2(e.clientX-cx,-(e.clientY-cy))*180/Math.PI}
 function nearest(th){let b=0,bd=1e9;P.ring.forEach((r,i)=>{let d=Math.abs(((th-r.ang+540)%360)-180);if(d<bd){bd=d;b=i}});return b}
 function priceTex(txt){const im=P.pi,w=(im&&im.width)||512,h=(im&&im.height)||128,c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#fff';x.font='300 '+Math.floor(h*.82)+'px Inter,Arial,sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(txt,w/2,h/2+h*.03);const t=new THREE.CanvasTexture(c);t.flipY=false;t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=4;return t}
-function addItem(c){if(P.item){M.remove(P.item)}const g=new THREE.Group(),col=new THREE.Color(COL[c.k]);const body=new THREE.Mesh(new THREE.CylinderGeometry(.021,.021,.07,24),new THREE.MeshStandardMaterial({color:col,roughness:.4,metalness:.05,emissive:col,emissiveIntensity:.18}));const cap=new THREE.Mesh(new THREE.CylinderGeometry(.011,.011,.018,16),new THREE.MeshStandardMaterial({color:0xe6e6ea,roughness:.3}));cap.position.y=.044;const lab=new THREE.Mesh(new THREE.CylinderGeometry(.0215,.0215,.026,24,1,true),new THREE.MeshStandardMaterial({color:0xffffff,roughness:.6}));lab.position.y=-.002;g.add(body,cap,lab);g.position.set(.0,.3,-.04);g.userData={y:.3,ry:.098,vy:0};g.rotation.z=.12;M.add(g);P.item=g}
-function clearItem(){if(P&&P.item){M.remove(P.item);P.item=null}}
-function disp(){const ts=$('tsel');if(ts){if(S.sel>=0){ts.hidden=false;$('tselI').src='images/icons/'+CORN[S.sel].k+'.png';$('tselN').textContent=CORN[S.sel].n;$('tselP').textContent=S.items.length?CORN[S.sel].pr.toLocaleString()+'원':''}else ts.hidden=true}
+function addItem(c,n){const g=new THREE.Group(),col=new THREE.Color(COL[c.k]);const body=new THREE.Mesh(new THREE.CylinderGeometry(.021,.021,.07,24),new THREE.MeshStandardMaterial({color:col,roughness:.4,metalness:.05,emissive:col,emissiveIntensity:.18}));const cap=new THREE.Mesh(new THREE.CylinderGeometry(.011,.011,.018,16),new THREE.MeshStandardMaterial({color:0xe6e6ea,roughness:.3}));cap.position.y=.044;const lab=new THREE.Mesh(new THREE.CylinderGeometry(.0215,.0215,.026,24,1,true),new THREE.MeshStandardMaterial({color:0xffffff,roughness:.6}));lab.position.y=-.002;g.add(body,cap,lab);
+ const sx=[-.11,0,.11][n%3],sz=n<3?-.09:.01;g.position.set(sx,.34,sz);g.rotation.z=.2;g.userData={ry:.116,vy:0,done:false};M.add(g);(P.its||(P.its=[])).push(g)}
+function clearItem(){if(P&&P.its){P.its.forEach(g=>M.remove(g));P.its=[]}}
+function disp(){const ts=$('tsel');if(ts){if(S.sel>=0){ts.hidden=false;$('tselI').src='images/icons/'+CORN[S.sel].k+'.png';$('tselN').textContent=CORN[S.sel].n;$('tselP').textContent=S.items.includes(S.sel)?CORN[S.sel].pr.toLocaleString()+'원':''}else ts.hidden=true}
  if(!P)return;const has=S.sel>=0,paid=S.items.length>0;P.line.visible=has;P.arrow.visible=has;P.disp.forEach((m,i)=>m.visible=has&&i===S.sel);P.price.visible=paid;
  if(paid){const tot=S.items.reduce((a,i)=>a+CORN[i].pr,0);P.price.material.map=priceTex(tot.toLocaleString('en-US'));P.price.material.needsUpdate=true}
  P.ring.forEach((r,i)=>{r.m.scale.setScalar(i===S.sel?1.4:1)})}
@@ -723,11 +701,11 @@ function bind(cv){
  cv.addEventListener('pointermove',e=>{if(drag){let d=ang(e)-drag.a0;d=((d+540)%360)-180;S.th=drag.t0+d;drag.moved=Math.max(drag.moved,Math.abs(d));const sel=nearest(((S.th%360)+360)%360);if(sel!==S.sel){S.sel=sel;disp();drawMap()}}else{const n=hit(e)||'';cv.style.cursor=/^(dial|call_)/.test(n)?'pointer':'default'}});
  const up=()=>{if(!drag)return;const tap=drag.moved<4;S.dragging=false;drag=null;if(tap){S.sel=(S.sel+1+CORN.length)%CORN.length;disp()}settle()};
  cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up)}
-function settle(){if(S.sel<0)return;S.tth=P.ring[S.sel].ang;const cur=((S.th%360)+360)%360;let d=((S.tth-cur+540)%360)-180;S.tth=S.th+d;pathTo=CORN[S.sel];disp();
+function settle(){if(S.sel<0)return;S.tth=P.ring[S.sel].ang;const cur=((S.th%360)+360)%360;let d=((S.tth-cur+540)%360)-180;S.tth=S.th+d;if(S.items.includes(S.sel)){pathTo=null;disp();drawMap();$('mapT').textContent=CORN[S.sel].n+'은 이미 담았어요 · 다른 코너를 골라요';return}pathTo=CORN[S.sel];disp();
  $('mapT').textContent=CORN[S.sel].n+' 코너로 안내 중';ph('idle','호출 대기 중','손님이 호출하면 알림이 와요');
  if(S.step<=2){if(S.step===1){S.step=2;ui()}S.called=false;moving&&cancelAnimationFrame(moving);cust={...ENT};S.walking=true;walk(cust,route(pathTo),()=>{S.walking=false;$('mapT').textContent=CORN[S.sel].n+' 코너에 도착'})}drawMap()}
 let tt=0;
-function frame(dt){if(!P)return;tt+=dt;if(!S.dragging){S.th+=(S.tth-S.th)*Math.min(1,dt*10)}P.dial.rotation.z=-S.th*Math.PI/180;
+function frame(dt){if(!P)return;tt+=dt;if(P.its)P.its.forEach(g=>{const u=g.userData;if(u.done)return;u.vy-=3.2*dt;g.position.y+=u.vy*dt;g.rotation.z*=Math.max(0,1-dt*5);if(g.position.y<=u.ry){g.position.y=u.ry;if(Math.abs(u.vy)<.18){u.done=true;g.rotation.z=0}else u.vy=-u.vy*.22}});if(!S.dragging){S.th+=(S.tth-S.th)*Math.min(1,dt*10)}P.dial.rotation.z=-S.th*Math.PI/180;
  /* 화살표: 지도에서 움직이는 방향을 따라 회전, 걷는 동안 맥박처럼 움직임 */
  let dh=((S.hd-S.hcur+540)%360)-180;S.hcur+=dh*Math.min(1,dt*8);P.arrow.rotation.z=S.hcur*Math.PI/180-0;const pu=S.walking?1+Math.sin(tt*9)*.14:1;P.arrow.scale.setScalar(pu);
  press=Math.max(0,press-dt*4);const z=-.0016*Math.sin(Math.min(1,press)*Math.PI);P.call.forEach(m=>{if(/pad|ring|bell/.test(m.name))m.position.z=(m.userData.z0===undefined?(m.userData.z0=m.position.z):m.userData.z0)+z});
@@ -744,9 +722,10 @@ function offer(){const c=CORN[S.sel];$('tprod').innerHTML=bottle(c);$('tofN').te
  function move(e){const r=st.r;g.style.transform='translate('+(e.clientX-r.left)+'px,'+(e.clientY-r.top)+'px)';const d=Math.hypot(e.clientX-r.left-S.dz[0],e.clientY-r.top-S.dz[1]);$('tdrop').classList.toggle('hot',d<95)}
  g.addEventListener('pointermove',e=>{if(st)move(e)});
  const end=e=>{if(!st)return;const r=st.r,d=Math.hypot(e.clientX-r.left-S.dz[0],e.clientY-r.top-S.dz[1]);st=null;g.classList.remove('drag');S.dg=false;$('tdrop').classList.remove('hot');
-  if(d<95){S.carry=false;g.style.transition='transform .35s ease-in,opacity .35s';g.style.transform='translate('+S.dz[0]+'px,'+(S.dz[1]+10)+'px) scale(.5)';g.style.opacity=0;setTimeout(()=>{g.classList.remove('on');g.style.transition='';g.style.opacity='';$('tdrop').classList.remove('on');addItem(CORN[S.sel]);S.items.push(S.sel);S.step=4;$('tOffer').hidden=true;ph('done','응대 완료','단말기로 완료를 확인했어요');ui();disp();S.hd=90;cam(4)},380)}};
+  if(d<95){S.carry=false;g.style.transition='transform .35s ease-in,opacity .35s';g.style.transform='translate('+S.dz[0]+'px,'+(S.dz[1]+10)+'px) scale(.5)';g.style.opacity=0;setTimeout(()=>{g.classList.remove('on');g.style.transition='';g.style.opacity='';$('tdrop').classList.remove('on');addItem(CORN[S.sel],S.items.length);S.items.push(S.sel);S.step=4;$('tOffer').hidden=true;ph('done','응대 완료','단말기로 완료를 확인했어요');ui();disp();S.hd=90;cam(4)},380)}};
  g.addEventListener('pointerup',end);g.addEventListener('pointercancel',end)})();
 $('trReset').addEventListener('click',()=>{reset();disp()});
+$('tNext').addEventListener('click',()=>{if(S.items.length>=6){reset();disp();return}moving&&cancelAnimationFrame(moving);S.step=1;S.sel=-1;S.called=false;S.touched=true;S.walking=false;S.carry=false;pathTo=null;cust={...ENT};stf={...STAFF0};S.hd=90;drawMap();disp();ph('idle','호출 대기 중','손님이 호출하면 알림이 와요');$('mapT').textContent='손님이 입구에 있어요';$('tOffer').hidden=true;cam(1);ui()});
 reset();
 /* 바구니 뷰어를 체험 칸으로 옮기기 */
 const mk1=document.createComment('pvB'),keep={};
