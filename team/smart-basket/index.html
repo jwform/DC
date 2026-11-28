@@ -482,7 +482,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .fin2 h3{font-weight:700;font-size:clamp(34px,4.6vw,68px);line-height:1.1;letter-spacing:-.045em;margin:14px 0 18px;word-break:keep-all}
 .fin2 p{font-size:clamp(18px,1.7vw,24px);line-height:1.6;color:rgba(245,245,246,.82);margin:0;word-break:keep-all}.fin2 p b{color:var(--lime)}
 @media(max-width:980px){.fin2-in{grid-template-columns:1fr}}
-.tnext{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:7;width:auto;margin:0;padding:13px 28px;font-size:17px;white-space:nowrap}.tnext[hidden]{display:none}
+.tnext{position:absolute;right:14px;top:14px;z-index:7;width:auto;margin:0;padding:13px 28px;font-size:17px;white-space:nowrap}.tnext[hidden]{display:none}
 
 .pf{max-width:none;padding-left:0;padding-right:0;background:linear-gradient(180deg,#07050d,#0b0716 40%,#07050d)}
 .pf-hero,.pf-row{max-width:1500px;margin-left:auto;margin-right:auto;padding:0 clamp(18px,5vw,90px);min-height:min(92vh,860px)}
@@ -509,7 +509,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .pq-t{position:absolute;left:0;top:50%;width:100%;transform:translateY(-46%);opacity:0;transition:opacity .55s ease,transform .7s cubic-bezier(.2,.8,.2,1);pointer-events:none}.pq-t.on{opacity:1;transform:translateY(-50%)}
 .pq-t h2{font-weight:800;font-size:clamp(50px,7.6vw,118px);line-height:.92;letter-spacing:-.05em;margin:16px 0 22px}.pq-t h2 em{font-style:normal;background:linear-gradient(90deg,#9d5cff,#c5ff35);-webkit-background-clip:text;background-clip:text;color:transparent}
 .pq-t p{font-size:clamp(18px,1.8vw,26px);line-height:1.55;color:rgba(245,245,246,.88);word-break:keep-all;margin:0}.pq-t p b{color:var(--lime)}
-.pq-t span{display:block;font:900 clamp(70px,9vw,140px)/.9 var(--f-body);letter-spacing:-.06em;color:rgba(197,255,53,.6);-webkit-text-stroke:0;margin-bottom:.06em;text-shadow:0 0 40px rgba(197,255,53,.25)}
+.pq-t>span{display:block;font:900 clamp(70px,9vw,140px)/.9 var(--f-body);letter-spacing:-.06em;color:rgba(197,255,53,.6);-webkit-text-stroke:0;margin-bottom:.06em;text-shadow:0 0 40px rgba(197,255,53,.25)}
 .pq-t h3{font-weight:700;font-size:clamp(34px,4.2vw,64px);letter-spacing:-.045em;line-height:1.1;margin:12px 0 16px;word-break:keep-all}
 .pq-img{position:relative;height:78vh;z-index:1}
 .pq-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:scale(.97);transition:opacity .6s ease,transform .9s cubic-bezier(.2,.8,.2,1);-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent),linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent),linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent);mask-composite:intersect}
@@ -529,7 +529,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .pq-img img.on{animation:pqf 6s ease-in-out infinite alternate}@keyframes pqf{to{transform:translate3d(0,-10px,0) rotate(.35deg) scale(1.012)}}
 .pq-img{transform:translate3d(calc(var(--pf)*-18px),calc(var(--pf)*-14px),0)}
 .pq-glow{animation:pqg 7s ease-in-out infinite alternate}@keyframes pqg{to{opacity:.62}}
-.pq-t span{transform:translateX(-40px);transition:transform .8s cubic-bezier(.2,.8,.2,1)}.pq-t.on span{transform:none}
+.pq-t>span{transform:translateX(-40px);transition:transform .8s cubic-bezier(.2,.8,.2,1)}.pq-t.on>span{transform:none}
 .pq-t h3,.pq-t h2{transform:translateY(22px);opacity:0;transition:transform .8s cubic-bezier(.2,.8,.2,1) .08s,opacity .6s ease .08s}.pq-t.on h3,.pq-t.on h2{transform:none;opacity:1}
 .pq-t p{transform:translateY(22px);opacity:0;transition:transform .8s cubic-bezier(.2,.8,.2,1) .2s,opacity .6s ease .2s}.pq-t.on p{transform:none;opacity:1}
 .pq-t .pm-eye{transition:opacity .6s}
@@ -538,6 +538,10 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .h-tag.r{font-size:20px!important;font-weight:800;letter-spacing:.04em;padding:11px 20px!important;background:#ff4d5e!important;color:#fff!important;border-color:#fff!important;box-shadow:0 0 30px rgba(255,77,94,.7)}
 .h-x{font-size:44px!important;font-weight:900}
 .fz-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;opacity:.0;transform:translateY(10px);transition:opacity .5s,transform .5s;pointer-events:none}.fz-cta.on{opacity:1;transform:none;pointer-events:auto}
+.pq-t p .pl{display:block;color:rgba(245,245,246,.28);transition:color .6s ease}.pq-t p .pl.lit{color:rgba(245,245,246,.96)}.pq-t p .pl b{color:inherit}.pq-t p .pl.lit b{color:var(--lime)}
+.pq-t p{margin-top:6px}.pq-t p .pl{margin-top:4px}
+.h-tag.r{font-size:15px!important;font-weight:800;padding:8px 15px!important;box-shadow:0 0 16px rgba(255,77,94,.55)}
+.h-x{font-size:30px!important}
 </style>
 </head>
 <body>
@@ -564,7 +568,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
     
 
     <section class="pq" id="product" aria-label="제품"><div class="pq-stage"><div class="pq-glow"></div>
-<div class="pq-txt"><div class="pq-t on" data-i="0"><div class="pm-eye">02 · 제품 · 최지원</div><h2>SMART<br>BASKET<br><em>DISPLAY</em></h2><p>바구니에 걸기만 하면<br><b>길을 안내</b>하고 <b>직원을 부르는</b> 작은 디스플레이</p></div><div class="pq-t" data-i="1"><span>01</span><h3>다이얼</h3><p>돌려서 가고 싶은 코너를 고릅니다</p></div><div class="pq-t" data-i="2"><span>02</span><h3>디스플레이</h3><p>아이콘과 화살표로 길을 보여줍니다. 한국어를 몰라도 됩니다</p></div><div class="pq-t" data-i="3"><span>03</span><h3>호출 버튼</h3><p>누르면 직원 휴대폰으로 바로 호출이 갑니다</p></div><div class="pq-t" data-i="4"><span>04</span><h3>바구니에 걸기만 하면 끝</h3><p>손잡이에 걸면 바로 사용할 수 있어요</p></div></div>
+<div class="pq-txt"><div class="pq-t on" data-i="0"><div class="pm-eye">02 · 제품 · 최지원</div><h2>SMART<br>BASKET<br><em>DISPLAY</em></h2><p><span class="pl">바구니에 걸기만 하면</span><span class="pl"><b>길을 안내</b>하고 <b>직원을 부르는</b> 작은 디스플레이.</span></p></div><div class="pq-t" data-i="1"><span>01</span><h3>다이얼</h3><p><span class="pl">다이얼을 돌려서</span><span class="pl">가고 싶은 코너를 고릅니다.</span></p></div><div class="pq-t" data-i="2"><span>02</span><h3>디스플레이</h3><p><span class="pl">아이콘과 화살표로 길을 보여줍니다.</span><span class="pl">한국어를 몰라도 됩니다.</span></p></div><div class="pq-t" data-i="3"><span>03</span><h3>호출 버튼</h3><p><span class="pl">버튼을 누르면</span><span class="pl">직원 휴대폰으로 바로 호출이 갑니다.</span></p></div><div class="pq-t" data-i="4"><span>04</span><h3>바구니에 걸기만 하면 끝</h3><p><span class="pl">손잡이에 걸면</span><span class="pl">바로 사용할 수 있어요.</span></p></div></div>
 <div class="pq-img"><img class="on" data-i="0" src="images/shot_s0_basket.webp" alt="SMART BASKET DISPLAY" decoding="async"><img class="" data-i="1" src="images/shot_s1_dial.webp" alt="다이얼" decoding="async"><img class="" data-i="2" src="images/shot_s2_display.webp" alt="디스플레이" decoding="async"><img class="" data-i="3" src="images/shot_s3_call.webp" alt="호출 버튼" decoding="async"><img class="" data-i="4" src="images/shot_s4_basket_side.webp" alt="바구니에 걸기만 하면 끝" decoding="async"></div>
 <div class="pq-bar" id="pqBar"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div></div></section>
 
@@ -794,7 +798,8 @@ new IntersectionObserver(es=>{es.forEach(e=>{if(e.intersectionRatio>=.45){tries=
 /* 제품 소개 · 스크롤로 장면 전환 (DOM 클래스만 바꿈) */
 (function(){var sec=document.getElementById('product');if(!sec)return;var T=sec.querySelectorAll('.pq-t'),I=sec.querySelectorAll('.pq-img img'),B=sec.querySelectorAll('#pqBar b'),stg=sec.querySelector('.pq-stage'),cur=-1,tk=false,N=5;
 function upd(){tk=false;var r=sec.getBoundingClientRect(),tot=sec.offsetHeight-innerHeight;if(tot<=0)return;var p=Math.max(0,Math.min(.9999,-r.top/tot)),i=Math.floor(p*N),f=p*N-i;
- if(i!==cur){cur=i;T.forEach(function(e,k){e.classList.toggle('on',k===i)});I.forEach(function(e,k){e.classList.toggle('on',k===i)})}
+ if(i!==cur){cur=i;T.forEach(function(e,k){e.classList.toggle('on',k===i);if(k!==i)e.querySelectorAll('.pl').forEach(function(l){l.classList.remove('lit')})});I.forEach(function(e,k){e.classList.toggle('on',k===i)})}
+ var ls=T[i].querySelectorAll('.pl');ls.forEach(function(l,k){l.classList.toggle('lit',f>=.14+k*(.62/ls.length))});
  B.forEach(function(b,k){b.style.width=(k<i?100:k===i?f*100:0).toFixed(1)+'%'});stg.style.setProperty('--pf',f.toFixed(3))}
 addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(upd)}},{passive:true});addEventListener('resize',upd);upd()})();
 /* 정리 · 스크롤할 때마다 하나씩 담김 */
