@@ -108,7 +108,8 @@ function human(o){
  if(o.vest){var v=new T.Mesh(new CAP(.172,.3*hs,4,10),mat(o.vest,.55));v.position.y=1.26*hs;v.scale.z=.76;g.add(v)}
  if(o.bag){var bg=new T.Mesh(new T.BoxGeometry(.24,.28,.1),mat(o.bag,em*.5));bg.position.set(.21,.96*hs,.03);g.add(bg)}
  g.userData={legs:legs,arms:arms,ph:Math.random()*6};S.add(g);return g}
-function walk(h,sp,t){var u=h.userData,k=Math.sin(t*sp*6.2+u.ph)*Math.min(.42,sp*.5);u.legs[0].rotation.x=k;u.legs[1].rotation.x=-k;u.arms[0].rotation.x=-k*.8;u.arms[1].rotation.x=k*.8}
+var DT=.016;
+function walk(h,sp,t){var u=h.userData;if(u.char){h.updateMatrixWorld(true);u.char.update(sp,DT);return}var k=Math.sin(t*sp*6.2+u.ph)*Math.min(.42,sp*.5);u.legs[0].rotation.x=k;u.legs[1].rotation.x=-k;u.arms[0].rotation.x=-k*.8;u.arms[1].rotation.x=k*.8}
 
 /* 주인공 & 직원 */
 var TX=-3,TZ=3.4;
@@ -132,7 +133,18 @@ function loadModel(){
    basket.add(root);modelReady=true;setDev(devOn);res()}catch(e){rej(e)}}
   if(window[V])return go();var s=document.createElement('script');s.src=opt.glbScript;s.onload=go;s.onerror=function(){rej(new Error('glb'))};document.head.appendChild(s)})}
 var devOn=false;function setDev(v){devOn=v;devParts.forEach(function(m){m.visible=v})}
-var ready=loadModel().catch(function(e){console.warn('model',e)});
+var base=opt.base||'';
+function loadScript(src){return new Promise(function(res,rej){var el=document.createElement('script');el.src=src;el.onload=res;el.onerror=function(){rej(new Error(src))};document.head.appendChild(el)})}
+var CHD=[],CRC=['#7a6bb8','#5a5290','#8f86c4','#4a4472','#6572a8','#9a8fd0','#6d6694','#8b78c8'];
+function applyChars(){var C=window.Chars;if(!C||!window.__CH_TOURIST||!window.__CH_STAFF)return Promise.resolve();
+ var dT=C.parse(C.b64ToBuf(window.__CH_TOURIST)),dS=C.parse(C.b64ToBuf(window.__CH_STAFF));
+ return Promise.all([C.loadTex(dT),C.loadTex(dS)]).then(function(){
+  function put(g,inst){g.children.slice().forEach(function(c){c.visible=false});g.add(inst.root);g.userData.char=inst}
+  put(tourist,C.make(dT,{emis:.3}));put(staff,C.make(dS,{emis:.26}));
+  crowd.forEach(function(c,i){var d=i%2?dT:dS,col=CRC[i%CRC.length];put(c.h,C.make(d,{tint:col,emis:.16,scale:rnd(.94,1.06),sx:rnd(.9,1.12)}))})})}
+var ready=Promise.all([loadModel().catch(function(e){console.warn('model',e)}),
+ Promise.all([loadScript(base+'lib/chars.js'),loadScript(base+'models/char_tourist.glb.js'),loadScript(base+'models/char_staff.glb.js')]).then(function(){return applyCharsLater()}).catch(function(e){console.warn('chars',e)})]);
+var applyCharsLater=function(){return applyChars()};
 
 /* ---------- 손님들 ---------- */
 var crowd=[],N=26;
@@ -193,7 +205,7 @@ function setBeat(i,f){if(i!==beat){beat=i;bt=0;jam=i===3;open=i>=7;crowd.forEach
   ceilG.visible=i>1;setDev(i>=4);setSigns(i>=6?'icon':'ko');if(i===7){callT=-1;pingT=-1}}
  bf=f||0}
 function frame(){raf=requestAnimationFrame(frame);if(!vis)return;
- var dt=Math.min(clk.getDelta(),.05),t=clk.elapsedTime;bt+=dt;
+ var dt=Math.min(clk.getDelta(),.05),t=clk.elapsedTime;bt+=dt;DT=dt;
  /* 손님 */
  for(var k=0;k<crowd.length;k++){var c=crowd[k],h=c.h;
   if(c.wait>0){c.wait-=dt;c.v*=.9;walk(h,0,t);if(c.wait<=0)pickT(c);continue}
@@ -218,8 +230,13 @@ function frame(){raf=requestAnimationFrame(frame);if(!vis)return;
  /* 주인공 */
  var ty=beat<=2?Math.PI:beat===3?Math.PI/2+.4:beat===6?Math.PI:beat===7?(callT>=0?Math.atan2(sx-TX,sz-TZ):Math.atan2(2,-3)):-Math.PI/2;
  tourist.rotation.y+=angDiff(ty,tourist.rotation.y)*ease(3,dt);tourist.position.set(TX,0,TZ);
- var A=tourist.userData.arms;A[0].rotation.x+=((beat===3?-Math.PI+.35+Math.sin(t*5)*.2:beat===2?-1.25:0)-A[0].rotation.x)*ease(6,dt);A[1].rotation.x+=((beat>=4?-.75:0)-A[1].rotation.x)*ease(6,dt);
+ var A=tourist.userData.arms;if(!tourist.userData.char){A[0].rotation.x+=((beat===3?-Math.PI+.35+Math.sin(t*5)*.2:beat===2?-1.25:0)-A[0].rotation.x)*ease(6,dt);A[1].rotation.x+=((beat>=4?-.75:0)-A[1].rotation.x)*ease(6,dt)}
  walk(tourist,0,t);
+ if(tourist.userData.char){tourist.updateMatrixWorld(true);var ch=tourist.userData.char,wv=tourist.userData.wv||0;wv+=((beat===3?1:0)-wv)*ease(6,dt);tourist.userData.wv=wv;
+  if(wv>.02){var yw=tourist.rotation.y,sw=Math.sin(t*6)*.5;
+   function LW(x,y,z){return new T.Vector3(x,y,z).applyAxisAngle(new T.Vector3(0,1,0),yw)}
+   ch.aim('RightArm',LW(-.8,.55,.2),wv);ch.aim('RightForeArm',LW(-.3+sw,1,.15),wv)}}
+ 
  lightT.position.set(TX+.6,2.4,TZ+.6);lightS.position.set(sx+.6,2.4,sz+.6);
  /* 기기 상호작용 */
  if(dialMesh){var tgt=beat===5?Math.sin(bt*.9)*1.1:beat>5?.8:0;dialA+=(tgt-dialA)*ease(4,dt);dialMesh.rotation.z=dialA}
