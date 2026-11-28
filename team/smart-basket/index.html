@@ -374,7 +374,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .kb{fill:#17132a;stroke:var(--lime);stroke-width:4}.kb2{fill:#0c0a16;stroke:#7628f5;stroke-width:3}.ptr{transition:transform .8s cubic-bezier(.3,1.4,.4,1)}.ptr line{stroke:var(--lime);stroke-width:6}
 .orb .o{transition:.4s}.orb text{fill:#cfcdd8;font:700 17px var(--f-body);stroke:none;text-anchor:middle;dominant-baseline:middle}.orb circle{fill:#15121f;stroke:#4a4660;stroke-width:2;transition:.4s}.orb .o.on circle{fill:var(--lime);stroke:var(--lime)}.orb .o.on text{fill:#10101a}
 .scr{width:min(560px,92%);aspect-ratio:2.8/1;background:#050508;border:3px solid #3a3a46;border-radius:20px;position:relative;overflow:hidden;color:#fff;box-shadow:0 0 60px rgba(118,40,245,.35)}
-.st{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:22px;opacity:0;font-size:clamp(28px,4vw,54px)}.st b{font-weight:300;letter-spacing:-.02em}.st i{font-style:normal;font-size:1.3em;color:var(--lime)}.st small{font-size:.45em;color:var(--lime);font-weight:700}
+.dst{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:22px;opacity:0;font-size:clamp(28px,4vw,54px)}.dst b{font-weight:300;letter-spacing:-.02em}.dst i{font-style:normal;font-size:1.3em;color:var(--lime)}.dst small{font-size:.45em;color:var(--lime);font-weight:700}
 .ic{width:1.5em;height:1.5em;fill:none;stroke:currentColor;stroke-width:2.6!important}.bell{color:#ff8a1f;animation:bl .6s infinite alternate}@keyframes bl{to{transform:rotate(12deg)}}
 .dp[data-i="1"].on .s1{animation:s3 6s infinite 0s}.dp[data-i="1"].on .s2{animation:s3 6s infinite 2s}.dp[data-i="1"].on .s3{animation:s3 6s infinite 4s}
 @keyframes s3{0%{opacity:0;transform:translateY(14px)}6%,30%{opacity:1;transform:none}36%,100%{opacity:0}}
@@ -425,6 +425,43 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .tdrop{position:absolute;z-index:4;left:0;top:0;width:210px;height:120px;margin:-60px 0 0 -105px;border:3px dashed var(--lime);border-radius:50%;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .3s,background .2s}.tdrop.on{opacity:1;animation:tdp 1.4s infinite}.tdrop.hot{background:rgba(197,255,53,.22)}.tdrop span{font:800 15px var(--f-body);color:var(--lime)}@keyframes tdp{50%{box-shadow:0 0 0 12px rgba(197,255,53,.18)}}
 .tdrag{position:absolute;z-index:6;left:0;top:0;width:64px;height:96px;margin:-48px 0 0 -32px;display:none;cursor:grab;touch-action:none;filter:drop-shadow(0 12px 20px rgba(0,0,0,.6))}.tdrag.on{display:block;animation:tdg 1.2s infinite}.tdrag.drag{animation:none;cursor:grabbing;transform-origin:center}.tdrag svg{width:100%;height:100%;pointer-events:none}@keyframes tdg{50%{margin-top:-58px}}
 .tdrag em{position:absolute;left:50%;top:104px;transform:translateX(-50%);white-space:nowrap;background:var(--lime);color:#10101a;font:800 14px var(--f-body);padding:6px 12px;border-radius:99px;font-style:normal;pointer-events:none}.tdrag.drag em{display:none}
+
+.try{min-height:100vh;display:flex;align-items:center;padding:100px 0 24px!important}
+.try-in{width:100%}
+.try-top{display:flex;justify-content:space-between;align-items:flex-end;gap:14px 30px;flex-wrap:wrap;margin-bottom:10px}
+.try-hd h3{font-size:clamp(28px,3.2vw,48px)!important;margin:4px 0 0!important}
+.try-steps{margin:0!important}.try-steps li{font-size:15px!important;padding:6px 16px 6px 6px!important}.try-steps b{width:26px!important;height:26px!important;font-size:13px!important}
+.try-hint{font-size:clamp(17px,1.7vw,24px)!important;margin:0 0 12px!important;min-height:1.4em!important}
+.try-grid{align-items:stretch!important;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)!important}
+.try-3d{height:calc(100vh - 250px)!important;min-height:400px;max-height:660px}
+.try-side{display:flex!important;flex-direction:column;gap:12px!important;height:calc(100vh - 250px);min-height:400px;max-height:660px}
+.tmapc{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}.tmapc svg{flex:1 1 auto;min-height:0;width:100%;height:100%}
+.tcard{padding:12px 14px!important}.tc-h{margin-bottom:6px!important}.tc-h b{font-size:17px!important}.tph{padding:12px 14px!important}.tph b{font-size:18px!important}.tph small{font-size:14px!important}
+.trr{position:absolute;left:14px;bottom:14px;z-index:6;border:1.5px solid rgba(255,255,255,.3);background:rgba(10,8,20,.75);color:#fff;border-radius:99px;padding:9px 16px;font:700 14px var(--f-body);cursor:pointer}
+.try-tip{bottom:16px!important}
+@media(max-width:980px){.try{min-height:0;display:block}.try-3d{height:46vh!important}.try-side{height:auto;max-height:none}.tmapc svg{height:auto}}
+
+.dp .ic{width:1.5em;height:1.5em;max-height:none;stroke:currentColor}.dp .dst svg{flex:none}
+.dp[data-i="2"]{display:flex!important;flex-wrap:wrap;align-items:center;justify-content:center;gap:24px 40px}.phn{width:270px!important;min-width:250px;flex:none}.phn .pc b{font-size:22px}.phn .pc span{font-size:16px}.pb{font-size:17px}
+.dp svg.cam,.cam{width:1.2em;height:1.2em;vertical-align:-.2em;margin-right:.3em;stroke:currentColor;fill:none}
+.cmt{display:inline-flex;align-items:center}
+
+.fin{position:relative;padding:clamp(80px,9vw,140px) 0;background:radial-gradient(60% 50% at 20% 0%,rgba(118,40,245,.22),transparent 70%),#07050d;border-top:1px solid rgba(157,92,255,.18)}
+.fin-in{max-width:1500px;margin:0 auto;padding:0 clamp(18px,5vw,90px)}
+.fin .ce{font:700 13px var(--f-mono);letter-spacing:.2em;color:var(--lime)}
+.fin h3{font-weight:700;font-size:clamp(34px,5vw,76px);line-height:1.08;letter-spacing:-.045em;margin:14px 0 34px;word-break:keep-all}
+.fin-flow{list-style:none;margin:0 0 36px;padding:0;display:flex;flex-wrap:wrap;gap:10px;counter-reset:f}
+.fin-flow li{counter-increment:f;display:flex;align-items:center;gap:10px;padding:10px 18px 10px 10px;border-radius:99px;border:1.5px solid rgba(197,255,53,.45);font:700 17px var(--f-body);color:#eae9f2}
+.fin-flow li:before{content:counter(f);width:28px;height:28px;border-radius:50%;background:var(--lime);color:#10101a;display:grid;place-items:center;font-size:14px;font-weight:800}
+.fin-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,28px)}
+.fin-cards>div{border-radius:24px;border:1px solid rgba(157,92,255,.3);background:rgba(14,10,26,.8);padding:26px 26px 28px}
+.fin-cards k{display:block;font:700 12px var(--f-mono);letter-spacing:.2em;color:var(--lime)}
+.fin-cards b{display:block;font-size:clamp(24px,2.2vw,34px);letter-spacing:-.04em;margin:10px 0 10px}
+.fin-cards p{margin:0;font-size:clamp(16px,1.25vw,19px);line-height:1.65;color:rgba(245,245,246,.8);word-break:keep-all}
+.fin-spec{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.fin-spec span{display:flex;flex-direction:column;gap:4px;padding:14px 20px;border-radius:16px;background:rgba(255,255,255,.05);font:700 18px var(--f-body)}
+.fin-spec k{font:700 11px var(--f-mono);letter-spacing:.2em;color:var(--lime)}
+@media(max-width:980px){.fin-cards{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -463,7 +500,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
       </div>
       <div class="pm-view" id="pmView" data-tab="basket">
         <div class="pm-fb" id="pmFb"><img src="images/IMG-01_hero.webp" alt="바구니에 걸린 스마트 바구니 디스플레이"></div>
-        <div class="pv" id="pvBasket"></div><div class="pv off" id="pvDev"></div>
+        <div class="pv" id="pvBasket"></div>
         <div class="pm-mode" role="group" aria-label="보기 선택"><button type="button" class="on" data-m="basket">바구니에 건 모습</button><button type="button" data-m="dev">제품만 보기</button></div>
         <i class="pm-c tl"></i><i class="pm-c tr"></i><i class="pm-c bl"></i><i class="pm-c br"></i>
         <span class="pm-dim a">280 mm</span><span class="pm-dim b">98 mm</span>
@@ -474,15 +511,14 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
     <div class="pr-prog" id="prProg"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div></div></section>
 
     <section class="try" id="try" aria-label="직접 체험"><div class="try-in">
-<div class="try-hd"><span class="ce">03 · 체험</span><h3>이제, 직접 써 보세요</h3></div>
-<ol class="try-steps" id="trSteps"><li data-s="1"><b>1</b>코너 고르기</li><li data-s="2"><b>2</b>직원 호출</li><li data-s="3"><b>3</b>제품 담기</li><li data-s="4"><b>4</b>금액 확인</li></ol>
+<div class="try-top"><div class="try-hd"><span class="ce">03 · 체험</span><h3>이제, 직접 써 보세요</h3></div>
+<ol class="try-steps" id="trSteps"><li data-s="1"><b>1</b>코너 고르기</li><li data-s="2"><b>2</b>직원 호출</li><li data-s="3"><b>3</b>제품 담기</li><li data-s="4"><b>4</b>금액 확인</li></ol></div>
 <p class="try-hint" id="trHint"></p>
-<div class="try-grid"><div class="try-3d" id="try3d"><div class="try-load" id="trLoad">3D 제품을 불러오는 중…</div><div class="try-tip" id="trTip">다이얼을 <b>돌려</b> 보세요</div><div class="tdrop" id="tdrop"><span>여기에 놓기</span></div><div class="tdrag" id="tdrag"></div><div class="try-ptr" id="trPtr"><i></i><span id="trPtrT">드래그해서 돌리기</span></div></div>
+<div class="try-grid"><div class="try-3d" id="try3d"><div class="try-load" id="trLoad">3D 제품을 불러오는 중…</div><div class="try-tip" id="trTip">다이얼을 <b>돌려</b> 보세요</div><div class="tdrop" id="tdrop"><span>여기에 놓기</span></div><div class="tdrag" id="tdrag"></div><div class="try-ptr" id="trPtr"><i></i><span id="trPtrT">드래그해서 돌리기</span></div><button type="button" class="trr" id="trReset">↺ 다시 해보기</button></div>
 <div class="try-side">
-<div class="tcard"><div class="tc-h"><b>매장 지도</b><span id="mapT">손님이 입구에 있어요</span></div><svg id="tmap" viewBox="0 0 360 250"></svg><div class="tleg"><i class="c"></i>손님<i class="s"></i>직원</div></div>
+<div class="tcard tmapc"><div class="tc-h"><b>매장 지도</b><span id="mapT">손님이 입구에 있어요</span></div><svg id="tmap" viewBox="0 0 360 250" preserveAspectRatio="xMidYMid meet"></svg><div class="tleg"><i class="c"></i>손님<i class="s"></i>직원</div></div>
 <div class="tcard"><div class="tc-h"><b>직원 휴대폰</b></div><div class="tph" id="tph" data-st="idle"><i></i><div><b id="tphT">호출 대기 중</b><small id="tphS">손님이 호출하면 알림이 와요</small></div></div></div>
-<div class="tcard toffer" id="tOffer" hidden><div class="tc-h"><b>직원이 가져왔어요</b></div><div class="tof"><div class="tprod" id="tprod"></div><div><b id="tofN"></b><small id="tofP"></small></div></div><p class="tofn">제품을 <b>바구니로 끌어다</b> 넣어 보세요</p></div>
-<button type="button" class="ghostbtn" id="trReset">↺ 다시 해보기</button>
+<div class="tcard toffer" id="tOffer" hidden><div class="tof"><div class="tprod" id="tprod"></div><div><b id="tofN"></b><small id="tofP"></small></div></div></div>
 </div></div></div></section>
 
     <section class="scn" id="scenario" aria-label="시나리오"><div class="scn-st"><div class="scn-in">
@@ -495,16 +531,26 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 <div class="dtl-copy"><span class="ce">05 · 디테일</span><div class="dtl-t"><span id="dtN">01</span><h3 id="dtT"></h3><p id="dtD"></p></div></div>
 <div class="dtl-vis" id="dtV">
 <div class="dp" data-i="0"><svg viewBox="-200 -170 400 340"><g class="orb"></g><circle r="62" class="kb"/><circle r="46" class="kb2"/><g class="ptr"><line x1="0" y1="-12" x2="0" y2="-44"/></g></svg></div>
-<div class="dp" data-i="1"><div class="scr"><div class="st s1"><svg viewBox="0 0 48 48" class="ic"><path d="M6 12h6l5 20h20l4-14H15"/><circle cx="20" cy="38" r="3"/><circle cx="34" cy="38" r="3"/></svg><b>48,000</b></div><div class="st s2"><svg viewBox="0 0 48 48" class="ic"><circle cx="24" cy="24" r="15"/><path d="M18 22h.01M30 22h.01M19 29q5 5 10 0"/></svg><i>→</i><small>앞으로 12m</small></div><div class="st s3"><svg viewBox="0 0 48 48" class="ic bell"><path d="M12 34h24l-3-5V20a9 9 0 0 0-18 0v9zM20 38a4 4 0 0 0 8 0"/></svg><b>호출 중…</b></div></div><div class="sc-cap"><span class="c1">길 안내</span><span class="c2">아이콘+화살표</span><span class="c3">직원 호출</span></div></div>
+<div class="dp" data-i="1"><div class="scr"><div class="dst s1"><svg viewBox="0 0 48 48" class="ic"><path d="M6 12h6l5 20h20l4-14H15"/><circle cx="20" cy="38" r="3"/><circle cx="34" cy="38" r="3"/></svg><b>48,000</b></div><div class="dst s2"><svg viewBox="0 0 48 48" class="ic"><circle cx="24" cy="24" r="15"/><path d="M18 22h.01M30 22h.01M19 29q5 5 10 0"/></svg><i>→</i><small>앞으로 12m</small></div><div class="dst s3"><svg viewBox="0 0 48 48" class="ic bell"><path d="M12 34h24l-3-5V20a9 9 0 0 0-18 0v9zM20 38a4 4 0 0 0 8 0"/></svg><b>호출 중…</b></div></div><div class="sc-cap"><span class="c1">길 안내</span><span class="c2">아이콘+화살표</span><span class="c3">직원 호출</span></div></div>
 <div class="dp" data-i="2"><div class="call"><div class="rg"></div><div class="rg r2"></div><div class="btn"><svg viewBox="0 0 48 48"><path d="M12 34h24l-3-5V20a9 9 0 0 0-18 0v9zM20 38a4 4 0 0 0 8 0"/></svg></div></div><div class="phn"><div class="pb"><i></i><b>호출 알림</b></div><div class="pc"><b>스킨케어 코너</b><span>손님이 부르고 있어요</span></div></div></div>
-<div class="dp" data-i="3"><svg viewBox="0 0 420 300"><rect x="30" y="60" width="360" height="125" rx="20" class="dv"/><rect x="60" y="96" width="210" height="60" rx="8" class="dsp"/><circle cx="335" cy="126" r="30" class="dl"/><circle cx="62" cy="126" r="0"/><g class="dm"><path d="M30 215H390M30 207V223M390 207V223"/><text x="210" y="245">280 mm</text></g><g class="dm"><path d="M410 60V185M402 60H418M402 185H418"/><text x="414" y="128" transform="rotate(90 414 128)">98 mm</text></g><g class="ph2"><rect x="30" y="262" width="206" height="26" rx="8"/><text x="248" y="281">스마트폰 길이와 비슷</text></g></svg></div>
-<div class="dp" data-i="4"><svg viewBox="0 0 420 320"><path d="M60 280V120H360V280" class="bk"/><path d="M60 120H360" class="rim"/><g class="hk"><rect x="170" y="40" width="80" height="140" rx="14" class="dv"/><path d="M185 40V96H225V40" class="hook"/><rect x="186" y="108" width="48" height="26" rx="5" class="dsp"/></g><g class="dm"><text x="210" y="304">테두리에 걸기만 하면 끝</text></g></svg></div>
-<div class="dp" data-i="5"><svg viewBox="0 0 420 320"><path d="M60 260V110H360V260" class="bk"/><rect x="150" y="60" width="120" height="46" rx="10" class="dv"/><path d="M210 106 L130 250 H290 Z" class="cone"/><g class="itm"><rect x="190" y="150" width="40" height="70" rx="8"/><rect x="195" y="140" width="30" height="14" rx="4"/></g><text class="pr" x="210" y="40">48,000원</text></svg></div>
+<div class="dp" data-i="3"><svg viewBox="0 0 480 390"><rect x="30" y="40" width="336" height="118" rx="22" class="dv"/><rect x="58" y="64" width="190" height="70" rx="8" class="dsp"/><circle cx="312" cy="99" r="30" class="dl"/><circle cx="52" cy="99" r="10" class="dl"/><g class="dm"><path d="M30 186H366M30 178V194M366 178V194"/><text x="198" y="216">280 mm</text></g><g class="dm"><path d="M392 40V158M384 40H400M384 158H400"/><text x="404" y="106" style="text-anchor:start">98 mm</text></g><rect x="360" y="236" width="79" height="118" rx="14" class="dv"/><g class="dm"><path d="M360 372H439M360 364V380M439 364V380"/><text x="400" y="386">65 mm</text></g><text x="360" y="226" style="fill:#9d9bb0;font:600 15px var(--f-body);stroke:none;text-anchor:start">옆면 두께</text><g class="ph2"><rect x="30" y="262" width="262" height="34" rx="12"/><text x="48" y="285">스마트폰 길이와 비슷해요</text></g></svg></div>
+<div class="dp" data-i="4"><svg viewBox="0 0 480 360"><path d="M40 150L72 300H408L440 150" class="bk"/><path d="M30 150H450" class="rim"/><g class="hk"><rect x="86" y="128" width="308" height="108" rx="20" class="dv"/><path d="M140 128V92H176V150M304 128V92H340V150" class="hook"/><rect x="108" y="150" width="170" height="66" rx="7" class="dsp"/><circle cx="342" cy="182" r="26" class="dl"/></g><g class="dm"><path d="M86 258H394M86 250V266M394 250V266"/><text x="240" y="284">제품 280 mm</text></g><g class="dm"><path d="M30 322H450M30 314V330M450 314V330"/><text x="240" y="348">일반 장바구니 가로 약 380 mm</text></g></svg></div>
+<div class="dp" data-i="5"><svg viewBox="0 0 480 360"><path d="M40 140L72 310H408L440 140" class="bk"/><path d="M30 140H450" class="rim"/><rect x="86" y="100" width="308" height="80" rx="18" class="dv"/><circle cx="240" cy="192" r="11" class="dl"/><circle cx="240" cy="192" r="4" style="fill:var(--lime);stroke:none"/><path d="M240 200L150 300H330Z" class="cone"/><g class="itm"><rect x="214" y="236" width="52" height="64" rx="9"/><rect x="224" y="224" width="32" height="14" rx="4"/></g><text class="pr" x="240" y="62">48,000원</text><g class="dm"><text x="240" y="342">뒷면 카메라가 바구니 안쪽을 비스듬히 봐요</text></g></svg></div>
 </div></div></section>
 
     
     
-    <div class="pm-act">
+    <section class="fin" id="finish" aria-label="정리"><div class="fin-in">
+<span class="ce">06 · 정리</span><h3>글자가 아닌 아이콘으로,<br>기다림이 아닌 호출로</h3>
+<ol class="fin-flow"><li>코너 선택</li><li>길 안내</li><li>직원 호출</li><li>제품 전달</li><li>바구니에 담기</li><li>금액 표시</li></ol>
+<div class="fin-cards">
+<div><k>FOR CUSTOMER</k><b>한국어를 몰라도</b><p>다이얼로 코너를 고르면 아이콘과 화살표가 길을 보여줘요. 안내판을 읽지 않아도 원하는 코너에 도착해요.</p></div>
+<div><k>FOR STAFF</k><b>어디로 갈지 바로</b><p>호출 버튼을 누르면 직원 휴대폰에 코너 위치가 떠요. 손님을 찾아 헤매지 않고 필요한 곳으로 바로 가요.</p></div>
+<div><k>FOR STORE</k><b>바구니는 그대로</b><p>상단 걸이 두 개로 기존 바구니 테두리에 걸어요. 카메라가 담긴 제품을 인식한 뒤에 금액을 보여줘요.</p></div>
+</div>
+<div class="fin-spec"><span><k>SIZE</k>280 × 98 × 65 mm</span><span><k>MOUNT</k>상단 걸이 2개</span><span><k>INPUT</k>다이얼 · 호출 버튼</span><span><k>SENSOR</k>뒷면 카메라</span><span><k>COLOR</k>Black · Violet · Amber</span></div>
+</div></section>
+<div class="pm-act">
       <a class="btn" id="teamLink2" href="https://jwform.github.io/DC/team/"><span>← 다시 지도로 돌아가기</span><span>MAP</span></a>
       <a class="btn ghost" href="models/3D-01_product.glb" download><span>GLB 모델 ↓</span></a><a class="btn ghost" href="models/3D-02_with-basket.glb" download><span>바구니 장착 모델 ↓</span></a>
     </div>
@@ -517,24 +563,27 @@ const TEAM_URL='https://jwform.github.io/DC/team/', COURSE_URL='https://jwform.g
 ['homeLink'].forEach(i=>document.getElementById(i).href=COURSE_URL);
 (function(){
 let API={},cur='basket';window.__prAPI=()=>API;
-const view=document.getElementById('pmView'),pvB=document.getElementById('pvBasket'),pvD=document.getElementById('pvDev'),load=document.getElementById('pmLoad'),fb=document.getElementById('pmFb');
-[['0.10 0.0 0.0285','0 0 1','다이얼 · 코너 선택'],['-0.12 0.0 0.018','0 0 1','주황 호출 버튼 · 직원 호출'],['-0.02 0 0.0138','0 0 1','디스플레이 · 경로 안내'],['0 0.008 -0.0145','0 0 -1','뒷면 카메라 · 바구니 안쪽'],['0.1 0.053 -0.012','0 1 0','상단 걸이 · 바구니 테두리']].forEach(([p,n,t])=>{
-  const b=document.createElement('button');b.className='hs';b.type='button';b.tabIndex=-1;b.dataset.position=p;b.dataset.normal=n;b.innerHTML='<span>'+t+'</span>';pvD.appendChild(b)});
+const OFF=[0,.122,.1142];
+const DEVC=[-.0,.122,.128];
+API.dev={get _S(){return API.basket&&API.basket._S},get model(){return API.basket&&API.basket.model},focus(p,t,ph,r){API.basket&&API.basket.focus([p[0]+OFF[0],p[1]+OFF[1],p[2]+OFF[2]],t,ph,r)},setView(n){const a=API.basket;if(!a)return;const v=a.views[n];if(!v)return;a.focus(DEVC,v[0],v[1],.5)},setActive(){}};
+window.__showAll=function(){const a=API.basket;if(!a||!a.model)return;a.model.traverse(o=>{if(o.isMesh&&/^basket_/.test(o.name))o.visible=true})};
+window.__applyMode=function(){const a=API.basket;if(!a||!a.model)return;a.model.traverse(o=>{if(o.isMesh&&/^basket_/.test(o.name))o.visible=(view.dataset.tab!=='dev')})};
+const view=document.getElementById('pmView'),pvB=document.getElementById('pvBasket'),load=document.getElementById('pmLoad'),fb=document.getElementById('pmFb');
 function ld(src){return new Promise((r,j)=>{const s=document.createElement('script');s.src=src;s.onload=r;s.onerror=()=>j(new Error(src));document.head.appendChild(s)})}
 function mk(key,silent){
   if(API[key]||API['_'+key])return;API['_'+key]=1;if(!silent)load.style.display='';
-  const o=key==='basket'?{box:pvB,url:'models/3D-02_with-basket.glb',fallbackScript:'models/3D-02_with-basket.glb.js',fallbackVar:'__GLB_B64_BASKET',fitToModel:true}:{box:pvD,url:'models/3D-01_product.glb',fallbackScript:'models/3D-01_product.glb.js'};
-  API[key]=ProductViewer(o.box,{url:o.url,fallbackScript:o.fallbackScript,fallbackVar:o.fallbackVar,fitToModel:o.fitToModel,autoDelay:key==='basket'?8000:3500,onLoad:()=>{load.style.display='none';if(key==='basket')fb.style.display='none'},onError:()=>{load.textContent='3D를 불러오지 못했어요 · 사진으로 대신 보여드려요'}});
+  const o={box:pvB,url:'models/3D-02_with-basket.glb',fallbackScript:'models/3D-02_with-basket.glb.js',fallbackVar:'__GLB_B64_BASKET',fitToModel:true};
+  API[key]=ProductViewer(o.box,{url:o.url,fallbackScript:o.fallbackScript,fallbackVar:o.fallbackVar,fitToModel:o.fitToModel,autoDelay:key==='basket'?8000:3500,onLoad:()=>{load.style.display='none';fb.style.display='none';setTimeout(()=>window.__applyMode&&window.__applyMode(),50)},onError:()=>{load.textContent='3D를 불러오지 못했어요 · 사진으로 대신 보여드려요'}});
 }
-window.__thrP=ld('lib/three.bundle.js');let ready=window.__thrP.then(()=>ld('lib/viewer.js')).then(()=>mk('basket')).then(()=>{setTimeout(()=>mk('dev',true),2500)}).catch(e=>{load.textContent='3D 뷰어를 불러오지 못했어요';console.error(e)});
+window.__thrP=ld('lib/three.bundle.js');let ready=window.__thrP.then(()=>ld('lib/viewer.js')).then(()=>mk('basket')).catch(e=>{load.textContent='3D 뷰어를 불러오지 못했어요';console.error(e)});
 document.querySelectorAll('.pm-mode button').forEach(b=>b.addEventListener('click',()=>{
   cur=b.dataset.m;view.dataset.tab=cur;document.querySelectorAll('.pm-mode button').forEach(x=>x.classList.toggle('on',x===b));
-  pvB.classList.toggle('off',cur!=='basket');pvD.classList.toggle('off',cur!=='dev');
+  window.__applyMode();
   /* [OPT-1] 가려진 쪽 3D 뷰어는 렌더링 중지 */
-  if(API.basket&&API.basket.setActive)API.basket.setActive(cur==='basket');if(API.dev&&API.dev.setActive)API.dev.setActive(cur==='dev');
+  
   fb.style.display=(cur==='basket'&&!(API.basket&&API.basket._S&&API.basket._S.ready))?'':'none';
   document.querySelectorAll('#pmChips button').forEach(x=>x.classList.toggle('on',x.dataset.v==='quarter'));
-  ready.then(()=>{mk(cur);const a=API[cur];a&&a.setView&&a.setView('quarter')});
+  ready.then(()=>{const a=API[cur];a&&a.setView&&a.setView('quarter')});
 }));
 document.getElementById('pmChips').addEventListener('click',e=>{const b=e.target.closest('button[data-v]');if(!b)return;const a=API[cur];if(!a)return;document.querySelectorAll('#pmChips button').forEach(x=>x.classList.toggle('on',x===b));a.setView(b.dataset.v)});
 })();
@@ -610,9 +659,9 @@ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isInter
 </script>
 <script>
 (function(){var v=document.getElementById('scnV'),ol=document.getElementById('scnOl'),nEl=document.getElementById('scnN'),pg=document.getElementById('scnPg'),tabs=document.querySelectorAll('.scn-tabs button'),sec=document.getElementById('scenario');
-var D=[{src:'videos/VIDEO-02_customer_nosub.mp4',t:[0,5,9,13.5,18.5,20.5],s:['다이얼을 돌려 코너를 고르면 길 안내가 시작돼요','화살표를 따라 매장을 걸어 이동해요','호출 버튼을 눌러 직원에게 제품을 요청해요','직원이 제품을 꺼내 전달해요','손님이 바구니에 제품을 담아요','담긴 뒤에야 바구니 금액이 표시돼요']},
+var D=[{src:'videos/VIDEO-02_customer_nosub.mp4',t:[0,5,9,13.5,18.5,20.5],s:['다이얼을 돌려 코너를 고르면 길 안내가 시작돼요','화살표를 따라 매장을 걸어 이동해요','호출 버튼을 눌러 직원에게 제품을 요청해요','직원이 제품을 꺼내 전달해요','손님이 바구니에 제품을 담아요','카메라가 담긴 제품을 인식해야 금액이 표시돼요']},
 {src:'videos/VIDEO-03_staff_nosub.mp4',t:[0,1.75,4,6.25,10],s:['휴대폰으로 고객 호출 알림을 받아요','맵에서 호출된 코너 위치를 확인해요','해당 코너로 이동해요','진열대에서 제품을 꺼내 손님에게 전달해요','단말기로 응대 완료를 확인해요']}];
-var k=0,cur=-1;function build(){ol.innerHTML='';D[k].s.forEach(function(s,i){var li=document.createElement('li');li.textContent=s;li.onclick=function(){v.currentTime=D[k].t[i]+.05;v.play().catch(function(){})};ol.appendChild(li)});cur=-1}
+var k=0,cur=-1;function build(){ol.innerHTML='';D[k].s.forEach(function(s,i){var li=document.createElement('li');li.innerHTML=(/카메라/.test(s)?'<svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13" r="3.6"/></svg>':'')+s;li.onclick=function(){v.currentTime=D[k].t[i]+.05;v.play().catch(function(){})};ol.appendChild(li)});cur=-1}
 function sel(n){k=n;tabs.forEach(function(b,i){b.setAttribute('aria-selected',String(i===n))});v.src=D[n].src;build();v.load();v.play().catch(function(){})}
 tabs.forEach(function(b){b.onclick=function(){var n=+b.dataset.k,tot=sec.offsetHeight-innerHeight;scrollTo({top:sec.offsetTop+tot*(n?.62:.04),behavior:'smooth'})}});
 var tk2=false;function su(){tk2=false;var r=sec.getBoundingClientRect(),tot=sec.offsetHeight-innerHeight;if(tot<=0)return;var p=-r.top/tot;if(p<-.1||p>1.1)return;var n=p>=.5?1:0;if(n!==k)sel(n);document.getElementById('scnHint').style.visibility=n?'hidden':'visible'}
@@ -622,7 +671,7 @@ build();new IntersectionObserver(function(es){es.forEach(function(e){if(e.isInte
 })();
 
 (function(){var sec=document.getElementById('detail'),dp=sec.querySelectorAll('.dp'),N=document.getElementById('dtN'),T=document.getElementById('dtT'),D=document.getElementById('dtD'),box=sec.querySelector('.dtl-t'),cur=-1,tk=false;
-var ST=[['01','다이얼','돌리면 코너가 바뀌어요. 글자 없이 아이콘만으로 고를 수 있어요'],['02','디스플레이','길 안내, 금액, 호출 상태를 한 화면에서 보여줘요'],['03','호출 버튼','누르면 직원 휴대폰이 바로 울려요'],['04','280 × 98 × 65 mm','스마트폰보다 조금 긴 정도라 손잡이에 걸려도 거치적거리지 않아요'],['05','걸기만 하면 끝','상단 걸이 두 개를 바구니 테두리에 넘겨 걸어요. 바구니는 그대로 쓰면 돼요'],['06','담긴 뒤에야 금액','뒷면 카메라가 바구니 안쪽을 보고, 담긴 상품을 인식한 뒤에 금액을 보여줘요']];
+var ST=[['01','다이얼','돌리면 코너가 바뀌어요. 글자 없이 아이콘만으로 고를 수 있어요'],['02','디스플레이','길 안내, 금액, 호출 상태를 한 화면에서 보여줘요'],['03','호출 버튼','누르면 직원 휴대폰이 바로 울려요'],['04','280 × 98 × 65 mm','스마트폰보다 조금 긴 정도라 손잡이에 걸려도 거치적거리지 않아요'],['05','걸기만 하면 끝','상단 걸이 두 개를 바구니 테두리에 넘겨 걸어요. 바구니는 그대로 쓰면 돼요'],['06','카메라가 인식해야 금액','뒷면 카메라가 바구니 안쪽을 보고, 담긴 상품을 인식한 뒤에 금액을 보여줘요']];
 var NMS=['스킨케어','메이크업','헤어케어','향수','식품','바디'],orb=sec.querySelector('.orb'),ptr=sec.querySelector('.ptr'),os=[];
 NMS.forEach(function(n,i){var a=i*60-90,r=135,x=Math.cos(a*Math.PI/180)*r,y=Math.sin(a*Math.PI/180)*r,g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','o');g.innerHTML='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="34"/><text x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'">'+n+'</text>';orb.appendChild(g);os.push(g)});
 var k=0,tm;function spin(){k=(k+1)%6;os.forEach(function(g,i){g.classList.toggle('on',i===k)});ptr.style.transform='rotate('+(k*60)+'deg)'}
@@ -641,27 +690,28 @@ addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(upd)}
 (function(){
 const sec=document.getElementById('try'),box=document.getElementById('try3d'),view=document.getElementById('pmView'),pvB=document.getElementById('pvBasket');
 const $=id=>document.getElementById(id);
-const CORN=[{k:'skincare',n:'스킨케어',p:'세럼',pr:48000,x:70,y:60},{k:'makeup',n:'메이크업',p:'립스틱',pr:32000,x:180,y:60},{k:'haircare',n:'헤어케어',p:'헤어 에센스',pr:27000,x:290,y:60},{k:'bodycare',n:'바디케어',p:'바디 로션',pr:19000,x:70,y:140},{k:'perfume',n:'향수',p:'향수',pr:64000,x:180,y:140},{k:'food',n:'식품',p:'건강식품',pr:15000,x:290,y:140}];
+const CORN=[{k:'skincare',n:'스킨케어',p:'세럼',pr:48000,x:70,y:48},{k:'makeup',n:'메이크업',p:'립스틱',pr:32000,x:70,y:108},{k:'haircare',n:'헤어케어',p:'헤어 에센스',pr:27000,x:70,y:168},{k:'bodycare',n:'바디케어',p:'바디 로션',pr:19000,x:290,y:48},{k:'perfume',n:'향수',p:'향수',pr:64000,x:290,y:108},{k:'food',n:'식품',p:'건강식품',pr:15000,x:290,y:168}];
 const COL={skincare:'#ffd27a',makeup:'#ff6f91',haircare:'#7fd6ff',bodycare:'#b7f0a0',perfume:'#c9a3ff',food:'#ffb36b'};
-const ENT={x:180,y:228},STAFF0={x:330,y:226};
+const CAMI='<svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13" r="3.6"/></svg>';
+const ENT={x:180,y:236},STAFF0={x:180,y:14};
 const DEV=[0,.122,.128];
 let S,A=null,M=null,P=null,moving=null,cust={...ENT},stf={...STAFF0},pathTo=null;
-function stand(c){return{x:c.x,y:c.y<100?100:182}}function gut(c){return c.x<125?125:c.x<235?235:345}
+function stand(c){return{x:c.x<180?148:212,y:c.y}}function sstand(c){return{x:c.x<180?214:146,y:c.y}}
 function bottle(c){return '<svg viewBox="0 0 46 70"><rect x="15" y="2" width="16" height="12" rx="3" fill="#ddd"/><rect x="5" y="14" width="36" height="54" rx="9" fill="'+COL[c.k]+'"/><rect x="12" y="30" width="22" height="16" rx="3" fill="rgba(255,255,255,.7)"/></svg>'}
 function reset(){S={touched:false,sel:-1,th:0,tth:0,step:1,called:false,items:[],busy:false,hd:90,hcur:90,carry:false};moving&&cancelAnimationFrame(moving);cust={...ENT};stf={...STAFF0};pathTo=null;drawMap();ui();disp();$('mapT').textContent='손님이 입구에 있어요';ph('idle','호출 대기 중','손님이 호출하면 알림이 와요');$('tOffer').hidden=true;$('tdrag').classList.remove('on');$('tdrop').classList.remove('on');if(A)cam(1)}
 function cam(n){if(!A)return;if(n===3)A.focus([0,.17,-.01],28,56,1.0);else A.focus(DEV,0,84,n===4?.66:.56)}
-function drawMap(){let s='<rect x="8" y="8" width="344" height="234" rx="14" fill="none" stroke="#2a2640" stroke-width="2"/>';
- CORN.forEach((c,i)=>{const on=i===S.sel;s+=`<g><rect x="${c.x-38}" y="${c.y-30}" width="76" height="60" rx="12" fill="${on?'rgba(197,255,53,.18)':'#15112a'}" stroke="${on?'#c5ff35':'#2e2a48'}" stroke-width="${on?3:1.5}"/><image href="images/icons/${c.k}.png" x="${c.x-14}" y="${c.y-24}" width="28" height="28" opacity=".9"/><text x="${c.x}" y="${c.y+24}" fill="#cfcdd8" font-size="12" font-family="sans-serif" font-weight="700" text-anchor="middle">${c.n}</text></g>`});
- if(pathTo){const q=stand(pathTo),g=gut(pathTo);s+=`<path d="M${ENT.x} ${ENT.y} L${ENT.x} 192 L${g} 192 L${g} ${q.y} L${q.x} ${q.y}" fill="none" stroke="#c5ff35" stroke-width="3" stroke-dasharray="7 7"/>`}
- s+=`<text x="${ENT.x}" y="246" fill="#6c6a7c" font-size="11" font-family="monospace" text-anchor="middle">ENTRANCE</text><circle cx="${stf.x}" cy="${stf.y}" r="9" fill="#c5ff35"/><circle cx="${cust.x}" cy="${cust.y}" r="9" fill="#fff" stroke="#7628f5" stroke-width="3"/>`;
+function drawMap(){let s='<rect x="6" y="4" width="348" height="242" rx="14" fill="none" stroke="#2a2640" stroke-width="2"/><rect x="152" y="22" width="56" height="214" fill="rgba(255,255,255,.03)"/>';
+ CORN.forEach((c,i)=>{const on=i===S.sel;s+=`<g><rect x="${c.x-42}" y="${c.y-26}" width="84" height="52" rx="12" fill="${on?'rgba(197,255,53,.18)':'#15112a'}" stroke="${on?'#c5ff35':'#2e2a48'}" stroke-width="${on?3:1.5}"/><image href="images/icons/${c.k}.png" x="${c.x-13}" y="${c.y-22}" width="26" height="26" opacity=".9"/><text x="${c.x}" y="${c.y+21}" fill="#cfcdd8" font-size="12" font-family="sans-serif" font-weight="700" text-anchor="middle">${c.n}</text></g>`});
+ if(pathTo){const q=stand(pathTo);s+=`<path d="M${ENT.x} ${ENT.y} L${ENT.x} ${q.y} L${q.x} ${q.y}" fill="none" stroke="#c5ff35" stroke-width="3" stroke-dasharray="7 7"/>`}
+ s+=`<text x="${ENT.x+34}" y="${ENT.y+3}" fill="#8a88a0" font-size="11" font-family="sans-serif" font-weight="700">입구</text><text x="${STAFF0.x+34}" y="${STAFF0.y+4}" fill="#8a88a0" font-size="11" font-family="sans-serif" font-weight="700">직원 대기</text><circle cx="${stf.x}" cy="${stf.y}" r="9" fill="#c5ff35"/><circle cx="${cust.x}" cy="${cust.y}" r="9" fill="#fff" stroke="#7628f5" stroke-width="3"/>`;
  $('tmap').innerHTML=s}
 function ui(){document.querySelectorAll('#trSteps li').forEach(li=>{const n=+li.dataset.s;li.classList.toggle('on',n===S.step);li.classList.toggle('done',n<S.step)});
- const H={1:'다이얼을 <b>돌려서</b> 가고 싶은 코너를 골라 보세요',2:'도움이 필요하면 <b>호출 버튼</b>을 눌러 보세요',3:'직원이 가져온 제품을 <b>바구니로 끌어다</b> 넣어 보세요',4:'바구니에 담기자 <b>금액</b>이 화면에 나타났어요'};$('trHint').innerHTML=H[S.step];
+ const H={1:'다이얼을 <b>돌려서</b> 가고 싶은 코너를 골라 보세요',2:'도움이 필요하면 <b>호출 버튼</b>을 눌러 보세요',3:'직원이 가져온 제품을 <b>바구니로 끌어다</b> 넣어 보세요',4:'바구니 속 <b>카메라</b>'+CAMI+'가 담긴 제품을 인식해 <b>금액</b>이 나타났어요'};$('trHint').innerHTML=H[S.step];
  $('trTip').style.display=S.step===1&&!(S&&S.touched)?'':'none'}
 function ph(st,t,s){$('tph').dataset.st=st;$('tphT').textContent=t;$('tphS').textContent=s}
 function anim(obj,to,ms,hd,cb){if(hd!==null)S.hd=hd;const f={x:obj.x,y:obj.y},t0=performance.now();const tick=n=>{const u=Math.min(1,(n-t0)/ms),e=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;obj.x=f.x+(to.x-f.x)*e;obj.y=f.y+(to.y-f.y)*e;drawMap();if(u<1)moving=requestAnimationFrame(tick);else cb&&cb()};moving=requestAnimationFrame(tick)}
 function walk(obj,pts,cb){let i=0;const nx=()=>{if(i>=pts.length){cb&&cb();return}const p=pts[i++];const dx=p.x-obj.x,dy=p.y-obj.y;const hd=Math.abs(dy)>=Math.abs(dx)?(dy<0?90:-90):(dx>0?0:180);anim(obj,p,Math.max(250,Math.hypot(dx,dy)*7),hd,nx)};nx()}
-function route(c){const q=stand(c),g=gut(c);return[{x:ENT.x,y:192},{x:g,y:192},{x:g,y:q.y},{x:q.x,y:q.y}]}
+function route(c){const q=stand(c);return[{x:180,y:q.y},{x:q.x,y:q.y}]}
 function setup(a){A=a;M=a.model;M.updateMatrixWorld(true);const meshes=[];M.traverse(o=>{if(o.isMesh)meshes.push(o)});const find=re=>meshes.find(m=>re.test(m.name));
  const rec=m=>{const g=m.geometry;g.computeBoundingBox();const c=g.boundingBox.getCenter(new THREE.Vector3()),sz=g.boundingBox.getSize(new THREE.Vector3());g.translate(-c.x,-c.y,-c.z);m.position.add(c);return{c:m.position.clone(),s:Math.max(sz.x,sz.y)}};
  P={meshes,dial:find(/^dial$/),ring:[],call:meshes.filter(m=>/^call_/.test(m.name)),line:find(/line/),arrow:find(/arrow/),price:find(/price/),disp:[],tray:find(/basket_wire/)};
@@ -699,7 +749,7 @@ function frame(dt){if(!P)return;tt+=dt;if(!S.dragging){S.th+=(S.tth-S.th)*Math.m
  if(S.step===3&&P.tray){const R0=A.canvas.getBoundingClientRect(),V0=(P.bc||(P.bc=new THREE.Box3().setFromObject(M).getCenter(new THREE.Vector3()))).clone().project(A.cam);const q=[(V0.x*.5+.5)*R0.width,(-V0.y*.5+.5)*R0.height];const d=$('tdrop');d.style.transform='translate('+q[0]+'px,'+q[1]+'px)';S.dz=q;const g=$('tdrag');if(!S.dg&&S.carry){const R=A.canvas.getBoundingClientRect();g.style.transform='translate('+(R.width-90)+'px,'+(R.height-100)+'px)'}}}
 function callPress(){press=1;if(S.sel<0){const h=$('trHint');h.classList.remove('shake');void h.offsetWidth;h.classList.add('shake');return}
  if(S.called)return;moving&&cancelAnimationFrame(moving);const q0=stand(CORN[S.sel]);cust={...q0};S.walking=false;drawMap();S.called=true;S.step=3;ui();$('mapT').textContent='직원이 호출을 받았어요';ph('call','호출 · '+CORN[S.sel].n+' 코너','손님이 도움을 요청했어요');
- setTimeout(()=>{ph('go','이동 중','맵을 보고 '+CORN[S.sel].n+' 코너로 가는 중');const q=stand(pathTo),g=gut(pathTo);walk(stf,[{x:g,y:STAFF0.y},{x:g,y:q.y},{x:q.x+26,y:q.y}],()=>{ph('done','도착했어요','제품을 꺼내 전달해요');offer()})},900)}
+ setTimeout(()=>{ph('go','이동 중','맵을 보고 '+CORN[S.sel].n+' 코너로 가는 중');const q=sstand(pathTo);walk(stf,[{x:180,y:q.y},{x:q.x,y:q.y}],()=>{ph('done','도착했어요','제품을 꺼내 전달해요');offer()})},900)}
 function offer(){const c=CORN[S.sel];$('tprod').innerHTML=bottle(c);$('tofN').textContent=c.p;$('tofP').textContent=c.pr.toLocaleString()+'원';$('tOffer').hidden=false;$('mapT').textContent='직원이 제품을 전달해요';
  cam(3);S.carry=true;const g=$('tdrag');g.innerHTML=bottle(c)+'<em>끌어서 바구니에</em>';g.classList.add('on');$('tdrop').classList.add('on')}
 (function(){const g=$('tdrag');let st=null;
@@ -713,8 +763,8 @@ $('trReset').addEventListener('click',()=>{reset();disp()});
 reset();
 /* 바구니 뷰어를 체험 칸으로 옮기기 */
 const mk1=document.createComment('pvB'),keep={};
-function away(){if(pvB.parentNode!==box){pvB.before(mk1);box.insertBefore(pvB,box.firstChild);pvB.classList.remove('off')}if(A){A.lock(true)}}
-function home(){if(pvB.parentNode===box){mk1.after(pvB);mk1.remove();pvB.classList.toggle('off',view.dataset.tab!=='basket');if(A)A.lock(false)}}
+function away(){if(window.__showAll)window.__showAll();if(pvB.parentNode!==box){pvB.before(mk1);box.insertBefore(pvB,box.firstChild);pvB.classList.remove('off')}if(A){A.lock(true)}}
+function home(){if(pvB.parentNode===box){mk1.after(pvB);mk1.remove();pvB.classList.remove('off');window.__applyMode&&window.__applyMode();if(A)A.lock(false)}}
 let tries=0;function init(){const a=window.__prAPI&&window.__prAPI().basket;if(a&&a._S&&a._S.ready&&a.model){away();a.setActive(true);if(!P)setup(a);else{a.lock(true);cam(S.step===3?3:S.step===4?4:1)}return}if(tries++<200)setTimeout(init,300)}
 new IntersectionObserver(es=>{es.forEach(e=>{if(e.intersectionRatio>=.45){tries=0;init()}else if(e.intersectionRatio<.3){home()}})},{threshold:[0,.3,.45,.6]}).observe(sec);
 })();
