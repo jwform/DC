@@ -124,27 +124,31 @@ var devParts=[],dialMesh=null,callMats=[],modelReady=false;
 function loadModel(){
  var V=opt.glbVar||'__GLB_B64_BASKET',build=window.__buildGLB;
  return new Promise(function(res,rej){
-  function go(){try{var buf=build.b64ToBuf(window[V]),g=build.parseGLB(buf),root=build.buildModel(g,function(){});
+  function go(ab){try{var buf=ab||build.b64ToBuf(window[V]),g=build.parseGLB(buf),root=build.buildModel(g,function(){});
    root.traverse(function(m){if(!m.isMesh)return;m.castShadow=false;m.receiveShadow=false;var n=m.name;
     if(/^basket_/.test(n)){}else if(n==='display_frame'||/^(display|dial|dial_|body|hook|rear|usb|camera|call)/.test(n)||/png/.test(n)){devParts.push(m)}
     if(n==='dial'){dialMesh=m}
     if(/^call_(ring|pad|bell)/.test(n)&&m.material)callMats.push(m.material)});
    if(dialMesh){var gm=dialMesh.geometry;gm.computeBoundingBox();var c=gm.boundingBox.getCenter(new T.Vector3());gm.translate(-c.x,-c.y,-c.z);dialMesh.position.copy(c)}
    basket.add(root);modelReady=true;setDev(devOn);res()}catch(e){rej(e)}}
-  if(window[V])return go();var s=document.createElement('script');s.src=opt.glbScript;s.onload=go;s.onerror=function(){rej(new Error('glb'))};document.head.appendChild(s)})}
+  function viaScript(){if(window[V])return go();var s=document.createElement('script');s.src=opt.glbScript;s.onload=function(){go()};s.onerror=function(){rej(new Error('glb'))};document.head.appendChild(s)}
+  if(opt.glbUrl&&window.fetch){fetch(opt.glbUrl).then(function(r){if(!r.ok)throw 0;return r.arrayBuffer()}).then(function(ab){go(ab)}).catch(viaScript)}else viaScript()})}
+
 var devOn=false;function setDev(v){devOn=v;devParts.forEach(function(m){m.visible=v})}
 var base=opt.base||'';
 function loadScript(src){return new Promise(function(res,rej){var el=document.createElement('script');el.src=src;el.onload=res;el.onerror=function(){rej(new Error(src))};document.head.appendChild(el)})}
 var CHD=[],CRC=['#7a6bb8','#5a5290','#8f86c4','#4a4472','#6572a8','#9a8fd0','#6d6694','#8b78c8'];
-function applyChars(){var C=window.Chars;if(!C||!window.__CH_TOURIST||!window.__CH_STAFF)return Promise.resolve();
- var dT=C.parse(C.b64ToBuf(window.__CH_TOURIST)),dS=C.parse(C.b64ToBuf(window.__CH_STAFF));
+function charBuf(url,js,v){return fetch(url).then(function(r){if(!r.ok)throw 0;return r.arrayBuffer()}).catch(function(){return loadScript(js).then(function(){return window.Chars.b64ToBuf(window[v])})})}
+function applyChars(){var C=window.Chars;if(!C)return Promise.resolve();
+ return Promise.all([charBuf(base+'models/char_tourist.glb',base+'models/char_tourist.glb.js','__CH_TOURIST'),charBuf(base+'models/char_staff.glb',base+'models/char_staff.glb.js','__CH_STAFF')]).then(function(bs){
+ var dT=C.parse(bs[0]),dS=C.parse(bs[1]);
  return Promise.all([C.loadTex(dT),C.loadTex(dS)]).then(function(){
   function put(g,inst){g.children.slice().forEach(function(c){c.visible=false});g.add(inst.root);g.userData.char=inst}
   put(tourist,C.make(dT,{emis:.3}));put(staff,C.make(dS,{emis:.26}));
-  crowd.forEach(function(c,i){var d=i%2?dT:dS,col=CRC[i%CRC.length];put(c.h,C.make(d,{tint:col,emis:.16,scale:rnd(.94,1.06),sx:rnd(.9,1.12)}))})})}
-var ready=Promise.all([loadModel().catch(function(e){console.warn('model',e)}),
- Promise.all([loadScript(base+'lib/chars.js'),loadScript(base+'models/char_tourist.glb.js'),loadScript(base+'models/char_staff.glb.js')]).then(function(){return applyCharsLater()}).catch(function(e){console.warn('chars',e)})]);
-var applyCharsLater=function(){return applyChars()};
+  crowd.forEach(function(c,i){var d=i%2?dT:dS,col=CRC[i%CRC.length];put(c.h,C.make(d,{tint:col,emis:.16,scale:rnd(.94,1.06),sx:rnd(.9,1.12)}))})})})}
+var ready=loadModel().catch(function(e){console.warn('model',e)});
+loadScript(base+'lib/chars.js').then(function(){return applyChars()}).catch(function(e){console.warn('chars',e)});
+
 
 /* ---------- 손님들 ---------- */
 var crowd=[],N=26;
