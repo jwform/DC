@@ -287,6 +287,6 @@ function resize(){var w=canvas.clientWidth||canvas.parentNode.clientWidth,h=canv
  var pr=Math.min(window.devicePixelRatio||1,w<800?1:1.25);R.setPixelRatio(pr);R.setSize(w,h,false);comp.setPixelRatio(pr);comp.setSize(w,h);cam.aspect=w/h;
  var asp=w/h;bl.setSize(w*.5,h*.5);cam.updateProjectionMatrix()}
 resize();frame();
-return{_crowd:crowd,setBeat:setBeat,resize:resize,setVisible:function(v){vis=v;if(v)clk.getDelta()},ready:ready}
+return{_crowd:crowd,setBeat:setBeat,resize:resize,setVisible:function(v){if(v===vis)return;vis=v;if(v){resize();clk.getDelta()}else{try{R.setSize(1,1,false);comp.setSize(1,1);bl.setSize(1,1)}catch(e){}}},ready:ready}
 };
 })();

@@ -88,7 +88,7 @@ window.ProductViewer=function(box,opt){
   opt=opt||{};
   var renderer=new T.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});
   renderer.setClearColor(0x000000,0);
-  renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFShadowMap;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFShadowMap;
   renderer.toneMapping=T.NeutralToneMapping;renderer.toneMappingExposure=1.0;
   var cv=renderer.domElement;cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab;outline:none';
   cv.setAttribute('tabindex','0');cv.setAttribute('role','img');cv.setAttribute('aria-label',opt.alt||'3D 제품 모델');
