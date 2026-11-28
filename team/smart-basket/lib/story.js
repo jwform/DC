@@ -170,11 +170,11 @@ var ringT=new T.Mesh(new T.RingGeometry(.7,.78,48),new T.MeshBasicMaterial({colo
 var ringS=ringT.clone();ringS.material=ringT.material.clone();ringS.material.color.set(0x8fe05a);S.add(ringS);
 
 /* ---------- HUD (화면 위 표시) ---------- */
-hud.innerHTML='<div class="h-dens" data-h="dens"><span>NOW IN STORE</span><b>26</b><span>STAFF</span><b class="g">1</b></div>'+
+hud.innerHTML='<div class="h-dens" data-h="dens"><span>매장 안 손님</span><b>26</b><span>직원</span><b class="g">1</b></div>'+
  '<div class="h-tag" data-h="tour">외국인 관광객</div><div class="h-tag g" data-h="staff">매장 직원</div>'+
  '<div class="h-q" data-h="q0">?</div><div class="h-q" data-h="q1">?</div><div class="h-q" data-h="q2">?</div>'+
  '<svg class="h-line" data-h="line"><line x1="0" y1="0" x2="0" y2="0"/></svg><div class="h-x" data-h="x">✕</div><div class="h-tag r" data-h="cut">사이에 사람 12명</div>'+
- '<div class="h-tag s" data-h="dev"></div><div class="h-tag s" data-h="goal">스킨케어 코너</div><div class="h-say" data-h="say">도움 필요하시면 말씀해주세요~</div><div class="h-say t" data-h="exc">Excuse me!</div>';
+ '<div class="h-tag s" data-h="dev"></div><div class="h-tag s" data-h="goal">스킨케어 코너</div><div class="h-say" data-h="say">도움 필요하시면 말씀해주세요~</div><div class="h-say t" data-h="exc">저기요!</div>';
 var H={};[].forEach.call(hud.querySelectorAll('[data-h]'),function(e){H[e.dataset.h]=e});
 var v3=new T.Vector3();
 function proj(x,y,z){v3.set(x,y,z).project(cam);return{x:(v3.x*.5+.5)*W,y:(-v3.y*.5+.5)*Hh,ok:v3.z<1&&v3.z>-1}}
@@ -184,7 +184,7 @@ function place(el,p,on,dx,dy){if(!el)return;var vis=on&&p.ok&&p.x>-60&&p.x<W+60&
 var W=1,Hh=1,beat=0,bt=0,bf=0,first=true;
 var SH=[
  {p:[0,13.5,14],l:[0,.5,-1],f:40,sh:0},
- {p:[0,18.5,4.6],l:[0,0,-.5],f:44,sh:.14},
+ {p:[0,10.5,12.5],l:[0,0,-.5],f:46,sh:.14},
  {p:[-3.1,1.75,6.1],l:[-1.7,3.1,-6],f:60,sh:.16},
  {p:[-.7,2.55,10.2],l:[1.7,1.15,-.9],f:52,sh:.15},
  {loc:[.5,.5,.8],at:[.08,.22,.1],f:34,sh:.25},
@@ -201,17 +201,20 @@ function shot(){var s=SH[beat];
 
 /* ---------- 루프 ---------- */
 var clk=new T.Clock(),vis=true,raf=0,sTime=0,pingT=-1,callT=-1,dialA=0;
-function setBeat(i,f){if(i!==beat){beat=i;bt=0;jam=i===3;open=i>=7;crowd.forEach(function(c){c.wait=0;pickT(c)});
+function setBeat(i,f){if(i!==beat){beat=i;bt=0;jam=i===3;open=i>=7;crowd.forEach(function(c){c.wait=0;pickT(c)});sPick();
   ceilG.visible=i>1;setDev(i>=4);setSigns(i>=6?'icon':'ko');if(i===7){callT=-1;pingT=-1}}
  bf=f||0}
+var sw={tx:-1,tz:-6.4,yaw:0,wait:0,st:0};
+function sPick(){sw.st=0;for(var n=0;n<30;n++){var x=rnd(-11,11),z=rnd(-7,8.5);if(inIsl(x,z,.6))continue;if(beat<=3&&Math.hypot(x-TX,z-TZ)<6.5)continue;sw.tx=x;sw.tz=z;return}sw.tx=7;sw.tz=-6}
 function frame(){raf=requestAnimationFrame(frame);if(!vis)return;
  var dt=Math.min(clk.getDelta(),.05),t=clk.elapsedTime;bt+=dt;DT=dt;
  /* 손님 */
  for(var k=0;k<crowd.length;k++){var c=crowd[k],h=c.h;
   if(c.wait>0){c.wait-=dt;c.v*=.9;walk(h,0,t);if(c.wait<=0)pickT(c);continue}
-  var dx=c.tx-c.x,dz=c.tz-c.z,d=Math.hypot(dx,dz);if(d<.5){c.wait=rnd(.6,2.6);continue}
-  c.yaw+=angDiff(Math.atan2(dx,dz),c.yaw)*ease(4,dt);
-  var sp=c.sp*(jam&&c.jam?.55:1);c.v+=(sp-c.v)*ease(3,dt);
+  var dx=c.tx-c.x,dz=c.tz-c.z,d=Math.hypot(dx,dz);if(d<.9){c.wait=rnd(.6,2.6);c.stk=0;continue}
+  c.stk=(c.stk||0)+dt;if(c.stk>2.2){if(c.bd===undefined||d>c.bd-.25){c.wait=rnd(.4,1.2);pickT(c);c.stk=0;c.bd=undefined;continue}c.bd=d;c.stk=0}else if(c.bd===undefined)c.bd=d;
+  var ad=angDiff(Math.atan2(dx,dz),c.yaw);c.yaw+=clamp(ad*ease(4,dt),-2.4*dt,2.4*dt);
+  var sp=c.sp*(jam&&c.jam?.55:1)*Math.max(.15,Math.cos(Math.min(1.4,Math.abs(ad))));c.v+=(sp-c.v)*ease(3,dt);
   var nx=c.x+Math.sin(c.yaw)*c.v*dt*1.25,nz=c.z+Math.cos(c.yaw)*c.v*dt*1.25;
   if(inIsl(nx,nz,.3)){c.yaw+=.4;pickT(c)}else{c.x=nx;c.z=nz}
   for(var j=0;j<crowd.length;j++){var o=crowd[j];if(o===c)continue;var ax=c.x-o.x,az=c.z-o.z,dd=ax*ax+az*az;if(dd<.36&&dd>1e-4){var m=.6/Math.sqrt(dd)*dt*.9;c.x+=ax*m;c.z+=az*m}}
@@ -220,22 +223,27 @@ function frame(){raf=requestAnimationFrame(frame);if(!vis)return;
   h.position.set(c.x,0,c.z);h.rotation.y=c.yaw;walk(h,c.v,t)}
  /* 직원 */
  var walking=false;
- if(beat<7){var ph=(t*.3)%2,gx=ph<1?-7+ph*14:7-(ph-1)*14;sx+=(gx-sx)*ease(1.8,dt);sz+=(-6.4-sz)*ease(2,dt);var vx=gx-sx;if(Math.abs(vx)>.04)staff.rotation.y+=angDiff(Math.atan2(vx,.001),staff.rotation.y)*ease(5,dt);walking=true;
-  /* 일부 장면에서는 직원이 화면 오른쪽 뒤 복도에서 멀어지게 */
-  if(beat===3){var gx3=6.4;sx+=(gx3-sx)*ease(.5,dt)}}
+ if(beat<7){if(sw.wait>0){sw.wait-=dt}else{var ddx=sw.tx-sx,ddz=sw.tz-sz,dd=Math.hypot(ddx,ddz);
+   if(dd<.7){sw.wait=rnd(.8,2.4);sPick()}
+   else{var ya=Math.atan2(ddx,ddz),ad2=angDiff(ya,sw.yaw);sw.yaw+=clamp(ad2*ease(4,dt),-2.2*dt,2.2*dt);
+    var spd=1.15*Math.max(.2,Math.cos(Math.min(1.4,Math.abs(ad2))));var nx2=sx+Math.sin(sw.yaw)*spd*dt*1.2,nz2=sz+Math.cos(sw.yaw)*spd*dt*1.2;
+    if(inIsl(nx2,nz2,.3)){sPick()}else{sx=nx2;sz=nz2;walking=true}
+    sw.st=(sw.st||0)+dt;if(sw.st>9){sw.st=0;sPick()}}}
+  staff.rotation.y=sw.yaw}
  else{var go=callT>=0&&bt-callT>.6,gx2=-1.6,gz2=2.5,dx2=gx2-sx,dz2=gz2-sz,d2=Math.hypot(dx2,dz2);
-  if(go&&d2>.2){var sp2=2.1;sx+=dx2/d2*sp2*dt;sz+=dz2/d2*sp2*dt;staff.rotation.y+=angDiff(Math.atan2(dx2,dz2),staff.rotation.y)*ease(6,dt);walking=true}
+  if(go&&d2>.2){var sp2=2.6;sx+=dx2/d2*sp2*dt;sz+=dz2/d2*sp2*dt;staff.rotation.y+=angDiff(Math.atan2(dx2,dz2),staff.rotation.y)*ease(6,dt);walking=true}
   else if(go){staff.rotation.y+=angDiff(Math.atan2(TX-sx,TZ-sz),staff.rotation.y)*ease(6,dt)}}
+ if(beat>=7)sw.yaw=staff.rotation.y;
  staff.position.set(sx,0,sz);walk(staff,walking?1.2:0,t);
  /* 주인공 */
  var ty=beat<=2?Math.PI:beat===3?Math.PI/2+.4:beat===6?Math.PI:beat===7?(callT>=0?Math.atan2(sx-TX,sz-TZ):Math.atan2(2,-3)):-Math.PI/2;
  tourist.rotation.y+=angDiff(ty,tourist.rotation.y)*ease(3,dt);tourist.position.set(TX,0,TZ);
  var A=tourist.userData.arms;if(!tourist.userData.char){A[0].rotation.x+=((beat===3?-Math.PI+.35+Math.sin(t*5)*.2:beat===2?-1.25:0)-A[0].rotation.x)*ease(6,dt);A[1].rotation.x+=((beat>=4?-.75:0)-A[1].rotation.x)*ease(6,dt)}
  walk(tourist,0,t);
- if(tourist.userData.char){tourist.updateMatrixWorld(true);var ch=tourist.userData.char,wv=tourist.userData.wv||0;wv+=((beat===3?1:0)-wv)*ease(6,dt);tourist.userData.wv=wv;
-  if(wv>.02){var yw=tourist.rotation.y,sw=Math.sin(t*6)*.5;
+ if(tourist.userData.char){tourist.updateMatrixWorld(true);var ch=tourist.userData.char,wv=tourist.userData.wv||0;wv+=(0-wv)*ease(6,dt);tourist.userData.wv=wv;
+  if(wv>.02){var yw=tourist.rotation.y,swv=Math.sin(t*6)*.5;
    function LW(x,y,z){return new T.Vector3(x,y,z).applyAxisAngle(new T.Vector3(0,1,0),yw)}
-   ch.aim('RightArm',LW(-.8,.55,.2),wv);ch.aim('RightForeArm',LW(-.3+sw,1,.15),wv)}}
+   ch.aim('RightArm',LW(-.8,.55,.2),wv);ch.aim('RightForeArm',LW(-.3+swv,1,.15),wv)}}
  
  lightT.position.set(TX+.6,2.4,TZ+.6);lightS.position.set(sx+.6,2.4,sz+.6);
  /* 기기 상호작용 */
@@ -252,7 +260,7 @@ function frame(){raf=requestAnimationFrame(frame);if(!vis)return;
  /* 카메라 */
  shot();var k2=first?1:ease(beat===5||beat===4||beat===8||beat===6?2.2:2.6,dt);first=false;cp.lerp(tp,k2);cl.lerp(tl,k2);cf+=(SH[beat].f-cf)*k2;csh+=(SH[beat].sh-csh)*k2;
  crowd.forEach(function(c){if(beat<2){c.h.visible=true;return}var px=c.h.position.x-cp.x,pz=c.h.position.z-cp.z,d=Math.hypot(px,pz),dx=cl.x-cp.x,dz=cl.z-cp.z,dl=Math.hypot(dx,dz)||1,al=(px*dx+pz*dz)/dl,pe=Math.abs(px*dz-pz*dx)/dl;c.h.visible=!(al>-.5&&al<(beat>=4&&beat!==6&&beat!==7?4:3.2)&&pe<1.1&&d<4.5)});
- cam.position.copy(cp);cam.lookAt(cl);cam.fov=cf*(W<Hh*.9?1.35:1);cam.updateProjectionMatrix();var por=W<Hh*.9;cam.setViewOffset(W,Hh,por?0:-csh*W,por?Hh*.2:0,W,Hh);cam.updateMatrixWorld();
+ ceilG.visible=beat>1&&cp.y<5.8; cam.position.copy(cp);cam.lookAt(cl);cam.fov=cf*(W<Hh*.9?1.35:1);cam.updateProjectionMatrix();var por=W<Hh*.9;cam.setViewOffset(W,Hh,por?0:-csh*W,por?Hh*.2:0,W,Hh);cam.updateMatrixWorld();
  /* HUD */
  var pt=proj(TX,2.05,TZ),ps=proj(sx,2.2,sz),pm2=proj((TX+sx)/2,1.5,(TZ+sz)/2);
  place(H.dens,{x:W-150,y:120,ok:true},beat===1);
