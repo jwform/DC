@@ -88,7 +88,7 @@ window.ProductViewer=function(box,opt){
   opt=opt||{};
   var renderer=new T.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});
   renderer.setClearColor(0x000000,0);
-  renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFShadowMap;
   renderer.toneMapping=T.NeutralToneMapping;renderer.toneMappingExposure=1.0;
   var cv=renderer.domElement;cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab;outline:none';
   cv.setAttribute('tabindex','0');cv.setAttribute('role','img');cv.setAttribute('aria-label',opt.alt||'3D 제품 모델');
@@ -97,7 +97,7 @@ window.ProductViewer=function(box,opt){
   var pm=new T.PMREMGenerator(renderer);
   scene.environment=pm.fromScene(new window.RoomEnvironment(),0.04).texture;scene.environmentIntensity=0.7;
   var sun=new T.DirectionalLight(0xffffff,2.6);sun.position.set(-0.25,0.32,-0.2);sun.castShadow=true;
-  sun.shadow.mapSize.set(1024,1024);sun.shadow.radius=5;sun.shadow.bias=-0.0004;
+  sun.shadow.mapSize.set(512,512);sun.shadow.radius=5;sun.shadow.bias=-0.0004;
   Object.assign(sun.shadow.camera,{left:-0.3,right:0.3,top:0.3,bottom:-0.3,near:0.05,far:1.5});
   var rim=new T.DirectionalLight(0x7628F5,1.6);rim.position.set(0.2,0.05,-0.3);
   var fill=new T.DirectionalLight(0xdfe6ff,0.35);fill.position.set(0.3,0.12,-0.15);
@@ -114,7 +114,7 @@ window.ProductViewer=function(box,opt){
 
   function fit(){
     var w=box.clientWidth||600,h=box.clientHeight||400;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));renderer.setSize(w,h,false);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.25));renderer.setSize(w,h,false);
     cam.aspect=w/h;
     // 가로 280mm가 화면 폭의 약 78%가 되도록 거리 계산 (세로가 좁으면 세로 기준)
     var tv=Math.tan(cam.fov*RAD/2),th=tv*cam.aspect;

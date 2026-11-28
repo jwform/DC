@@ -11,9 +11,9 @@ function parse(buf){
   var off=(v.byteOffset||0)+(a.byteOffset||0),len=a.count*n;
   var s=new C(bin.slice(off,off+len*C.BYTES_PER_ELEMENT));return{a:s,n:n,count:a.count}}
  var prim=json.meshes[0].primitives[0],at=prim.attributes;
- var d={json:json,pos:acc(at.POSITION),nor:acc(at.NORMAL),uv:acc(at.TEXCOORD_0),ji:acc(at.JOINTS_0),jw:acc(at.WEIGHTS_0),idx:acc(prim.indices),ibm:acc(json.skins[0].inverseBindMatrices)};
- var im=json.images[0],iv=json.bufferViews[im.bufferView];
- d.imgBlob=new Blob([bin.slice(iv.byteOffset||0,(iv.byteOffset||0)+iv.byteLength)],{type:im.mimeType||'image/jpeg'});
+ var d={json:json,pos:acc(at.POSITION),nor:acc(at.NORMAL),uv:at.TEXCOORD_0!=null?acc(at.TEXCOORD_0):null,col:at.COLOR_0!=null?acc(at.COLOR_0):null,ji:acc(at.JOINTS_0),jw:acc(at.WEIGHTS_0),idx:acc(prim.indices),ibm:acc(json.skins[0].inverseBindMatrices)};
+ if(json.images&&json.images[0]){var im=json.images[0],iv=json.bufferViews[im.bufferView];
+ d.imgBlob=new Blob([bin.slice(iv.byteOffset||0,(iv.byteOffset||0)+iv.byteLength)],{type:im.mimeType||'image/jpeg'})}
  d.clips={};
  (json.animations||[]).forEach(function(an){var tr=[];
   an.channels.forEach(function(c){var s=an.samplers[c.sampler],t=acc(s.input),o=acc(s.output),nm=json.nodes[c.target.node].name;
@@ -21,12 +21,12 @@ function parse(buf){
    else if(c.target.path==='translation')tr.push(new T.VectorKeyframeTrack(nm+'.position',Array.from(t.a),Array.from(o.a)))});
   d.clips[an.name]=new T.AnimationClip(an.name,-1,tr)});
  d.geo=new T.BufferGeometry();
- d.geo.setAttribute('position',new T.BufferAttribute(d.pos.a,3));d.geo.setAttribute('normal',new T.BufferAttribute(d.nor.a,3));d.geo.setAttribute('uv',new T.BufferAttribute(d.uv.a,2));
+ d.geo.setAttribute('position',new T.BufferAttribute(d.pos.a,3));d.geo.setAttribute('normal',new T.BufferAttribute(d.nor.a,3));if(d.uv)d.geo.setAttribute('uv',new T.BufferAttribute(d.uv.a,2));if(d.col)d.geo.setAttribute('color',new T.BufferAttribute(d.col.a,3));
  d.geo.setAttribute('skinIndex',new T.BufferAttribute(new Uint16Array(d.ji.a),4));d.geo.setAttribute('skinWeight',new T.BufferAttribute(d.jw.a,4));
  d.geo.setIndex(new T.BufferAttribute(d.idx.a,1));d.geo.computeBoundingSphere();d.geo.boundingSphere.radius=3;
  d.tex=null;
  return d}
-function loadTex(d){return new Promise(function(res){if(d.tex)return res(d.tex);var u=URL.createObjectURL(d.imgBlob),im=new Image();
+function loadTex(d){return new Promise(function(res){if(d.tex||!d.imgBlob)return res(d.tex);var u=URL.createObjectURL(d.imgBlob),im=new Image();
  im.onload=function(){var t=new T.Texture(im);t.flipY=false;t.colorSpace=T.SRGBColorSpace;t.anisotropy=4;t.needsUpdate=true;d.tex=t;res(t)};im.onerror=function(){res(null)};im.src=u})}
 var _q=new T.Quaternion(),_q2=new T.Quaternion(),_v=new T.Vector3(),_v2=new T.Vector3(),UP=new T.Vector3(0,1,0);
 function make(d,o){
@@ -38,7 +38,7 @@ function make(d,o){
  var rootI=J.scenes[0].nodes[0],root=objs[rootI];
  var bones=joints.map(function(j){return objs[j]}),ibm=[];
  for(var i=0;i<joints.length;i++){var m=new T.Matrix4();m.fromArray(d.ibm.a,i*16);ibm.push(m)}
- var mat=new T.MeshStandardMaterial(o.tint?{color:o.tint,roughness:.85,metalness:0,emissive:o.tint,emissiveIntensity:o.emis==null?.18:o.emis}:{map:d.tex,roughness:.8,metalness:0,emissive:0xffffff,emissiveMap:d.tex,emissiveIntensity:o.emis==null?.22:o.emis});
+ var mat=(!o.tint&&d.col)?new T.MeshStandardMaterial({vertexColors:true,roughness:.85,metalness:0,emissive:o.glow||0x3a3a4a,emissiveIntensity:1}):new T.MeshStandardMaterial(o.tint?{color:o.tint,roughness:.85,metalness:0,emissive:o.tint,emissiveIntensity:o.emis==null?.18:o.emis}:{map:d.tex,roughness:.8,metalness:0,emissive:0xffffff,emissiveMap:d.tex,emissiveIntensity:o.emis==null?.22:o.emis});
  var mesh=new T.SkinnedMesh(d.geo,mat);mesh.frustumCulled=false;mesh.name='body';
  var holder=objs[meshNode];
  holder.parent&&holder.parent.remove(holder);
