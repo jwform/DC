@@ -150,6 +150,7 @@ var applyCharsLater=function(){return applyChars()};
 var crowd=[],N=26;
 function inIsl(x,z,m){for(var k=0;k<ISL.length;k++){if(Math.abs(x-ISL[k][0])<1.9+m&&Math.abs(z-ISL[k][1])<1+m)return true}return false}
 var jam=false,open=false;
+function outIsl(o){for(var k=0;k<ISL.length;k++){var dx=o.x-ISL[k][0],dz=o.z-ISL[k][1],px=1.9+.25-Math.abs(dx),pz=1+.25-Math.abs(dz);if(px>0&&pz>0){if(px<pz)o.x+=(dx<0?-1:1)*px;else o.z+=(dz<0?-1:1)*pz}}}
 function lineZ(x){var d=(sx-TX)||1,u=clamp((x-TX)/d,0,1);return TZ+(sz-TZ)*u}
 function pickT(c){for(var n=0;n<14;n++){var x,z;
   if(jam&&c.jam){x=rnd(-1.6,4.2);z=rnd(-.4,2.8)}else{x=rnd(-12,12);z=rnd(-7,9)}
@@ -157,7 +158,7 @@ function pickT(c){for(var n=0;n<14;n++){var x,z;
   if(!inIsl(x,z,.5)&&!(Math.abs(x-TX)<1.5&&Math.abs(z-TZ)<1.5)){c.tx=x;c.tz=z;return}}
  c.tx=rnd(-9,9);c.tz=rnd(5,8)}
 for(var i=0;i<N;i++){var h=human({top:pick(TOPS),bottom:pick(BOTS),hair:pick(HAIR),style:Math.random()<.4?'long':'',bag:Math.random()<.5?pick(TOPS):0,h:rnd(.93,1.06),glow:.1});
- var c={h:h,x:rnd(-12,12),z:rnd(-7,9),tx:0,tz:0,sp:rnd(.7,1.15),wait:0,yaw:rnd(0,6.28),v:0,jam:i%3!==0};pickT(c);h.position.set(c.x,0,c.z);crowd.push(c)}
+ var c={h:h,x:rnd(-12,12),z:rnd(-7,9),tx:0,tz:0,sp:rnd(.7,1.15),wait:0,yaw:rnd(0,6.28),v:0,jam:i%3!==0};outIsl(c);pickT(c);h.position.set(c.x,0,c.z);crowd.push(c)}
 
 /* ---------- 경로선 (다이얼로 고른 코너까지) ---------- */
 var PTS=[[TX,.06,TZ-.9],[TX,.06,.9],[-9.2,.06,.9],[-9.6,.06,-6.2]].map(function(p){return new T.Vector3(p[0],p[1],p[2])});
@@ -216,8 +217,9 @@ function frame(){raf=requestAnimationFrame(frame);if(!vis)return;
   var ad=angDiff(Math.atan2(dx,dz),c.yaw);c.yaw+=clamp(ad*ease(4,dt),-2.4*dt,2.4*dt);
   var sp=c.sp*(jam&&c.jam?.55:1)*Math.max(.15,Math.cos(Math.min(1.4,Math.abs(ad))));c.v+=(sp-c.v)*ease(3,dt);
   var nx=c.x+Math.sin(c.yaw)*c.v*dt*1.25,nz=c.z+Math.cos(c.yaw)*c.v*dt*1.25;
-  if(inIsl(nx,nz,.3)){c.yaw+=.4;pickT(c)}else{c.x=nx;c.z=nz}
+  if(inIsl(nx,nz,.12)){pickT(c);c.stk=0;c.bd=undefined}else{c.x=nx;c.z=nz}
   for(var j=0;j<crowd.length;j++){var o=crowd[j];if(o===c)continue;var ax=c.x-o.x,az=c.z-o.z,dd=ax*ax+az*az;if(dd<.36&&dd>1e-4){var m=.6/Math.sqrt(dd)*dt*.9;c.x+=ax*m;c.z+=az*m}}
+  outIsl(c);
   var tdx=c.x-TX,tdz=c.z-TZ;if(tdx*tdx+tdz*tdz<1.2){c.x+=tdx*dt*1.4;c.z+=tdz*dt*1.4}
   if(open){var lz=lineZ(c.x);if(Math.abs(c.z-lz)<1.1&&c.x>-3.6&&c.x<6.2)c.z+=(c.z>lz?1:-1)*dt*2.4}
   h.position.set(c.x,0,c.z);h.rotation.y=c.yaw;walk(h,c.v,t)}
@@ -227,14 +229,14 @@ function frame(){raf=requestAnimationFrame(frame);if(!vis)return;
    if(dd<.7){sw.wait=rnd(.8,2.4);sPick()}
    else{var ya=Math.atan2(ddx,ddz),ad2=angDiff(ya,sw.yaw);sw.yaw+=clamp(ad2*ease(4,dt),-2.2*dt,2.2*dt);
     var spd=1.15*Math.max(.2,Math.cos(Math.min(1.4,Math.abs(ad2))));var nx2=sx+Math.sin(sw.yaw)*spd*dt*1.2,nz2=sz+Math.cos(sw.yaw)*spd*dt*1.2;
-    if(inIsl(nx2,nz2,.3)){sPick()}else{sx=nx2;sz=nz2;walking=true}
+    if(inIsl(nx2,nz2,.12)){sPick()}else{sx=nx2;sz=nz2;walking=true}
     sw.st=(sw.st||0)+dt;if(sw.st>9){sw.st=0;sPick()}}}
   staff.rotation.y=sw.yaw}
  else{var go=callT>=0&&bt-callT>.6,gx2=-1.6,gz2=2.5,dx2=gx2-sx,dz2=gz2-sz,d2=Math.hypot(dx2,dz2);
   if(go&&d2>.2){var sp2=2.6;sx+=dx2/d2*sp2*dt;sz+=dz2/d2*sp2*dt;staff.rotation.y+=angDiff(Math.atan2(dx2,dz2),staff.rotation.y)*ease(6,dt);walking=true}
   else if(go){staff.rotation.y+=angDiff(Math.atan2(TX-sx,TZ-sz),staff.rotation.y)*ease(6,dt)}}
  if(beat>=7)sw.yaw=staff.rotation.y;
- staff.position.set(sx,0,sz);walk(staff,walking?1.2:0,t);
+ var so={x:sx,z:sz};outIsl(so);sx=so.x;sz=so.z;staff.position.set(sx,0,sz);walk(staff,walking?1.2:0,t);
  /* 주인공 */
  var ty=beat<=2?Math.PI:beat===3?Math.PI/2+.4:beat===6?Math.PI:beat===7?(callT>=0?Math.atan2(sx-TX,sz-TZ):Math.atan2(2,-3)):-Math.PI/2;
  tourist.rotation.y+=angDiff(ty,tourist.rotation.y)*ease(3,dt);tourist.position.set(TX,0,TZ);
@@ -279,6 +281,6 @@ function resize(){var w=canvas.clientWidth||canvas.parentNode.clientWidth,h=canv
  var pr=Math.min(window.devicePixelRatio||1,w<800?1.15:1.5);R.setPixelRatio(pr);R.setSize(w,h,false);comp.setPixelRatio(pr);comp.setSize(w,h);cam.aspect=w/h;
  var asp=w/h;bl.setSize(w*.5,h*.5);cam.updateProjectionMatrix()}
 resize();frame();
-return{setBeat:setBeat,resize:resize,setVisible:function(v){vis=v;if(v)clk.getDelta()},ready:ready}
+return{_crowd:crowd,setBeat:setBeat,resize:resize,setVisible:function(v){vis=v;if(v)clk.getDelta()},ready:ready}
 };
 })();

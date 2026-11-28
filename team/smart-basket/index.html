@@ -274,7 +274,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 @media(max-width:980px){.sw-m{width:calc(100% - 36px);bottom:11vh}.sw-vg{background:linear-gradient(0deg,rgba(7,5,13,.92),rgba(7,5,13,.4) 45%,transparent 70%)}.sw-hint{display:none}}
 
 /* [PRODUCT-PIN] */
-.pm-hero.pr{display:block;height:520vh;padding:0;margin:0;overflow:visible;min-height:0}
+.pm-hero.pr{display:block;height:760vh;padding:0;margin:0;overflow:visible;min-height:0}
 .pr-stage{position:sticky;top:0;height:100vh;display:grid;grid-template-columns:minmax(300px,.8fr) 1.3fr;align-items:center;gap:clamp(10px,2vw,40px);padding:96px clamp(18px,3.4vw,56px) 56px;overflow:hidden}
 .pr-stage .pm-view{height:min(78vh,860px)}
 .pr-cap{margin-top:22px;min-height:96px;padding-left:16px;border-left:2px solid var(--lime);opacity:0;transform:translateY(14px);transition:.5s}.pr-cap.on{opacity:1;transform:none}
@@ -325,6 +325,17 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 @media(max-width:980px){.sw-card{right:auto;left:18px;top:11vh;transform-origin:left top}.sw-m{width:calc(100% - 36px);bottom:9vh}.sw-m h2{font-size:clamp(32px,9vw,54px)}.dvs-top b{font-size:24px}}
 .pr-cap{min-height:150px}.pr-cap span{font-size:15px}.pr-cap b{font-size:clamp(32px,3.4vw,52px)!important;margin:8px 0!important;line-height:1.1}.pr-cap small{font-size:clamp(18px,1.6vw,24px)!important;line-height:1.55;color:rgba(245,245,246,.85)!important}
 .pm-what{font-size:clamp(20px,1.8vw,28px)!important;line-height:1.5}
+
+.pr-demo{position:relative;margin-top:22px;min-height:190px}
+.pr-demo .sw-card{position:absolute;left:0;top:0;right:auto;z-index:2;transform:translateY(14px)}.pr-demo .sw-card.on{transform:none}
+.pr-demo .sw-card[data-i="2"]{bottom:auto;top:0;flex-wrap:wrap;justify-content:flex-start}
+.pm-copy h2,.pm-copy .pm-eye,.pm-copy .pm-what{transition:opacity .5s,transform .6s,max-height .6s;max-height:600px}
+.pr-stage.cap .pm-copy h2,.pr-stage.cap .pm-copy .pm-eye,.pr-stage.cap .pm-copy .pm-what{opacity:0;transform:translateY(-14px);max-height:0;overflow:hidden;margin:0!important;pointer-events:none}
+#prCta{transition:opacity .5s}.pr-stage:not(.end) #prCta{opacity:0;pointer-events:none;height:0;margin:0;overflow:hidden}
+.pm-hero.pr{height:760vh}
+.pr-cap{margin-top:0}
+.pr-stage .hs{opacity:0!important;pointer-events:none!important}
+@media(max-width:980px){.pr-demo{min-height:150px;margin-top:10px}.pr-demo .sw-card{transform-origin:left top}.dvs,.ph{transform:scale(.8);transform-origin:left top}.sgn{font-size:20px;padding:12px 16px}}
 </style>
 </head>
 <body>
@@ -347,20 +358,19 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
   <div class="pm-box" id="pmBox">
     <div class="pm-top"><a class="pm-logo" id="teamLink" href="https://jwform.github.io/DC/team/" aria-label="지도로 돌아가기" title="지도로 돌아가기"><img src="assets/logo.png" alt="2030 MYEONGDONG"></a><div class="pm-nav"><a class="pm-home" id="homeLink" href="https://jwform.github.io/DC/" aria-label="지도로 돌아가기" title="지도로 돌아가기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/></svg></a></div></div>
 <section class="sw" id="problem" aria-label="문제"><div class="sw-stage" id="stP"><div class="sw-sh" id="swSh"><div class="sw-fb" id="swFb"><img src="images/prob-01_crowd.jpg" alt="" data-b="0,1"><img src="images/prob-02_signs.jpg" alt="" data-b="2,6"><img src="images/prob-03_blocked.jpg" alt="" data-b="3,7"><img src="images/IMG-01_hero.webp" alt="" data-b="4,5,8"></div><canvas class="sw-cv" id="swCv"></canvas><div class="sw-hud" id="swHud"></div><div class="sw-vg"></div><div class="sw-ld" id="swLd">매장을 불러오는 중…</div></div><div class="sw-in"><div class="sw-m" data-i="0"><h2>명동의 한 매장,<br>오후 3시</h2></div><div class="sw-m" data-i="1"><h2>사람으로<br>가득한 매장</h2></div><div class="sw-m" data-i="2"><h2>안내판은<br>한국어뿐</h2></div><div class="sw-m" data-i="3"><h2>직원은 보이지만<br>닿지 않아요</h2></div></div><div class="sw-bar"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div></div></section>
-<section class="sw" id="solution" aria-label="해결"><div class="sw-stage" id="stS"><div class="sw-in"><div class="sw-m" data-i="4"><h2>그래서 바구니에<br>길잡이를 달았어요</h2></div><div class="sw-m" data-i="5"><h2>다이얼을 돌리면<br>길이 나타나요</h2></div><div class="sw-m" data-i="6"><h2>안내판은<br>그림으로</h2></div><div class="sw-m" data-i="7"><h2>버튼 한 번,<br>직원이 와요</h2></div><div class="sw-m fin" data-i="8"><h2>스마트 바구니<br>디스플레이</h2><a class="btn" href="#product"><span>제품 자세히 보기</span><span>↓</span></a></div></div>
-<div class="sw-card" data-i="5"><div class="dvs"><div class="dvs-top"><svg class="dvs-ic" viewBox="0 0 48 48"></svg><div><b class="dvs-nm">스킨케어</b><span class="dvs-ar">→ 앞으로 12m</span></div></div><div class="dvs-row"><i data-k="0"></i><i data-k="1"></i><i data-k="2"></i><i data-k="3"></i></div></div><svg class="dial" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="30" class="in"/><line x1="50" y1="50" x2="50" y2="14"/></svg></div>
-<div class="sw-card" data-i="6"><div class="sgn bad"><svg viewBox="0 0 48 48"></svg><b>스킨케어</b><em>?</em></div><div class="sgn good"><svg viewBox="0 0 48 48" class="si"></svg><b>→</b><em>✓</em></div></div>
-<div class="sw-card" data-i="7"><div class="ph"><div class="ph-b"><i></i><b>호출 알림</b></div><div class="ph-c"><svg viewBox="0 0 48 48" class="si"></svg><div><b>스킨케어 코너</b><span>손님이 부르고 있어요</span></div></div><div class="ph-m"><u></u><s></s></div></div></div>
-<div class="sw-bar"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div></div></section>
+
     
 
     <section class="pm-hero pr" id="product"><div class="pr-stage"><div class="pm-ambient"></div>
       
       <div class="pm-copy">
-        <div class="pm-eye">02 — PRODUCT · 최지원</div>
+        <div class="pm-eye">02 · 제품 · 최지원</div>
         <h2 id="pmTitle">SMART<br>BASKET<br><em>DISPLAY</em></h2>
         <p class="pm-what" id="prW">바구니에 걸기만 하면<br><b>길을 안내</b>하고 <b>직원을 부르는</b> 작은 디스플레이</p>
-                <div class="pr-cap" id="prCap"><span id="prN">01</span><b id="prT"></b><small id="prD"></small></div><a class="pm-cta" href="#try">직접 체험해보기 <span aria-hidden="true">↓</span></a>
+                <div class="pr-cap" id="prCap"><span id="prN">01</span><b id="prT"></b><small id="prD"></small></div><div class="pr-demo" id="prDemo"><div class="sw-card" data-i="1"><div class="dvs"><div class="dvs-top"><svg class="dvs-ic" viewBox="0 0 48 48"></svg><div><b class="dvs-nm">스킨케어</b><span class="dvs-ar">→ 앞으로 12m</span></div></div><div class="dvs-row"><i data-k="0"></i><i data-k="1"></i><i data-k="2"></i><i data-k="3"></i></div></div><svg class="dial" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="30" class="in"/><line x1="50" y1="50" x2="50" y2="14"/></svg></div>
+<div class="sw-card" data-i="2"><div class="sgn bad"><svg viewBox="0 0 48 48"></svg><b>스킨케어</b><em>?</em></div><div class="sgn good"><svg viewBox="0 0 48 48" class="si"></svg><b>→</b><em>✓</em></div></div>
+<div class="sw-card" data-i="3"><div class="ph"><div class="ph-b"><i></i><b>호출 알림</b></div><div class="ph-c"><svg viewBox="0 0 48 48" class="si"></svg><div><b>스킨케어 코너</b><span>손님이 부르고 있어요</span></div></div><div class="ph-m"><u></u><s></s></div></div></div>
+</div><a class="pm-cta" id="prCta" href="#try">직접 체험해보기 <span aria-hidden="true">↓</span></a>
       </div>
       <div class="pm-view" id="pmView" data-tab="basket">
         <div class="pm-fb" id="pmFb"><img src="images/IMG-01_hero.webp" alt="바구니에 걸린 스마트 바구니 디스플레이"></div>
@@ -370,7 +380,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
         <span class="pm-dim a">280 mm</span><span class="pm-dim b">98 mm</span>
         <div class="pm-load" id="pmLoad">3D 모델 불러오는 중…</div>
         <div class="pm-chips" id="pmChips" role="group" aria-label="보기 전환"><button class="on" data-v="quarter" type="button">Quarter</button><button data-v="top" type="button">Top</button><button data-v="front" type="button">Front</button><button data-v="side" type="button">Side</button><button data-v="rear" type="button">Rear</button></div>
-        <div class="pm-hint"><b>드래그</b>로 돌려보고 · <b>휠</b>로 확대 · 제품만 보기에서는 <b>빛나는 점</b>에 올리면 설명</div>
+        <div class="pm-hint" style="display:none"><b>드래그</b>로 돌려보고 · <b>휠</b>로 확대 · 제품만 보기에서는 <b>빛나는 점</b>에 올리면 설명</div>
       </div>
     <div class="pr-prog" id="prProg"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div></div></section>
 
@@ -478,7 +488,7 @@ const TEAM_URL='https://jwform.github.io/DC/team/', COURSE_URL='https://jwform.g
 (function(){
 let API={},cur='basket';window.__prAPI=()=>API;
 const view=document.getElementById('pmView'),pvB=document.getElementById('pvBasket'),pvD=document.getElementById('pvDev'),load=document.getElementById('pmLoad'),fb=document.getElementById('pmFb');
-[['0.10 -0.045 0.0285','0 0 1','다이얼 · 코너 선택'],['-0.12 -0.045 0.018','0 0 1','주황 호출 버튼 · 직원 호출'],['-0.02 0 0.0138','0 0 1','디스플레이 · 경로 안내'],['0 0.008 -0.0145','0 0 -1','뒷면 카메라 · 바구니 안쪽'],['0.1 0.053 -0.012','0 1 0','상단 걸이 · 바구니 테두리']].forEach(([p,n,t])=>{
+[['0.10 0.0 0.0285','0 0 1','다이얼 · 코너 선택'],['-0.12 0.0 0.018','0 0 1','주황 호출 버튼 · 직원 호출'],['-0.02 0 0.0138','0 0 1','디스플레이 · 경로 안내'],['0 0.008 -0.0145','0 0 -1','뒷면 카메라 · 바구니 안쪽'],['0.1 0.053 -0.012','0 1 0','상단 걸이 · 바구니 테두리']].forEach(([p,n,t])=>{
   const b=document.createElement('button');b.className='hs';b.type='button';b.tabIndex=-1;b.dataset.position=p;b.dataset.normal=n;b.innerHTML='<span>'+t+'</span>';pvD.appendChild(b)});
 function ld(src){return new Promise((r,j)=>{const s=document.createElement('script');s.src=src;s.onload=r;s.onerror=()=>j(new Error(src));document.head.appendChild(s)})}
 function mk(key){
@@ -660,50 +670,53 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 </script>
 <script>
 /* [STORY] 3D 매장 · 스크롤로 장면 전환 */
-(function(){var P=document.getElementById('problem'),Sn=document.getElementById('solution'),secs=[P,Sn],CNT=[4,5],OFF=[0,4],sh=document.getElementById('swSh'),cv=document.getElementById('swCv'),hud=document.getElementById('swHud'),ld=document.getElementById('swLd'),stg=[document.getElementById('stP'),document.getElementById('stS')],S=null,tick=false,cur=-1,act=0;
-var ICON=['<circle cx="24" cy="24" r="15"/><path d="M18 22h.01M30 22h.01M19 29q5 5 10 0"/><path d="M38 6v6M35 9h6"/>','<rect x="18" y="24" width="12" height="16" rx="2"/><path d="M20 24v-8l8-5v13"/>','<path d="M6 16h24a9 9 0 0 1 0 15H6z"/><path d="M20 31l-3 12h8l2-12M38 14l5-3M38 20h6M38 26l5 3"/>','<rect x="12" y="24" width="24" height="17" rx="4"/><path d="M19 24v-6h10v6M21 12h6M24 12v6"/>'];
-var NM=['스킨케어','메이크업','헤어케어','향수'],DS=['12m','9m','15m','7m'];
-var dvs=Sn.querySelector('.dvs'),dic=Sn.querySelector('.dvs-ic'),dnm=Sn.querySelector('.dvs-nm'),dar=Sn.querySelector('.dvs-ar'),chips=Sn.querySelectorAll('.dvs-row i'),dl=Sn.querySelector('.dial line'),ph=Sn.querySelector('.ph');
-Sn.querySelectorAll('.sgn.bad svg')[0].innerHTML=ICON[0].replace(/<path d="M38.*?\/>/,'');Sn.querySelector('.sgn.good svg').innerHTML=ICON[0]+'';Sn.querySelector('.ph-c svg').innerHTML=ICON[0];
-Sn.querySelector('.sgn.bad svg').innerHTML='<path d="M8 14h32v20H8z"/><path d="M14 22h20M14 28h12"/>';
-var last=-1;function cards(i,f){var sel=Math.min(3,Math.floor(f*4.4));if(i===5&&sel!==last){last=sel;dic.innerHTML=ICON[sel];dnm.textContent=NM[sel];dar.textContent='→ 앞으로 '+DS[sel];chips.forEach(function(c,k){c.classList.toggle('on',k<=sel)});dl.style.transform='rotate('+(sel*52-80)+'deg)'}
- if(i===7)ph.style.opacity=f>.3?1:.0}
-function host(a){if(a===act&&sh.parentNode===stg[a])return;act=a;stg[a].insertBefore(sh,stg[a].firstChild);if(S)S.resize()}
-function upd(){tick=false;var ps=[0,0],tot;for(var k=0;k<2;k++){var r=secs[k].getBoundingClientRect();tot=secs[k].offsetHeight-innerHeight;ps[k]=tot>0?Math.max(0,Math.min(.9999,-r.top/tot)):0}
- var a=Sn.getBoundingClientRect().top<=0?1:0;host(a);var p=ps[a],n=CNT[a],li=Math.floor(p*n),f=p*n-li,i=OFF[a]+li;
- if(i!==cur){cur=i;secs.forEach(function(s,k){s.querySelectorAll('.sw-m').forEach(function(m){m.classList.toggle('on',+m.dataset.i===i)});s.querySelectorAll('.sw-card').forEach(function(m){m.classList.toggle('on',+m.dataset.i===i)});s.dataset.b=i});
+(function(){var P=document.getElementById('problem'),cv=document.getElementById('swCv'),hud=document.getElementById('swHud'),ld=document.getElementById('swLd'),S=null,tick=false,cur=-1,N=4;
+function upd(){tick=false;var r=P.getBoundingClientRect(),tot=P.offsetHeight-innerHeight;if(tot<=0)return;var p=Math.max(0,Math.min(.9999,-r.top/tot)),i=Math.floor(p*N),f=p*N-i;
+ if(i!==cur){cur=i;P.querySelectorAll('.sw-m').forEach(function(m){m.classList.toggle('on',+m.dataset.i===i)});P.dataset.b=i;
   [].forEach.call(P.querySelectorAll('.sw-fb img'),function(im){im.style.opacity=(','+im.dataset.b+',').indexOf(','+i+',')>-1?1:0})}
- secs.forEach(function(s,k){s.querySelectorAll('.sw-bar b').forEach(function(b,j){var kk=k===a?(j<li?100:j===li?f*100:0):(k<a?100:0);b.style.width=kk.toFixed(1)+'%'})});
- cards(i,f);if(S)S.setBeat(i,f)}
+ P.querySelectorAll('.sw-bar b').forEach(function(b,j){b.style.width=(j<i?100:j===i?f*100:0).toFixed(1)+'%'});if(S)S.setBeat(i,f)}
 var on=function(){if(!tick){tick=true;requestAnimationFrame(upd)}};addEventListener('scroll',on,{passive:true});addEventListener('resize',function(){if(S)S.resize();upd()});
 function boot(){if(!window.Story||!window.__buildGLB){return setTimeout(boot,200)}
  try{S=window.Story(cv,hud,{glbScript:'models/3D-02_with-basket.glb.js'});S.ready.then(function(){ld.classList.add('off');upd()});S.resize();
-  var vis={};var io=new IntersectionObserver(function(es){es.forEach(function(e){vis[e.target.id]=e.isIntersecting});S.setVisible(!!(vis.problem||vis.solution))},{rootMargin:'200px'});io.observe(P);io.observe(Sn);upd()}
+  new IntersectionObserver(function(es){S.setVisible(es[es.length-1].isIntersecting)},{rootMargin:'200px'}).observe(P);upd()}
  catch(e){fail()}}
-function fail(){P.classList.add('nogl');Sn.classList.add('nogl');ld.classList.add('off');cur=-1;upd()}
+function fail(){P.classList.add('nogl');ld.classList.add('off');cur=-1;upd()}
 setTimeout(function(){if(!S||!ld.classList.contains('off'))fail()},20000);cv.addEventListener('webglcontextlost',fail);
 var sc=document.createElement('script');sc.src='lib/story.js';sc.onerror=fail;sc.onload=function(){(window.__thrP||Promise.resolve()).then(function(){boot()})};document.head.appendChild(sc);
 upd();
 })();
 </script>
 <script>
-/* [PRODUCT] 스크롤로 제품 한 부분씩 */
-(function(){var sec=document.getElementById('product'),cap=document.getElementById('prCap'),N=document.getElementById('prN'),T=document.getElementById('prT'),D=document.getElementById('prD'),what=document.getElementById('prW'),bars=sec.querySelectorAll('#prProg b'),chips=document.querySelectorAll('#pmChips button'),cur=-2,tk=false;
-var ST=[null,['01','다이얼','돌리거나 눌러서 가고 싶은 코너를 고릅니다','quarter','basket'],['02','디스플레이','코너 아이콘·화살표·합계 금액을 한눈에','front','basket'],['03','호출 버튼','누르면 직원에게 바로 호출이 갑니다','top','basket'],['04','280 × 98 mm','손잡이에 걸기만 하면 끝. 제품만 따로 보면 이렇게 작습니다','quarter','dev']];
-function api(){return window.__prAPI&&window.__prAPI()}
-function go(i){var s=ST[i];what.style.opacity=i===0?1:.0;what.style.display=i===0?'':'none';cap.classList.toggle('on',!!s);
- if(s){N.textContent=s[0];T.textContent=s[1];D.textContent=s[2];var b=document.querySelector('.pm-mode button[data-m="'+s[4]+'"]');if(b&&!b.classList.contains('on'))b.click();
-  var A=api();if(A){var v=A[s[4]==='dev'?'dev':'basket'];if(v&&v.setView)v.setView(s[3])}
-  chips.forEach(function(c){c.classList.toggle('on',c.dataset.v===s[3])})}
- else{var b=document.querySelector('.pm-mode button[data-m="basket"]');if(b&&!b.classList.contains('on'))b.click()}}
+/* [PRODUCT] 스크롤로 제품 한 부분씩 가까이 */
+(function(){var sec=document.getElementById('product'),stage=sec.querySelector('.pr-stage'),cap=document.getElementById('prCap'),N=document.getElementById('prN'),T=document.getElementById('prT'),D=document.getElementById('prD'),bars=sec.querySelectorAll('#prProg b'),cur=-2,tk=false;
+var ICON=['<circle cx="24" cy="24" r="15"/><path d="M18 22h.01M30 22h.01M19 29q5 5 10 0"/><path d="M38 6v6M35 9h6"/>','<rect x="18" y="24" width="12" height="16" rx="2"/><path d="M20 24v-8l8-5v13"/>','<path d="M6 16h24a9 9 0 0 1 0 15H6z"/><path d="M20 31l-3 12h8l2-12M38 14l5-3M38 20h6M38 26l5 3"/>','<rect x="12" y="24" width="24" height="17" rx="4"/><path d="M19 24v-6h10v6M21 12h6M24 12v6"/>'];
+var NM=['스킨케어','메이크업','헤어케어','향수'],DS=['12m','9m','15m','7m'];
+var demo=document.getElementById('prDemo'),dic=demo.querySelector('.dvs-ic'),dnm=demo.querySelector('.dvs-nm'),dar=demo.querySelector('.dvs-ar'),chips=demo.querySelectorAll('.dvs-row i'),dl=demo.querySelector('.dial line'),ph=demo.querySelector('.ph');
+demo.querySelector('.sgn.bad svg').innerHTML='<path d="M8 14h32v20H8z"/><path d="M14 22h20M14 28h12"/>';demo.querySelector('.sgn.good svg').innerHTML=ICON[0];demo.querySelector('.ph-c svg').innerHTML=ICON[0];
+var sel=-1,tm=0;function dial(){sel=(sel+1)%4;dic.innerHTML=ICON[sel];dnm.textContent=NM[sel];dar.textContent='→ 앞으로 '+DS[sel];chips.forEach(function(c,k){c.classList.toggle('on',k<=sel)});dl.style.transform='rotate('+(sel*52-80)+'deg)'}
+/* 단계: [번호, 제목, 설명, 뷰어, 초점(좌표), 방위각, 고도, 확대, 카드] */
+var ST=[null,
+ ['01','다이얼','돌려서 가고 싶은 코너를 고릅니다','dev',[0.10,0.0,0.028],18,80,.3,1],
+ ['02','디스플레이','아이콘과 화살표로 길을 보여줍니다. 한국어를 몰라도 됩니다','dev',[-0.02,0,0.0138],0,86,.52,2],
+ ['03','호출 버튼','누르면 직원 휴대폰으로 바로 호출이 갑니다','dev',[-0.12,0.0,0.018],-18,80,.3,3],
+ ['04','바구니에 걸기만 하면 끝','손잡이에 걸면 바로 사용할 수 있어요','basket',null,34,54,1,0]];
+function api(k){return window.__prAPI&&window.__prAPI()[k]}
+function ready(k,fn,n){n=n||0;var a=api(k);if(a&&a._S&&a._S.ready)return fn(a);if(n<80)setTimeout(function(){ready(k,fn,n+1)},150)}
+function mode(m){var b=document.querySelector('.pm-mode button[data-m="'+m+'"]');if(b&&!b.classList.contains('on'))b.click()}
+function go(i){var s=ST[i];stage.classList.toggle('cap',i>0);stage.classList.toggle('end',i===4);cap.classList.toggle('on',!!s);
+ demo.querySelectorAll('.sw-card').forEach(function(c){c.classList.toggle('on',!!s&&+c.dataset.i===s[8])});clearInterval(tm);
+ if(s&&s[8]===1){dial();tm=setInterval(dial,1500)}if(s&&s[8]===3){ph.style.opacity=0;setTimeout(function(){ph.style.opacity=1},900)}
+ if(!s){mode('basket');ready('basket',function(a){a.setView('quarter')});return}
+ N.textContent=s[0];T.textContent=s[1];D.textContent=s[2];mode(s[3]);
+ setTimeout(function(){ready(s[3],function(a){if(s[4])a.focus(s[4],s[5],s[6],s[7]);else a.setView('quarter')})},s[3]==='dev'?250:0)}
 function upd(){tk=false;var r=sec.getBoundingClientRect(),tot=sec.offsetHeight-innerHeight;if(tot<=0)return;var p=Math.max(0,Math.min(.9999,-r.top/tot)),n=5,i=Math.floor(p*n),f=p*n-i;
  if(i!==cur){cur=i;go(i)}bars.forEach(function(b,k){b.style.width=(k<i?100:k===i?f*100:0).toFixed(1)+'%'})}
 addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(upd)}},{passive:true});addEventListener('resize',upd);upd();
 })();
 </script>
-<nav class="rail" id="rail" aria-label="챕터"><a href="#problem" data-s="problem"><b>문제</b><i></i></a><a href="#solution" data-s="solution"><b>해결</b><i></i></a><a href="#product" data-s="product"><b>제품</b><i></i></a><a href="#try" data-s="try"><b>체험</b><i></i></a><a href="#scenario" data-s="scenario"><b>시나리오</b><i></i></a><a href="#detail" data-s="detail"><b>디테일</b><i></i></a></nav>
+<nav class="rail" id="rail" aria-label="챕터"><a href="#problem" data-s="problem"><b>문제</b><i></i></a><a href="#product" data-s="product"><b>제품</b><i></i></a><a href="#try" data-s="try"><b>체험</b><i></i></a><a href="#scenario" data-s="scenario"><b>시나리오</b><i></i></a><a href="#detail" data-s="detail"><b>디테일</b><i></i></a></nav>
 <script>
-(function(){var ids=['problem','solution','product','try','scenario','detail'],rail=document.getElementById('rail'),as=rail.querySelectorAll('a'),els=ids.map(function(i){return document.getElementById(i)}),root=document.documentElement,tk=false;
+(function(){var ids=['problem','product','try','scenario','detail'],rail=document.getElementById('rail'),as=rail.querySelectorAll('a'),els=ids.map(function(i){return document.getElementById(i)}),root=document.documentElement,tk=false;
 function f(){tk=false;var y=window.scrollY,H=document.documentElement.scrollHeight-innerHeight,p=H>0?y/H:0;root.style.setProperty('--gx',(15+p*70).toFixed(1)+'%');root.style.setProperty('--gy',(25+Math.sin(p*6.28)*20).toFixed(1)+'%');
  var cur=-1;els.forEach(function(e,k){if(e&&e.getBoundingClientRect().top<innerHeight*.5)cur=k});
  

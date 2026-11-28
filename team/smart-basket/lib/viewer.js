@@ -105,7 +105,7 @@ window.ProductViewer=function(box,opt){
   scene.add(sun,rim,fill,camKey,camFill,hemi,camKey.target,camFill.target);
 
   var S={th:VIEWS.quarter[0]*RAD,ph:VIEWS.quarter[1]*RAD,r:1,gth:VIEWS.quarter[0]*RAD,gph:VIEWS.quarter[1]*RAD,gr:1,r0:1,
-         auto:true,idle:performance.now(),target:new T.Vector3(),ready:false,visible:true};
+         auto:true,idle:performance.now(),target:new T.Vector3(),gt:new T.Vector3(),c0:new T.Vector3(),ready:false,visible:true};
   var hot=[].slice.call(box.querySelectorAll('[data-position]')).map(function(el){
     var p=el.dataset.position.split(/\s+/).map(Number),n=(el.dataset.normal||'0 1 0').split(/\s+/).map(Number);
     el.style.position='absolute';el.style.left='0';el.style.top='0';el.style.zIndex='3';el.style.pointerEvents='none';el.tabIndex=-1;
@@ -152,6 +152,7 @@ window.ProductViewer=function(box,opt){
     var dt=Math.min((now-last)/1000,0.1);last=now;
     if(S.auto&&now-S.idle>(opt.autoDelay||1200)){S.gth+=16*RAD*dt;S.th=S.gth}
     else{var k=1-Math.exp(-dt*9);S.th+=(S.gth-S.th)*k;S.ph+=(S.gph-S.ph)*k;S.r+=(S.gr-S.r)*k}
+    if(S.ready)S.target.lerp(S.gt,1-Math.exp(-dt*6));
     placeCam();
     /* 카메라를 따라다니는 키/필 조명: 어느 방향에서 봐도 제품이 어둡지 않게 */
     camKey.position.set(cam.position.x+0.12,cam.position.y+0.16,cam.position.z+0.02);camKey.target.position.copy(S.target);
@@ -187,8 +188,9 @@ window.ProductViewer=function(box,opt){
     setView:function(name){
       var v=VIEWS[name];if(!v)return;stopAuto();
       var th=v[0]*RAD;while(th-S.th>Math.PI)th-=2*Math.PI;while(th-S.th<-Math.PI)th+=2*Math.PI;
-      S.gth=th;S.gph=v[1]*RAD;S.gr=S.r0;S.userZoomed=false;
+      S.gth=th;S.gph=v[1]*RAD;S.gr=S.r0;S.userZoomed=false;S.gt.copy(S.c0);
     },
+    focus:function(p,thd,phd,rs){stopAuto();var th=thd*RAD;while(th-S.th>Math.PI)th-=2*Math.PI;while(th-S.th<-Math.PI)th+=2*Math.PI;S.gth=th;S.gph=phd*RAD;S.gt.set(p[0],p[1],p[2]);S.gr=S.r0*rs;S.userZoomed=true},
     resume:function(){S.auto=true;S.idle=performance.now()},
     /* [OPT-1] 보기 전환으로 가려진 뷰어는 false로 두면 렌더링을 멈춘다 */
     setActive:function(on){S.active=!!on;S.visible=S.io&&S.active;wake()},
@@ -199,7 +201,7 @@ window.ProductViewer=function(box,opt){
     var model=buildModel(parseGLB(buf),function(){});
     scene.add(model);
     var bb=new T.Box3().setFromObject(model),c=bb.getCenter(new T.Vector3());
-    S.target.copy(c);if(opt.fitToModel){var sz=bb.getSize(new T.Vector3());S.hw=Math.hypot(sz.x,sz.z)/2;S.hh=sz.y/2*1.15;fit();S.r=S.gr=S.r0}
+    S.target.copy(c);S.gt.copy(c);S.c0.copy(c);if(opt.fitToModel){var sz=bb.getSize(new T.Vector3());S.hw=Math.hypot(sz.x,sz.z)/2;S.hh=sz.y/2*1.15;fit();S.r=S.gr=S.r0}
     var ground=new T.Mesh(new T.PlaneGeometry(3,3),new T.ShadowMaterial({opacity:0.55}));
     ground.rotation.x=-Math.PI/2;ground.position.set(c.x,bb.min.y-0.0004,c.z);ground.receiveShadow=true;scene.add(ground);
     var gc=document.createElement('canvas');gc.width=gc.height=256;var gx=gc.getContext('2d'),gg=gx.createRadialGradient(128,128,0,128,128,128);
