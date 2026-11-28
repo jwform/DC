@@ -140,13 +140,13 @@ function loadScript(src){return new Promise(function(res,rej){var el=document.cr
 var CHD=[],CRC=['#7a6bb8','#5a5290','#8f86c4','#4a4472','#6572a8','#9a8fd0','#6d6694','#8b78c8'];
 function charBuf(url){return fetch(url).then(function(r){if(!r.ok)throw 0;return r.arrayBuffer()})}
 function applyChars(){var C=window.Chars;if(!C)return Promise.resolve();
- return Promise.all(['char_tourist','char_staff','crowd_a','crowd_b'].map(function(n){return charBuf(base+'models/'+n+'.glb')})).then(function(bs){
+ return Promise.all(['char_tourist','char_staff','crowd_a','crowd_b'].map(function(n){return charBuf(base+'models/'+n+'.glb?v=4')})).then(function(bs){
  var d=bs.map(function(b){return C.parse(b)});
  function put(g,inst){g.children.slice().forEach(function(c){c.visible=false});g.add(inst.root);g.userData.char=inst}
  put(tourist,C.make(d[0],{tint:'#ffd23f',emis:.55}));put(staff,C.make(d[1],{tint:'#2fe6c0',emis:.5}));
  crowd.forEach(function(c,i){var col=CRC[i%CRC.length];c.h.userData.skip=1;put(c.h,C.make(d[2+i%2],{tint:col,emis:.16,scale:rnd(.94,1.06),sx:rnd(.9,1.12)}))})})}
 var ready=loadModel().catch(function(e){console.warn('model',e)});
-loadScript(base+'lib/chars.js').then(function(){return applyChars()}).catch(function(e){console.warn('chars',e)});
+loadScript(base+'lib/chars.js?v=4').then(function(){return applyChars()}).catch(function(e){console.warn('chars',e)});
 
 
 /* ---------- 손님들 ---------- */
@@ -261,7 +261,7 @@ function frame(){raf=requestAnimationFrame(frame);if(!vis)return;
  tube.geometry.setDrawRange(0,Math.floor(pp*SEG)*RAD*6);tube.visible=beat>=5&&beat<=6||(beat===5);
  pathHead.visible=beat===5&&pp>0&&pp<1;if(pathHead.visible){var q=curve.getPointAt(pp),q2=curve.getPointAt(Math.min(1,pp+.01));pathHead.position.copy(q);pathHead.position.y=.3;vv.copy(q2).sub(q);pathHead.rotation.set(0,Math.atan2(vv.x,vv.z),0);pathHead.rotateX(Math.PI/2)}
  goal.material.opacity=(beat===5&&pp>=1||beat===6)?.6+.35*Math.sin(t*4):0;
- ringT.position.set(TX,.06,TZ);ringT.material.opacity=beat===1?.55+.35*Math.sin(t*3):0;ringS.position.set(sx,.06,sz);ringS.material.opacity=beat===1||beat===3?.8:0;
+ ringT.position.set(TX,.06,TZ);ringT.material.opacity=0;ringS.position.set(sx,.06,sz);ringS.material.opacity=0;
  /* 카메라 */
  shot();var k2=first?1:ease(beat===5||beat===4||beat===8||beat===6?2.2:2.6,dt);first=false;cp.lerp(tp,k2);cl.lerp(tl,k2);cf+=(SH[beat].f-cf)*k2;csh+=(SH[beat].sh-csh)*k2;
  crowd.forEach(function(c){if(beat<2){c.h.visible=true;return}var px=c.h.position.x-cp.x,pz=c.h.position.z-cp.z,d=Math.hypot(px,pz),dx=cl.x-cp.x,dz=cl.z-cp.z,dl=Math.hypot(dx,dz)||1,al=(px*dx+pz*dz)/dl,pe=Math.abs(px*dz-pz*dx)/dl;c.h.visible=!(al>-.5&&al<(beat>=4&&beat!==6&&beat!==7?4:3.2)&&pe<1.1&&d<4.5)});

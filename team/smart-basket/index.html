@@ -719,7 +719,7 @@ function boot(){if(!window.Story||!window.__buildGLB){return setTimeout(boot,200
 function fail(e){console.warn('CTXfail',e&&(e.message||e.type||e));P.classList.add('nogl');ld.classList.add('off');cur=-1;upd()}
 setTimeout(function(){if(!S)fail()},60000);cv.addEventListener('webglcontextlost',fail);
 function whenThree(cb){if(window.THREE&&window.POST!==undefined||window.THREE&&window.__buildGLB)cb();else setTimeout(function(){whenThree(cb)},100)}
-whenThree(function(){var sc=document.createElement('script');sc.src='lib/story.js';sc.onerror=fail;sc.onload=function(){boot()};document.head.appendChild(sc)});
+whenThree(function(){var sc=document.createElement('script');sc.src='lib/story.js?v=4';sc.onerror=fail;sc.onload=function(){boot()};document.head.appendChild(sc)});
 upd();
 })();
 </script>
