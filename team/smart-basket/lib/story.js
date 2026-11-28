@@ -153,13 +153,13 @@ loadScript(base+'lib/chars.js?v=4').then(function(){return applyChars()}).catch(
 
 
 /* ---------- 손님들 ---------- */
-var crowd=[],N=(window.innerWidth<800?12:18);
+var crowd=[],N=(window.innerWidth<800?12:18),JJ=0;for(var q=0;q<N;q++)if(q%3!==0)JJ++;
 function inIsl(x,z,m){for(var k=0;k<ISL.length;k++){if(Math.abs(x-ISL[k][0])<1.9+m&&Math.abs(z-ISL[k][1])<1+m)return true}return false}
 var jam=false,open=false;
 function outIsl(o){for(var k=0;k<ISL.length;k++){var dx=o.x-ISL[k][0],dz=o.z-ISL[k][1],px=1.9+.25-Math.abs(dx),pz=1+.25-Math.abs(dz);if(px>0&&pz>0){if(px<pz)o.x+=(dx<0?-1:1)*px;else o.z+=(dz<0?-1:1)*pz}}}
 function lineZ(x){var d=(sx-TX)||1,u=clamp((x-TX)/d,0,1);return TZ+(sz-TZ)*u}
 function pickT(c){for(var n=0;n<14;n++){var x,z;
-  if(jam&&c.jam){x=rnd(-1.6,4.2);z=rnd(-.4,2.8)}else{x=rnd(-12,12);z=rnd(-7,9)}
+  if(jam&&c.jam){x=rnd(-3.8,.3);z=rnd(-2.6,1.8)}else{x=rnd(-12,12);z=rnd(-7,9)}
   if(open&&Math.abs(z-lineZ(x))<1.7&&x>-3.8&&x<6.5)continue;
   if(!inIsl(x,z,.5)&&!(Math.abs(x-TX)<1.5&&Math.abs(z-TZ)<1.5)){c.tx=x;c.tz=z;return}}
  c.tx=rnd(-9,9);c.tz=rnd(5,8)}
@@ -180,8 +180,8 @@ var ringS=ringT.clone();ringS.material=ringT.material.clone();ringS.material.col
 hud.innerHTML='<div class="h-dens" data-h="dens"><span>매장 안 손님</span><b>'+(N+1)+'</b><span>직원</span><b class="g">1</b></div>'+
  '<div class="h-tag" data-h="tour">외국인 관광객</div><div class="h-tag g" data-h="staff">매장 직원</div>'+
  '<div class="h-q" data-h="q0">?</div><div class="h-q" data-h="q1">?</div><div class="h-q" data-h="q2">?</div>'+
- '<svg class="h-line" data-h="line"><line x1="0" y1="0" x2="0" y2="0"/></svg><div class="h-x" data-h="x">✕</div><div class="h-tag r" data-h="cut">사이에 사람 12명</div>'+
- '<div class="h-tag s" data-h="dev"></div><div class="h-tag s" data-h="goal">스킨케어 코너</div><div class="h-say" data-h="say">도움 필요하시면 말씀해주세요~</div><div class="h-say t" data-h="exc">저기요!</div>';
+ '<svg class="h-line" data-h="line"><line x1="0" y1="0" x2="0" y2="0"/></svg><div class="h-x" data-h="x">✕</div><div class="h-tag r" data-h="cut">사이에 사람 '+JJ+'명</div>'+
+ '<div class="h-tag s" data-h="dev"></div><div class="h-tag s" data-h="goal">스킨케어 코너</div><div class="h-say" data-h="say">도움 필요하시면 말씀해주세요~</div><div class="h-say t" data-h="exc">Excuse me!</div>';
 var H={};[].forEach.call(hud.querySelectorAll('[data-h]'),function(e){H[e.dataset.h]=e});
 var v3=new T.Vector3();
 function proj(x,y,z){v3.set(x,y,z).project(cam);return{x:(v3.x*.5+.5)*W,y:(-v3.y*.5+.5)*Hh,ok:v3.z<1&&v3.z>-1}}
@@ -212,7 +212,7 @@ function setBeat(i,f){if(i!==beat){beat=i;bt=0;jam=i===3;open=i>=7;crowd.forEach
   ceilG.visible=i>1;setDev(i>=4);setSigns(i>=6?'icon':'ko');if(i===7){callT=-1;pingT=-1}}
  bf=f||0}
 var sw={tx:-1,tz:-6.4,yaw:0,wait:0,st:0};
-function sPick(){sw.st=0;for(var n=0;n<30;n++){var x=rnd(-11,11),z=rnd(-7,8.5);if(inIsl(x,z,.6))continue;if(beat<=3&&Math.hypot(x-TX,z-TZ)<6.5)continue;sw.tx=x;sw.tz=z;return}sw.tx=7;sw.tz=-6}
+function sPick(){sw.st=0;if(beat<7){sw.tx=-1+rnd(-1.2,1.2);sw.tz=-6.4+rnd(-.6,.6);return}for(var n=0;n<30;n++){var x=rnd(-11,11),z=rnd(-7,8.5);if(inIsl(x,z,.6))continue;if(beat<=3&&Math.hypot(x-TX,z-TZ)<6.5)continue;sw.tx=x;sw.tz=z;return}sw.tx=7;sw.tz=-6}
 function frame(){raf=requestAnimationFrame(frame);if(!vis)return;
  FC++;var dt=Math.min(clk.getDelta(),.05),t=clk.elapsedTime;bt+=dt;DT=dt;
  /* 손님 */

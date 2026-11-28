@@ -483,6 +483,24 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .fin2 p{font-size:clamp(18px,1.7vw,24px);line-height:1.6;color:rgba(245,245,246,.82);margin:0;word-break:keep-all}.fin2 p b{color:var(--lime)}
 @media(max-width:980px){.fin2-in{grid-template-columns:1fr}}
 .tnext{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:7;width:auto;margin:0;padding:13px 28px;font-size:17px;white-space:nowrap}.tnext[hidden]{display:none}
+
+.pf{max-width:none;padding-left:0;padding-right:0;background:linear-gradient(180deg,#07050d,#0b0716 40%,#07050d)}
+.pf-hero,.pf-row{max-width:1500px;margin-left:auto;margin-right:auto;padding:0 clamp(18px,5vw,90px);min-height:min(92vh,860px)}
+.pf-row{margin-top:0}
+.pf-img{border:0;background:none;box-shadow:none;border-radius:0;overflow:visible;aspect-ratio:4/3}
+.pf-img::before{content:"";position:absolute;inset:-6% -4%;background:radial-gradient(55% 50% at 50% 55%,rgba(118,40,245,.38),transparent 72%);pointer-events:none}
+.pf-img img{inset:0;width:100%;height:100%;-webkit-mask-image:radial-gradient(ellipse 72% 72% at 50% 50%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 72% 72% at 50% 50%,#000 55%,transparent 100%)}
+.pf-txt{position:relative}.pf-txt span{display:block;font:900 clamp(90px,12vw,190px)/.8 var(--f-body);letter-spacing:-.06em;color:rgba(197,255,53,.1);margin-bottom:-.28em}
+.pf-txt h3{position:relative}.pf-txt p{position:relative}
+.pf-go{padding-bottom:clamp(30px,5vw,60px)}
+.fin2{border-top:0;background:radial-gradient(60% 50% at 70% 40%,rgba(118,40,245,.18),transparent 70%),#07050d}
+.fs{position:relative;width:min(100%,520px);margin:0 auto}
+.fs-pr{text-align:center;font:600 15px var(--f-mono);letter-spacing:.14em;color:var(--mute);margin-bottom:6px}.fs-pr b{display:block;font:800 clamp(44px,6vw,80px)/1.05 var(--f-body);color:var(--lime);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.fs-box{position:relative;aspect-ratio:4/3}.fs-box svg{position:absolute;inset:0;width:100%;height:100%}
+.fs-it{position:absolute;bottom:25%;width:11%;height:27%;transition:transform .7s cubic-bezier(.3,1.3,.5,1),opacity .35s}.fs-it svg{position:static;width:100%;height:100%}
+.fs-it.pre{transform:translateY(-230%);opacity:0}
+.fs-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px}.fs-tags span{padding:7px 14px;border-radius:99px;border:1px solid rgba(197,255,53,.4);font:700 14px var(--f-body);color:#eae9f2}
+.pf-img img{-webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent),linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent),linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);mask-composite:intersect}
 </style>
 </head>
 <body>
@@ -520,7 +538,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 
     <section class="try" id="try" aria-label="직접 체험"><div class="try-in">
 <div class="try-top"><div class="try-hd"><span class="ce">03 · 체험</span><h3>이제, 직접 써 보세요</h3></div>
-<ol class="try-steps" id="trSteps"><li data-s="1"><b>1</b>코너 고르기</li><li data-s="2"><b>2</b>직원 호출</li><li data-s="3"><b>3</b>제품 담기</li><li data-s="4"><b>4</b>금액 확인</li></ol></div>
+</div>
 <p class="try-hint" id="trHint"></p>
 <div class="try-grid"><div class="try-3d" id="try3d"><div class="try-load" id="trLoad">3D 제품을 불러오는 중…</div><div class="try-tip" id="trTip">다이얼을 <b>돌려</b> 보세요</div><div class="tdrop" id="tdrop"><span>여기에 놓기</span></div><div class="tdrag" id="tdrag"></div><div class="try-ptr" id="trPtr"><i></i><span id="trPtrT">드래그해서 돌리기</span></div><div class="tsel" id="tsel" hidden><img id="tselI" alt=""><b id="tselN"></b><span id="tselP"></span></div><button type="button" class="tbtn tnext" id="tNext" hidden>다른 코너도 담아보기</button><button type="button" class="trr" id="trReset">↺ 다시 해보기</button></div>
 <div class="try-side">
@@ -548,7 +566,9 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 
     
     
-    <section class="fin2" id="finish" aria-label="정리"><div class="fin2-in"><div><span class="ce">06 · 정리</span><h3>아이콘으로 고르고,<br>버튼으로 부릅니다</h3><p>손님은 <b>한국어를 몰라도</b> 길을 찾고,<br>직원은 <b>부른 곳으로 바로</b> 갑니다.</p></div><div class="pf-img"><img src="images/shot_s0_basket.webp" alt="스마트 바구니 디스플레이" loading="lazy" decoding="async"></div></div></section>
+    <section class="fin2" id="finish" aria-label="정리"><div class="fin2-in"><div><span class="ce">06 · 정리</span><h3>담을수록,<br>금액이 쌓입니다</h3><p>화장품 매장만이 아니에요.<br><b>마트 · 편의점 · 서점 · 약국</b><br>손잡이가 있는 바구니라면 어디든 걸 수 있어요.</p></div>
+<div class="fs" id="fs"><div class="fs-pr">합계<b id="fsP">205,000원</b></div><div class="fs-box"><svg viewBox="0 0 400 300"><path d="M40 110L72 270H328L360 110" fill="rgba(80,60,150,.25)" stroke="#aeb2ba" stroke-width="3"/><path d="M30 110H370" stroke="#cfd2d8" stroke-width="7" stroke-linecap="round"/><path d="M110 110C110 40 290 40 290 110" fill="none" stroke="#cfd2d8" stroke-width="6" stroke-linecap="round"/></svg><div class="fs-it" style="left:18%;bottom:24%"><svg viewBox="0 0 46 70"><rect x="15" y="2" width="16" height="12" rx="3" fill="#ddd"/><rect x="5" y="14" width="36" height="54" rx="9" fill="#ffd27a"/><rect x="12" y="30" width="22" height="16" rx="3" fill="rgba(255,255,255,.7)"/></svg></div><div class="fs-it" style="left:30%;bottom:24%"><svg viewBox="0 0 46 70"><rect x="15" y="2" width="16" height="12" rx="3" fill="#ddd"/><rect x="5" y="14" width="36" height="54" rx="9" fill="#ff6f91"/><rect x="12" y="30" width="22" height="16" rx="3" fill="rgba(255,255,255,.7)"/></svg></div><div class="fs-it" style="left:42%;bottom:24%"><svg viewBox="0 0 46 70"><rect x="15" y="2" width="16" height="12" rx="3" fill="#ddd"/><rect x="5" y="14" width="36" height="54" rx="9" fill="#7fd6ff"/><rect x="12" y="30" width="22" height="16" rx="3" fill="rgba(255,255,255,.7)"/></svg></div><div class="fs-it" style="left:54%;bottom:24%"><svg viewBox="0 0 46 70"><rect x="15" y="2" width="16" height="12" rx="3" fill="#ddd"/><rect x="5" y="14" width="36" height="54" rx="9" fill="#b7f0a0"/><rect x="12" y="30" width="22" height="16" rx="3" fill="rgba(255,255,255,.7)"/></svg></div><div class="fs-it" style="left:66%;bottom:24%"><svg viewBox="0 0 46 70"><rect x="15" y="2" width="16" height="12" rx="3" fill="#ddd"/><rect x="5" y="14" width="36" height="54" rx="9" fill="#c9a3ff"/><rect x="12" y="30" width="22" height="16" rx="3" fill="rgba(255,255,255,.7)"/></svg></div><div class="fs-it" style="left:36%;bottom:36%"><svg viewBox="0 0 46 70"><rect x="15" y="2" width="16" height="12" rx="3" fill="#ddd"/><rect x="5" y="14" width="36" height="54" rx="9" fill="#ffb36b"/><rect x="12" y="30" width="22" height="16" rx="3" fill="rgba(255,255,255,.7)"/></svg></div><svg viewBox="0 0 400 300"><path d="M44 130L74 268H326L356 130Z" fill="rgba(160,150,220,.10)" stroke="#aeb2ba" stroke-width="2"/><path d="M52 175H348M60 220H340M120 130L130 268M180 130V268M240 130V268M300 130L290 268" stroke="#aeb2ba" stroke-width="1.6" fill="none" opacity=".8"/><rect x="104" y="128" width="192" height="40" rx="10" fill="#15122a" stroke="#c5ff35" stroke-width="2"/><text x="200" y="156" fill="#c5ff35" font-size="22" font-weight="700" text-anchor="middle" font-family="sans-serif" id="fsT">205,000</text></svg></div>
+<div class="fs-tags"><span>마트</span><span>편의점</span><span>서점</span><span>약국</span><span>화장품 매장</span></div></div></div></section>
 
 <div class="pm-act">
       <a class="btn" id="teamLink2" href="https://jwform.github.io/DC/team/"><span>← 다시 지도로 돌아가기</span><span>MAP</span></a>
@@ -736,5 +756,12 @@ new IntersectionObserver(es=>{es.forEach(e=>{if(e.intersectionRatio>=.45){tries=
 })();
 </script>
 <script>/* 제품 뷰어 감시: 보이는 동안 렌더 루프가 멈춰 있으면 깨움 */(function(){var t=0;addEventListener('scroll',function(){if(t)return;t=setTimeout(function(){t=0;try{var a=window.__prAPI&&window.__prAPI().basket;if(a&&a.wake)a.wake()}catch(e){}},120)},{passive:true})})();</script>
+<script>
+(function(){var box=document.getElementById('fs');if(!box)return;var its=box.querySelectorAll('.fs-it'),P=document.getElementById('fsP'),T=document.getElementById('fsT'),pr=[48000,32000,27000,19000,64000,15000],tm=0,on=false;
+function show(n){var t=0;for(var i=0;i<its.length;i++){its[i].classList.toggle('pre',i>=n);if(i<n)t+=pr[i]}var f=t.toLocaleString('en-US');P.textContent=t.toLocaleString('en-US')+'원';T.textContent=f}
+function run(){var n=0;show(0);clearInterval(tm);tm=setInterval(function(){if(!on){return}n++;show(n);if(n>=6){clearInterval(tm);setTimeout(function(){if(on)run()},3200)}},1000)}
+try{new IntersectionObserver(function(es){on=es[0].isIntersecting;if(on&&!tm._r){run()}if(!on){clearInterval(tm);show(6)}},{threshold:.4}).observe(box)}catch(e){show(6)}
+})();
+</script>
 </body>
 </html>
