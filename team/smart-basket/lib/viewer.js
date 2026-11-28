@@ -88,7 +88,7 @@ window.ProductViewer=function(box,opt){
   opt=opt||{};
   var renderer=new T.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});
   renderer.setClearColor(0x000000,0);
-  renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFShadowMap;
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFShadowMap;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;
   renderer.toneMapping=T.NeutralToneMapping;renderer.toneMappingExposure=1.0;
   var cv=renderer.domElement;cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab;outline:none';
   cv.setAttribute('tabindex','0');cv.setAttribute('role','img');cv.setAttribute('aria-label',opt.alt||'3D 제품 모델');
@@ -212,7 +212,7 @@ window.ProductViewer=function(box,opt){
     var glowM=new T.Mesh(new T.PlaneGeometry(0.46,0.46),new T.MeshBasicMaterial({map:new T.CanvasTexture(gc),transparent:true,depthWrite:false,blending:T.AdditiveBlending,toneMapped:false}));
     glowM.rotation.x=-Math.PI/2;glowM.position.set(c.x,bb.min.y-0.0008,c.z);scene.add(glowM);
     sun.target.position.copy(c);scene.add(sun.target);
-    S.ready=true;S.idle=performance.now();fit();S.r=S.gr;
+    S.ready=true;renderer.shadowMap.needsUpdate=true;S.idle=performance.now();fit();S.r=S.gr;
     wake();
     opt.onLoad&&opt.onLoad(api);
   }).catch(function(err){console.error(err);opt.onError&&opt.onError(err)});
