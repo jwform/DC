@@ -143,7 +143,7 @@ function applyChars(){var C=window.Chars;if(!C)return Promise.resolve();
  return Promise.all(['char_tourist','char_staff','crowd_a','crowd_b'].map(function(n){return charBuf(base+'models/'+n+'.glb?v=4')})).then(function(bs){
  var d=bs.map(function(b){return C.parse(b)});
  function put(g,inst){g.children.slice().forEach(function(c){c.visible=false});g.add(inst.root);g.userData.char=inst}
- put(tourist,C.make(d[0],{tint:'#ffd23f',emis:.55}));put(staff,C.make(d[1],{tint:'#2fe6c0',emis:.5}));
+ put(tourist,C.make(d[0],{tint:'#bfae86',emis:.2}));put(staff,C.make(d[1],{tint:'#7fb3a6',emis:.2}));
  crowd.forEach(function(c,i){var col=CRC[i%CRC.length];c.h.userData.skip=1;put(c.h,C.make(d[2+i%2],{tint:col,emis:.16,scale:rnd(.94,1.06),sx:rnd(.9,1.12)}))})})}
 var ready=loadModel().catch(function(e){console.warn('model',e)});
 loadScript(base+'lib/chars.js?v=4').then(function(){return applyChars()}).catch(function(e){console.warn('chars',e)});
